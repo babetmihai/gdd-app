@@ -5,7 +5,7 @@ import questions from './questions'
 function App() {
   const [activeNodes, setActiveNodes] = React.useState(['gameType'])
   const [nodeId, setNodeId] = React.useState('gameType')
-  const { next = [], excludes = [], requries = [] } = _.get(questions, nodeId, {})
+  const { next = [] } = _.get(questions, nodeId, {})
   return (
     <div>
       {nodeId}
@@ -16,11 +16,16 @@ function App() {
             key={id}
             onClick={() => {
               const filteredActive = activeNodes.filter((activeNode) => activeNode !== nodeId)
+
+              const nextId = (next.length > 1 || activeNodes.length === 1)
+                ? id
+                : _.first(filteredActive)
+
               setActiveNodes(_.uniq([...filteredActive, id]))
-              if (next.length > 1 || activeNodes.length === 1) {
-                setNodeId(id)
+              if (questions[nextId].next.length === 1) {
+                setNodeId(_.first(questions[nextId].next))
               } else {
-                setNodeId(_.first(filteredActive))
+                setNodeId(nextId)
               }
             }}
           >
