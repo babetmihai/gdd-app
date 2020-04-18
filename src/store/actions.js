@@ -2,10 +2,6 @@ import get from 'lodash/get'
 import { STORE_SET, STORE_UPDATE, STORE_DELETE } from './constants'
 import store from 'store'
 
-const join = (...paths) => paths
-  .filter((key = '') => key.length > 0)
-  .join('.')
-
 const parse = (args) => {
   if (args.length === 0) return {}
   if (args.length === 1) return { payload: args[0], type: '' }
