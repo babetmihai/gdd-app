@@ -3,7 +3,7 @@ import capitalize from 'lodash/capitalize'
 import get from 'lodash/get'
 import actions from 'store/actions'
 import moment from 'moment'
-import DEFAULT_MESSAGES from './en.json'
+import DEFAULT_MESSAGES from './messages/en.json'
 
 export const LOCALE_LIST = ['en', 'ro']
 export const DEFAULT_LOCALE = 'en'
@@ -15,7 +15,7 @@ export const initLocale = async () => {
   if (locale === 'ro') await import('moment/locale/ro')
   moment.locale(locale)
 
-  const messages = await import(`./${locale}.json`)
+  const messages = await import(`./messages/${locale}.json`)
     .then(({ default: messages }) => messages)
     .catch(() => DEFAULT_MESSAGES)
 
