@@ -16,7 +16,7 @@ export default [
   { id: 'platformer', next: ['platform'] },
   { id: 'stealth', next: ['platform'] },
 
-  { id: 'platform', next: ['console', 'pc', 'mobile'] },
+  { id: 'platform', next: ['console', 'pc', 'mobile'], wait: true },
 
   { id: 'console', next: ['ps4', 'nintendo'], requires: ['moba'], excludes: ['rpg'] },
   { id: 'ps4', next: ['art_style'] },
