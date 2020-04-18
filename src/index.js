@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from 'components/App'
 import store from 'store'
-import { initLocale } from 'core/intl'
+import { initLocale } from 'core/messages'
 import * as serviceWorker from './serviceWorker'
 
 Promise.resolve()
