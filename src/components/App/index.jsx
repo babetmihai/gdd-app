@@ -16,7 +16,10 @@ function App() {
             key={id}
             onClick={() => {
               const filteredActive = activeNodes.filter((activeNode) => activeNode !== nodeId)
-              const nextId = wait ? _.first(filteredActive) : id
+
+              const nextId = (wait && activeNodes.length > 1)
+                ? _.first(filteredActive)
+                : id
 
               setActiveNodes(_.uniq([...filteredActive, id]))
               if (questions[nextId].next.length === 1) {
