@@ -6,9 +6,11 @@ import { connect } from 'react-redux'
 
 function App({ nodeId, nodeIds, nodes }) {
   React.useEffect(() => {
-    actions.set('nodeId', 'rpg')
-    actions.set('nodeIds', ['rpg', 'moba'])
-    actions.set('nodes', questions)
+    actions.set({
+      nodeId: 'rpg',
+      nodeIds: ['rpg', 'moba'],
+      nodes: questions
+    })
   }, [])
   const { next = [] } = _.get(nodes, nodeId, {})
   return (
@@ -44,8 +46,4 @@ const getNext = ({ id, nodes }) => {
   }
 }
 
-export default connect(() => ({
-  nodeId: actions.get('nodeId'),
-  nodeIds: actions.get('nodeIds'),
-  nodes: actions.get('nodes')
-}))(App)
+export default connect(() => actions.get())(App)
