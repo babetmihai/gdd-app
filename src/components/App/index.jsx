@@ -1,11 +1,16 @@
 import React from 'react'
 import _ from 'lodash'
+import actions from 'store/actions'
 import questions from './questions'
+import { connect } from 'react-redux'
 
-function App() {
-  const [activeNodes, setActiveNodes] = React.useState(['gameType'])
-  const [nodeId, setNodeId] = React.useState('gameType')
-  const { next = [] } = _.get(questions, nodeId, {})
+function App({ nodeId, nodeIds, nodes }) {
+  React.useEffect(() => {
+    actions.set('nodeId', 'rpg')
+    actions.set('nodeIds', ['rpg', 'moba'])
+    actions.set('nodes', questions)
+  }, [])
+  const { next = [] } = _.get(nodes, nodeId, {})
   return (
     <div>
       {nodeId}
@@ -15,18 +20,8 @@ function App() {
           <div
             key={id}
             onClick={() => {
-              const filteredActive = activeNodes.filter((activeNode) => activeNode !== nodeId)
-
-              const nextId = (next.length <= 1 && activeNodes.length > 1)
-                ? _.first(filteredActive)
-                : id
-
-              setActiveNodes(_.uniq([...filteredActive, id]))
-              if (questions[nextId].next.length === 1) {
-                setNodeId(_.first(questions[nextId].next))
-              } else {
-                setNodeId(nextId)
-              }
+              const nextId = getNext({ id, nodes })
+              actions.set('nodeId', nextId)
             }}
           >
             {id}
@@ -37,4 +32,20 @@ function App() {
   )
 }
 
-export default App
+const isSelection = ({ id, nodes }) => nodes[id].next.length > 1
+
+const getNext = ({ id, nodes }) => {
+  const selection = isSelection({ id, nodes })
+  switch (true) {
+    case (!selection):
+      return getNext({ id: _.first(nodes[id].next), nodes })
+
+    default: return id
+  }
+}
+
+export default connect(() => ({
+  nodeId: actions.get('nodeId'),
+  nodeIds: actions.get('nodeIds'),
+  nodes: actions.get('nodes')
+}))(App)
