@@ -5,15 +5,14 @@ import actions from 'store/actions'
 import moment from 'moment'
 import DEFAULT_MESSAGES from './messages/en.json'
 
-export const LOCALE_LIST = ['en', 'de', 'es']
+export const LOCALE_LIST = ['en', 'ro']
 export const DEFAULT_LOCALE = 'en'
 
 export const initLocale = async () => {
   let locale = navigator.language.substr(0, 2)
   if (!LOCALE_LIST.includes(locale)) locale = DEFAULT_LOCALE
 
-  if (locale === 'de') await import('moment/locale/de')
-  if (locale === 'es') await import('moment/locale/es')
+  if (locale === 'ro') await import('moment/locale/ro')
   moment.locale(locale)
 
   const messages = await import(`./messages/${locale}.json`)

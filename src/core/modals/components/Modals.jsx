@@ -1,10 +1,6 @@
 import React, { Suspense } from 'react'
 import { connect } from 'react-redux'
-import { selectModal } from 'core/modals'
-
-const MODALS = {
-
-}
+import { MODALS, selectModal } from 'core/modals'
 
 function Modals({ type, ...props })  {
   if (!type) return null
