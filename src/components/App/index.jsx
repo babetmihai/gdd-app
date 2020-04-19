@@ -37,10 +37,11 @@ function App(props) {
         ))}
         <button
           type="submit"
+          disabled={!options.some((id) => selection[id])}
           onClick={(event) => {
             event.preventDefault()
             actions.set(`completed.${nodeId}`, true)
-            const nextNodes = options.filter((id) => !!selection[id])
+            const nextNodes = options.filter((id) => selection[id])
             actions.set('nodeIds', _.uniq([...nodeIds, nextId, ...nextNodes]
               .filter((id) => id !== nodeId)
               .map((id) => getNext(id, nodes, completed))
