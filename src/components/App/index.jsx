@@ -15,31 +15,20 @@ function App(props) {
 
   const { nodeIds, selection, nodes } = props
   const nodeId = _.first(nodeIds)
-  const { next = [] } = _.get(nodes, nodeId, {})
-
-  React.useEffect(() => {
-    if (next.length === 1) {
-      const nextId = _.first(next)
-      actions.set(`selection.${nextId}`, true)
-      const nextNodeIds = [...nodeIds, nextId]
-        .filter((id) => id !== nodeId)
-        .filter((id) => !!selection[id])
-      actions.set('nodeIds', _.uniq(nextNodeIds))
-    }
-  }, [next, nodeId, nodeIds, selection])
+  const { options = [], nextId } = _.get(nodes, nodeId, {})
 
   return (
     <div>
       <h4>{nodeId}</h4>
       <form>
-        {next.map((id) => (
+        {options.map((id) => (
           <div key={id}>
             <input
               id={id}
               type="checkbox"
               checked={!!selection[id]}
               onChange={() => {
-                actions.update(`selection.${id}`, (value) => !value)
+                actions.set(`selection.${id}`, (value) => !value)
               }}
             />
             <label htmlFor={id}>
@@ -51,10 +40,16 @@ function App(props) {
           type="submit"
           onClick={(event) => {
             event.preventDefault()
-            const nextNodeIds = [...nodeIds, ...next]
+            const nextNodes = options.filter((id) => !!selection[id])
+            actions.set('nodeIds', _.uniq([...nodeIds, nextId, ...nextNodes]
               .filter((id) => id !== nodeId)
-              .filter((id) => !!selection[id])
-            actions.set('nodeIds', _.uniq(nextNodeIds))
+              .map((id) => {
+                const { options, nextId } = _.get(nodes, id, {})
+                if (!options) return nextId
+                return id
+              })
+              .filter(Boolean)
+            ))
           }}
         >
           next

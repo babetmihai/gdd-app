@@ -1,44 +1,44 @@
 export default [
-  { id: 'gameType', next: ['rpg', 'moba', 'shooter', 'action_adventure'] },
+  { id: 'gameType', options: ['rpg', 'moba', 'shooter', 'action_adventure'] },
 
-  { id: 'moba', next: ['platform'] },
-  { id: 'rpg', next: ['mmo', 'medieval', 'fantasy'] },
+  { id: 'moba', nextId: 'platform' },
+  { id: 'rpg', options: ['mmo', 'medieval', 'fantasy'] },
 
-  { id: 'mmo', next: ['platform'] },
-  { id: 'medieval', next: ['platform'] },
-  { id: 'fantasy', next: ['platform'] },
+  { id: 'mmo', nextId: 'platform' },
+  { id: 'medieval', nextId: 'platform' },
+  { id: 'fantasy', nextId: 'platform' },
 
-  { id: 'shooter', next: ['3rd_person', '1st_person'] },
-  { id: '3rd_person', next: ['platform'] },
-  { id: '1st_person', next: ['platform'] },
+  { id: 'shooter', options: ['3rd_person', '1st_person'] },
+  { id: '3rd_person', nextId: 'platform' },
+  { id: '1st_person', nextId: 'platform' },
 
-  { id: 'action_adventure', next: ['platformer', 'stealth'] },
-  { id: 'platformer', next: ['platform'] },
-  { id: 'stealth', next: ['platform'] },
+  { id: 'action_adventure', options: ['platformer', 'stealth'] },
+  { id: 'platformer', nextId: 'platform' },
+  { id: 'stealth', nextId: 'platform' },
 
-  { id: 'platform', next: ['console', 'pc', 'mobile'] },
+  { id: 'platform', options: ['console', 'pc', 'mobile'] },
 
-  { id: 'console', next: ['ps4', 'nintendo'], requires: ['moba'], excludes: ['rpg'] },
-  { id: 'ps4', next: ['art_style'] },
-  { id: 'nintendo', next: ['art_style'] },
+  { id: 'console', options: ['ps4', 'nintendo'], requires: ['moba'], excludes: ['rpg'] },
+  { id: 'ps4', nextId: 'art_style' },
+  { id: 'nintendo', nextId: 'art_style' },
 
-  { id: 'pc', next: ['browser', 'client'], excludes: ['moba'] },
-  { id: 'browser', next: ['art_style'] },
-  { id: 'client', next: ['art_style'] },
+  { id: 'pc', options: ['browser', 'client'], excludes: ['moba'] },
+  { id: 'browser', nextId: 'art_style' },
+  { id: 'client', nextId: 'art_style' },
 
-  { id: 'mobile', next: ['ios', 'android'] },
-  { id: 'ios', next: ['art_style'] },
-  { id: 'android', next: ['art_style'] },
+  { id: 'mobile', options: ['ios', 'android'] },
+  { id: 'ios', nextId: 'art_style' },
+  { id: 'android', nextId: 'art_style' },
 
-  { id: 'art_style', next: ['2d', '3d'] },
+  { id: 'art_style', options: ['2d', '3d'] },
 
-  { id: '2d', next: ['pixel_art', 'cartoonish', 'realistic'], excludes: ['3d_shooter'] },
-  { id: 'pixel_art', next: ['mechanics'] },
-  { id: 'cartoonish', next: ['mechanics'] },
-  { id: 'realistic', next: ['mechanics'] },
+  { id: '2d', options: ['pixel_art', 'cartoonish', 'realistic'], excludes: ['3d_shooter'] },
+  { id: 'pixel_art', nextId: 'mechanics' },
+  { id: 'cartoonish', nextId: 'mechanics' },
+  { id: 'realistic', nextId: 'mechanics' },
 
   { id: '3d', next: ['cell_shaded', 'realistic'] },
-  { id: 'cell_shaded', next: ['mechanics'] }
+  { id: 'cell_shaded', next: ['mechanics'], type: 'option' }
 ].reduce((acc, node) => {
   acc[node.id] = node
   return acc
