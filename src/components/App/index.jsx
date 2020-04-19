@@ -17,6 +17,17 @@ function App(props) {
   const nodeId = _.first(nodeIds)
   const { next = [] } = _.get(nodes, nodeId, {})
 
+  React.useEffect(() => {
+    if (next.length === 1) {
+      const nextId = _.first(next)
+      actions.set(`selection.${nextId}`, true)
+      const nextNodeIds = [...nodeIds, nextId]
+        .filter((id) => id !== nodeId)
+        .filter((id) => !!selection[id])
+      actions.set('nodeIds', _.uniq(nextNodeIds))
+    }
+  }, [next, nodeId, nodeIds, selection])
+
   return (
     <div>
       <h4>{nodeId}</h4>
@@ -41,7 +52,8 @@ function App(props) {
           onClick={(event) => {
             event.preventDefault()
             const nextNodeIds = [...nodeIds, ...next]
-              .filter((id) => id !== nodeId && !!selection[id])
+              .filter((id) => id !== nodeId)
+              .filter((id) => !!selection[id])
             actions.set('nodeIds', _.uniq(nextNodeIds))
           }}
         >
