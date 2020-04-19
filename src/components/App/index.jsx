@@ -9,11 +9,12 @@ function App(props) {
     actions.set({
       nodeIds: ['gameType'],
       nodes: questions,
+      completed: {},
       selection: {}
     })
   }, [])
 
-  const { nodeIds, selection, nodes } = props
+  const { nodeIds, selection, nodes, completed } = props
   const nodeId = _.first(nodeIds)
   const { options = [], nextId } = _.get(nodes, nodeId, {})
 
@@ -27,9 +28,7 @@ function App(props) {
               id={id}
               type="checkbox"
               checked={!!selection[id]}
-              onChange={() => {
-                actions.set(`selection.${id}`, (value) => !value)
-              }}
+              onChange={() => actions.update(`selection.${id}`, (value) => !value)}
             />
             <label htmlFor={id}>
               {id}
@@ -40,14 +39,11 @@ function App(props) {
           type="submit"
           onClick={(event) => {
             event.preventDefault()
+            actions.set(`completed.${nodeId}`, true)
             const nextNodes = options.filter((id) => !!selection[id])
             actions.set('nodeIds', _.uniq([...nodeIds, nextId, ...nextNodes]
               .filter((id) => id !== nodeId)
-              .map((id) => {
-                const { options, nextId } = _.get(nodes, id, {})
-                if (!options) return nextId
-                return id
-              })
+              .map((id) => getNext(id, nodes, completed))
               .filter(Boolean)
             ))
           }}
@@ -57,6 +53,14 @@ function App(props) {
       </form>
     </div>
   )
+}
+
+const getNext = (id, nodes, completed) => {
+  const { options, nextId } = _.get(nodes, id, {})
+  if (completed[id]) return null
+  if (!options && nextId) return getNext(nextId, nodes, completed)
+  if (!options && !nextId) return null
+  return id
 }
 
 export default connect(() => actions.get())(App)
