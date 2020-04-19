@@ -16,7 +16,7 @@ function App(props) {
 
   const { nodeIds, selection, nodes, completed } = props
   const nodeId = _.first(nodeIds)
-  const { options = [], nextId } = _.get(nodes, nodeId, {})
+  const { options = [] } = _.get(nodes, nodeId, {})
 
   return (
     <div>
@@ -42,10 +42,11 @@ function App(props) {
             event.preventDefault()
             actions.set(`completed.${nodeId}`, true)
             const nextNodes = options.filter((id) => selection[id])
-            actions.set('nodeIds', _.uniq([...nodeIds, nextId, ...nextNodes]
-              .filter((id) => id !== nodeId)
-              .map((id) => getNext(id, nodes, completed))
-              .filter(Boolean)
+            actions.set('nodeIds', _.uniq(
+              [...nodeIds, ...nextNodes]
+                .filter((id) => id !== nodeId)
+                .map((id) => getNext(id, nodes, completed))
+                .filter(Boolean)
             ))
           }}
         >
