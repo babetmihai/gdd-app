@@ -4,16 +4,19 @@ import actions from 'store/actions'
 import questions from './questions'
 import { connect } from 'react-redux'
 
-function App({ nodeId, nodeIds, selection, nodes }) {
+function App(props) {
   React.useEffect(() => {
     actions.set({
-      nodeId: 'rpg',
-      nodeIds: ['shooter'],
+      nodeIds: [ 'rpg', 'shooter', 'moba'],
       nodes: questions,
       selection: { rpg: true, shooter: true }
     })
   }, [])
+
+  const { nodeIds, selection, nodes } = props
+  const nodeId = _.first(nodeIds)
   const { next = [] } = _.get(nodes, nodeId, {})
+
   return (
     <div>
       <h4>{nodeId}</h4>
@@ -33,8 +36,9 @@ function App({ nodeId, nodeIds, selection, nodes }) {
           type="submit"
           onClick={(event) => {
             event.preventDefault()
-            const checked = next.filter((id) => !!selection[id])
-            console.log(checked)
+            const nextNodeIds = [...nodeIds, ...next]
+              .filter((id) => id !== nodeId && !!selection[id])
+            actions.set('nodeIds', _.uniq(nextNodeIds))
           }}
         >
           next
