@@ -8,42 +8,39 @@ function App({ nodeId, nodeIds, nodes }) {
   React.useEffect(() => {
     actions.set({
       nodeId: 'rpg',
-      nodeIds: ['rpg', 'moba'],
-      nodes: questions
+      nodeIds: ['shooter'],
+      nodes: questions,
+      selection: { rpg: true, shooter: true }
     })
   }, [])
-  const { next = [] } = _.get(nodes, nodeId, {})
+  const { next = [], selection = {} } = _.get(nodes, nodeId, {})
   return (
     <div>
       {nodeId}
-      <div>list:</div>
-      <div>
+      <form>
         {next.map((id) => (
-          <div
-            key={id}
-            onClick={() => {
-              const nextId = getNext({ id, nodes })
-              actions.set('nodeId', nextId)
-            }}
-          >
-            {id}
+          <div key={id}>
+            <input
+              id={id}
+              type="checkbox"
+              checked={selection[id]}
+              onChange={() => actions.update(`selection.${id}`, (value) => !value)}
+            />
+            <label htmlFor={id}>{id}</label>
           </div>
         ))}
-      </div>
+        <button
+          type="submit"
+          onClick={(event) => {
+            event.preventDefault()
+            console.log(next)
+          }}
+        >
+          next
+        </button>
+      </form>
     </div>
   )
-}
-
-const isSelection = ({ id, nodes }) => nodes[id].next.length > 1
-
-const getNext = ({ id, nodes }) => {
-  const selection = isSelection({ id, nodes })
-  switch (true) {
-    case (!selection):
-      return getNext({ id: _.first(nodes[id].next), nodes })
-
-    default: return id
-  }
 }
 
 export default connect(() => actions.get())(App)
