@@ -37,8 +37,8 @@ export default [
   { id: 'cartoonish', nextId: 'mechanics' },
   { id: 'realistic', nextId: 'mechanics' },
 
-  { id: '3d', next: ['cell_shaded', 'realistic'] },
-  { id: 'cell_shaded', next: ['mechanics'], type: 'option' }
+  { id: '3d', options: ['cell_shaded', 'realistic'] },
+  { id: 'cell_shaded', nextId: ['mechanics'] }
 ].reduce((acc, node) => {
   acc[node.id] = node
   return acc
