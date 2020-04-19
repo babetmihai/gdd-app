@@ -16,7 +16,7 @@ function App({ nodeId, nodeIds, selection, nodes }) {
   const { next = [] } = _.get(nodes, nodeId, {})
   return (
     <div>
-      {nodeId}
+      <h4>{nodeId}</h4>
       <form>
         {next.map((id) => (
           <div key={id}>
