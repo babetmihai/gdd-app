@@ -1,15 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 import actions from 'store/actions'
 import questions from './questions'
-import { connect } from 'react-redux'
 
 function App(props) {
   React.useEffect(() => {
     actions.set({
-      nodeIds: [ 'rpg', 'shooter', 'moba'],
+      nodeIds: ['gameType'],
       nodes: questions,
-      selection: { rpg: true, shooter: true }
+      selection: {}
     })
   }, [])
 
@@ -27,9 +27,13 @@ function App(props) {
               id={id}
               type="checkbox"
               checked={!!selection[id]}
-              onChange={() => actions.update(`selection.${id}`, (value) => !value)}
+              onChange={() => {
+                actions.update(`selection.${id}`, (value) => !value)
+              }}
             />
-            <label htmlFor={id}>{id}</label>
+            <label htmlFor={id}>
+              {id}
+            </label>
           </div>
         ))}
         <button
