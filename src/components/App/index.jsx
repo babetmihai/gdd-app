@@ -4,7 +4,7 @@ import actions from 'store/actions'
 import questions from './questions'
 import { connect } from 'react-redux'
 
-function App({ nodeId, nodeIds, nodes }) {
+function App({ nodeId, nodeIds, selection, nodes }) {
   React.useEffect(() => {
     actions.set({
       nodeId: 'rpg',
@@ -13,7 +13,7 @@ function App({ nodeId, nodeIds, nodes }) {
       selection: { rpg: true, shooter: true }
     })
   }, [])
-  const { next = [], selection = {} } = _.get(nodes, nodeId, {})
+  const { next = [] } = _.get(nodes, nodeId, {})
   return (
     <div>
       {nodeId}
@@ -23,7 +23,7 @@ function App({ nodeId, nodeIds, nodes }) {
             <input
               id={id}
               type="checkbox"
-              checked={selection[id]}
+              checked={!!selection[id]}
               onChange={() => actions.update(`selection.${id}`, (value) => !value)}
             />
             <label htmlFor={id}>{id}</label>
@@ -33,7 +33,8 @@ function App({ nodeId, nodeIds, nodes }) {
           type="submit"
           onClick={(event) => {
             event.preventDefault()
-            console.log(next)
+            const checked = next.filter((id) => !!selection[id])
+            console.log(checked)
           }}
         >
           next
