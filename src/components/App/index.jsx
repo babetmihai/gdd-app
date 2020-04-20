@@ -7,17 +7,16 @@ import questions from './questions'
 function App(props) {
   React.useEffect(() => {
     actions.set({
-      nodeIds: ['gameType'],
+      nodeId: 'gameType',
       nodes: questions,
-      completed: {},
-      selection: {}
+      history: {},
+      selected: {}
     })
   }, [])
 
-  const { nodeIds, selection, nodes, completed } = props
-  const nodeId = _.first(nodeIds)
-  const { options = [] } = _.get(nodes, nodeId, {})
-  const filteredOptions = filterOptions({ options, nodes, completed, selection })
+  const { nodeId, nodes, selected } = props
+  const { options = [], nextId } = _.get(nodes, nodeId, {})
+  const filteredOptions = filterOptions({ options, nodes, selected })
 
   return (
     <div>
@@ -28,8 +27,8 @@ function App(props) {
             <input
               id={id}
               type="checkbox"
-              checked={!!selection[id]}
-              onChange={() => actions.update(`selection.${id}`, (value) => !value)}
+              checked={!!selected[id]}
+              onChange={() => actions.update(`selected.${id}`, (value) => !value)}
             />
             <label htmlFor={id}>
               {id}
@@ -38,19 +37,12 @@ function App(props) {
         ))}
         <button
           type="submit"
-          disabled={!filteredOptions.some((id) => selection[id])}
+          disabled={!filteredOptions.some((id) => selected[id])}
           onClick={(event) => {
             event.preventDefault()
-            const nextNodes = filteredOptions.filter((id) => selection[id])
-            actions.set(`completed.${nodeId}`, nextNodes)
-            actions.set(
-              'nodeIds',
-              _.uniq([...nodeIds, ...nextNodes]
-                .filter((id) => id !== nodeId)
-                .map((id) => getNext({ id, nodes, completed }))
-                .filter(Boolean)
-              )
-            )
+            const selection = filteredOptions.filter((id) => selected[id])
+            actions.set(`history.${nodeId}`, selection)
+            actions.set( 'nodeId', getNext({ id: nextId, nodes, selected }))
           }}
         >
           next
@@ -60,24 +52,21 @@ function App(props) {
   )
 }
 
-const filterOptions = ({ options, nodes, completed, selection }) => {
-  return options
-    .filter((id) => !completed[id])
+const filterOptions = ({ options, nodes, selected }) => {
+  return _.uniq(options
     .filter((id) => {
       const { excludes, requires } = _.get(nodes, id, {})
       return (
-        (!excludes || excludes.every((_id) => !selection[_id])) &&
-        (!requires || requires.every((_id) => selection[_id]))
+        (!excludes || excludes.every((_id) => !selected[_id])) &&
+        (!requires || requires.every((_id) => selected[_id]))
       )
-    })
+    }))
 }
 
-const getNext = ({ id, nodes, completed }) => {
-  const { options, nextId } = _.get(nodes, id, {})
-  if (completed[id]) return null
-  if (!options && !nextId) return null
-  if (options) return id
-  if (nextId) return getNext({ id: nextId, nodes, completed })
+const getNext = ({ id, nodes, selected }) => {
+  const { options = [], nextId } = _.get(nodes, id, {})
+  const filteredOptions = filterOptions({ options, nodes, selected })
+  if (filteredOptions.length === 0) return nextId
   return id
 }
 
