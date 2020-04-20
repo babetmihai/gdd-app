@@ -35,18 +35,20 @@ function App(props) {
             </label>
           </div>
         ))}
-        <button
-          type="submit"
-          disabled={!filteredOptions.some((id) => selected[id])}
-          onClick={(event) => {
-            event.preventDefault()
-            const selection = filteredOptions.filter((id) => selected[id])
-            actions.set(`history.${nodeId}`, selection)
-            actions.set('nodeId', getNext({ id: nextId, nodes, selected }))
-          }}
-        >
-          next
-        </button>
+        {nextId &&
+          <button
+            type="submit"
+            disabled={!filteredOptions.some((id) => selected[id])}
+            onClick={(event) => {
+              event.preventDefault()
+              const selection = filteredOptions.filter((id) => selected[id])
+              actions.set(`history.${nodeId}`, selection)
+              actions.set('nodeId', getNext({ id: nextId, nodes, selected }))
+            }}
+          >
+            next
+          </button>
+        }
       </form>
     </div>
   )
@@ -66,7 +68,7 @@ const filterOptions = ({ options, nodes, selected }) => {
 const getNext = ({ id, nodes, selected }) => {
   const { options = [], nextId } = _.get(nodes, id, {})
   const filteredOptions = filterOptions({ options, nodes, selected })
-  if (filteredOptions.length === 0) return nextId
+  if (nextId && filteredOptions.length === 0) return nextId
   return id
 }
 
