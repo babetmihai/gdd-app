@@ -9,26 +9,27 @@ function App(props) {
     actions.set({
       nodeId: 'gameType',
       nodes: questions,
-      history: {},
-      selected: {}
+      history: {}
     })
   }, [])
 
-  const { nodeId, nodes, selected } = props
+  const [checked, setChecked] = React.useState({})
+
+  const { nodeId, nodes, history } = props
   const { options = [], nextId } = _.get(nodes, nodeId, {})
-  const filteredOptions = filterOptions({ options, nodes, selected })
+  const filteredOptions = filterOptions({ options, nodes, history })
 
   return (
     <div>
-      <h4>{nodeId}</h4>
+      <h4 onClick={() => actions.set('nodeId', 'gameType')}>{nodeId}</h4>
       <form>
         {filteredOptions.map((id) => (
           <div key={id}>
             <input
               id={id}
               type="checkbox"
-              checked={!!selected[id]}
-              onChange={() => actions.update(`selected.${id}`, (value) => !value)}
+              checked={!!checked[id]}
+              onChange={() => setChecked({ ...checked, [id]: !checked[id] })}
             />
             <label htmlFor={id}>
               {id}
@@ -38,10 +39,10 @@ function App(props) {
         {nextId &&
           <button
             type="submit"
-            disabled={!filteredOptions.some((id) => selected[id])}
+            disabled={filteredOptions.every((id) => !checked[id])}
             onClick={(event) => {
               event.preventDefault()
-              const selection = filteredOptions.filter((id) => selected[id])
+              const selection = filteredOptions.filter((id) => checked[id])
               actions.set(`history.${nodeId}`, selection)
               goToNode(nextId)
             }}
@@ -55,19 +56,16 @@ function App(props) {
 }
 
 const goToNode = (id) => {
-  const { nodes, selected } = actions.get()
+  const { nodes, history } = actions.get()
   const { options = [], nextId } = _.get(nodes, id, {})
-  const filteredOptions = filterOptions({ options, nodes, selected })
-
+  const filteredOptions = filterOptions({ options, nodes, history })
   switch (true) {
     case (!nextId): {
       actions.set('nodeId', id)
       break
     }
     case (filteredOptions.length === 1): {
-      const [optionId] = filteredOptions
       actions.set(`history.${id}`, filteredOptions)
-      actions.set(`selected.${optionId}`, true)
       goToNode(nextId)
       break
     }
@@ -81,15 +79,18 @@ const goToNode = (id) => {
   }
 }
 
-const filterOptions = ({ options, nodes, selected }) => {
+const filterOptions = ({ options, nodes, history = {} }) => {
+  const selected = getSelected(history)
   return _.uniq(options)
     .filter((id) => {
       const { excludes, requires } = _.get(nodes, id, {})
       return (
-        (!excludes || excludes.every((_id) => !selected[_id])) &&
-        (!requires || requires.every((_id) => selected[_id]))
+        (!excludes || excludes.every((_id) => !selected.includes(_id))) &&
+        (!requires || requires.every((_id) => selected.includes(_id)))
       )
     })
 }
+
+const getSelected = (history) => Object.values(history).flat()
 
 export default connect(() => actions.get())(App)
