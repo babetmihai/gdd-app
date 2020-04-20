@@ -43,7 +43,7 @@ function App(props) {
               event.preventDefault()
               const selection = filteredOptions.filter((id) => selected[id])
               actions.set(`history.${nodeId}`, selection)
-              actions.set('nodeId', getNext({ id: nextId, nodes, selected }))
+              goToNode(nextId)
             }}
           >
             next
@@ -65,11 +65,31 @@ const filterOptions = ({ options, nodes, selected }) => {
     }))
 }
 
-const getNext = ({ id, nodes, selected }) => {
+const goToNode = (id) => {
+  const { nodes, selected } = actions.get()
   const { options = [], nextId } = _.get(nodes, id, {})
   const filteredOptions = filterOptions({ options, nodes, selected })
-  if (nextId && filteredOptions.length === 0) return nextId
-  return id
+
+  switch (true) {
+    case (!nextId): {
+      actions.set('nodeId', id)
+      break
+    }
+    case (filteredOptions.length === 1): {
+      const [optionId] = filteredOptions
+      actions.set(`history.${id}`, filteredOptions)
+      actions.update(`selected.${optionId}`, (value) => !value)
+      goToNode(nextId)
+      break
+    }
+    case (filteredOptions.length === 0): {
+      goToNode(nextId)
+      break
+    }
+    default: {
+      actions.set('nodeId', id)
+    }
+  }
 }
 
 export default connect(() => actions.get())(App)
