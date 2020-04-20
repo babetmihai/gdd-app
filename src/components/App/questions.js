@@ -1,12 +1,15 @@
 export default [
-  { id: 'gameType', options: ['rpg', 'moba', 'shooter', 'action_adventure'], nextId: 'gameSubtype' },
+  {
+    id: 'gameType',
+    options: ['rpg', 'moba', 'shooter', 'action_adventure'],
+    nextId: 'gameSubtype'
+  },
 
-  { id: 'moba' },
-  { id: 'rpg' },
-  { id: 'shooter' },
-  { id: 'action_adventure' },
-
-  { id: 'gameSubtype', options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person'], nextId: 'platform' },
+  {
+    id: 'gameSubtype',
+    options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person'],
+    nextId: 'platform'
+  },
 
   { id: 'mmo', requires: ['rpg'] },
   { id: 'medieval', requires: ['rpg'] },
@@ -37,7 +40,7 @@ export default [
 
   { id: 'art_style', options: ['2d', '3d'], nextId: 'art_style_detail' },
 
-  { id: '2d', excludes: ['3d_shooter'] },
+  { id: '2d', excludes: ['3rd_person'] },
 
   {
     id: 'art_style_detail',
@@ -48,6 +51,7 @@ export default [
   { id: 'pixel_art', requires: ['2d'] },
   { id: 'cartoonish', requires: ['2d'] },
   { id: 'cell_shaded', requires: ['3d'] }
+
 ].reduce((acc, node) => {
   acc[node.id] = node
   return acc
