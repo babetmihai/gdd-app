@@ -23,6 +23,7 @@ function App(props) {
       <h4>{nodeId}</h4>
       <form>
         {options
+          .filter((id) => !completed[id])
           .filter((id) => {
             const { excludes, requires } = _.get(nodes, id, {})
             return (
@@ -69,7 +70,8 @@ const getNext = (id, nodes, completed) => {
   const { options, nextId } = _.get(nodes, id, {})
   if (completed[id]) return null
   if (!options && !nextId) return null
-  if (!options && nextId) return getNext(nextId, nodes, completed)
+  if (options) return id
+  if (nextId) return getNext(nextId, nodes, completed)
   return id
 }
 
