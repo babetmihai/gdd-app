@@ -7,7 +7,7 @@ export default [
 
   {
     id: 'gameSubtype',
-    options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person'],
+    options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person', 'platformer', 'stealth'],
     nextId: 'platform'
   },
 

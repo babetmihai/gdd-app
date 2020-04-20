@@ -59,24 +59,15 @@ const goToNode = (id) => {
   const { nodes, history } = actions.get()
   const { options = [], nextId } = _.get(nodes, id, {})
   const filteredOptions = filterOptions({ options, nodes, history })
-  switch (true) {
-    case (!nextId): {
-      actions.set('nodeId', id)
-      break
-    }
-    case (filteredOptions.length === 1): {
-      actions.set(`history.${id}`, filteredOptions)
-      goToNode(nextId)
-      break
-    }
-    case (filteredOptions.length === 0): {
-      goToNode(nextId)
-      break
-    }
-    default: {
-      actions.set('nodeId', id)
-    }
+
+  if (nextId && filteredOptions.length <= 1) {
+    actions.set(`history.${id}`, filteredOptions)
+    goToNode(nextId)
+
+  } else {
+    actions.set('nodeId', id)
   }
+
 }
 
 const filterOptions = ({ options, nodes, history = {} }) => {
