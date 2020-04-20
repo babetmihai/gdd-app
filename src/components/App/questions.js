@@ -16,13 +16,17 @@ export default [
   { id: 'platformer', requires: ['action_adventure'] },
   { id: 'stealth', requires: ['action_adventure'] },
 
-  { id: 'platform', options: ['console', 'pc', 'mobile'], nextId: 'platform_detail' },
+  {
+    id: 'platform',
+    options: ['console', 'pc', 'mobile'],
+    nextId: 'platform_detail'
+  },
 
-  { id: 'console' },
-  { id: 'pc' },
-  { id: 'mobile' },
-
-  { id: 'platform_detail', options: ['ps4', 'nintendo', 'browser', 'client', 'ios', 'android'], nextId: 'art_style' },
+  {
+    id: 'platform_detail',
+    options: ['ps4', 'nintendo', 'browser', 'client', 'ios', 'android'],
+    nextId: 'art_style'
+  },
 
   { id: 'ps4', requires: ['console'] },
   { id: 'nintendo', requires: ['console'] },
@@ -34,17 +38,16 @@ export default [
   { id: 'art_style', options: ['2d', '3d'], nextId: 'art_style_detail' },
 
   { id: '2d', excludes: ['3d_shooter'] },
-  { id: '3d' },
 
-  { id: 'art_style_detail', options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded', 'realistic'], nextId: 'done' },
+  {
+    id: 'art_style_detail',
+    options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded', 'realistic'],
+    nextId: 'done'
+  },
 
   { id: 'pixel_art', requires: ['2d'] },
   { id: 'cartoonish', requires: ['2d'] },
-  { id: 'realistic' },
-  { id: 'cell_shaded', requires: ['3d'] },
-
-  { id: 'done' }
-
+  { id: 'cell_shaded', requires: ['3d'] }
 ].reduce((acc, node) => {
   acc[node.id] = node
   return acc
