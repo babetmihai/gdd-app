@@ -17,44 +17,36 @@ function App(props) {
   const { nodeIds, selection, nodes, completed } = props
   const nodeId = _.first(nodeIds)
   const { options = [] } = _.get(nodes, nodeId, {})
+  const filteredOptions = filterOptions({ options, nodes, completed, selection })
 
   return (
     <div>
       <h4>{nodeId}</h4>
       <form>
-        {options
-          .filter((id) => !completed[id])
-          .filter((id) => {
-            const { excludes, requires } = _.get(nodes, id, {})
-            return (
-              (!excludes || !excludes.some((_id) => selection[_id])) &&
-              (!requires || requires.every((_id) => selection[_id]))
-            )
-          })
-          .map((id) => (
-            <div key={id}>
-              <input
-                id={id}
-                type="checkbox"
-                checked={!!selection[id]}
-                onChange={() => actions.update(`selection.${id}`, (value) => !value)}
-              />
-              <label htmlFor={id}>
-                {id}
-              </label>
-            </div>
-          ))}
+        {filteredOptions.map((id) => (
+          <div key={id}>
+            <input
+              id={id}
+              type="checkbox"
+              checked={!!selection[id]}
+              onChange={() => actions.update(`selection.${id}`, (value) => !value)}
+            />
+            <label htmlFor={id}>
+              {id}
+            </label>
+          </div>
+        ))}
         <button
           type="submit"
-          disabled={!options.some((id) => selection[id])}
+          disabled={!filteredOptions.some((id) => selection[id])}
           onClick={(event) => {
             event.preventDefault()
             actions.set(`completed.${nodeId}`, true)
-            const nextNodes = options.filter((id) => selection[id])
+            const nextNodes = filteredOptions.filter((id) => selection[id])
             actions.set('nodeIds', _.uniq(
               [...nodeIds, ...nextNodes]
                 .filter((id) => id !== nodeId)
-                .map((id) => getNext(id, nodes, completed))
+                .map((id) => getNext({ id, nodes, completed }))
                 .filter(Boolean)
             ))
           }}
@@ -66,12 +58,24 @@ function App(props) {
   )
 }
 
-const getNext = (id, nodes, completed) => {
+const filterOptions = ({ options, nodes, completed, selection }) => {
+  return options
+    .filter((id) => !completed[id])
+    .filter((id) => {
+      const { excludes, requires } = _.get(nodes, id, {})
+      return (
+        (!excludes || excludes.every((_id) => !selection[_id])) &&
+        (!requires || requires.every((_id) => selection[_id]))
+      )
+    })
+}
+
+const getNext = ({ id, nodes, completed }) => {
   const { options, nextId } = _.get(nodes, id, {})
   if (completed[id]) return null
   if (!options && !nextId) return null
   if (options) return id
-  if (nextId) return getNext(nextId, nodes, completed)
+  if (nextId) return getNext({ id: nextId, nodes, completed })
   return id
 }
 
