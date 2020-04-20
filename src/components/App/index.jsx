@@ -82,7 +82,7 @@ const goToNode = (id) => {
 }
 
 const filterOptions = ({ options, nodes, selected }) => {
-  return _.uniq(options
+  return _.uniq(options)
     .filter((id) => {
       const { excludes, requires } = _.get(nodes, id, {})
       return (
@@ -90,7 +90,6 @@ const filterOptions = ({ options, nodes, selected }) => {
         (!requires || requires.every((_id) => selected[_id]))
       )
     })
-  )
 }
 
 export default connect(() => actions.get())(App)
