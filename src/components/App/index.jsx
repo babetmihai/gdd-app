@@ -67,7 +67,7 @@ const goToNode = (id) => {
     case (filteredOptions.length === 1): {
       const [optionId] = filteredOptions
       actions.set(`history.${id}`, filteredOptions)
-      actions.update(`selected.${optionId}`, (value) => !value)
+      actions.set(`selected.${optionId}`, true)
       goToNode(nextId)
       break
     }
@@ -89,7 +89,8 @@ const filterOptions = ({ options, nodes, selected }) => {
         (!excludes || excludes.every((_id) => !selected[_id])) &&
         (!requires || requires.every((_id) => selected[_id]))
       )
-    }))
+    })
+  )
 }
 
 export default connect(() => actions.get())(App)
