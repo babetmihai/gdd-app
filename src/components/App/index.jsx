@@ -41,14 +41,16 @@ function App(props) {
           disabled={!filteredOptions.some((id) => selection[id])}
           onClick={(event) => {
             event.preventDefault()
-            actions.set(`completed.${nodeId}`, true)
             const nextNodes = filteredOptions.filter((id) => selection[id])
-            actions.set('nodeIds', _.uniq(
-              [...nodeIds, ...nextNodes]
+            actions.set(`completed.${nodeId}`, nextNodes)
+            actions.set(
+              'nodeIds',
+              _.uniq([...nodeIds, ...nextNodes]
                 .filter((id) => id !== nodeId)
                 .map((id) => getNext({ id, nodes, completed }))
                 .filter(Boolean)
-            ))
+              )
+            )
           }}
         >
           next

@@ -18,11 +18,11 @@ export default [
 
   { id: 'platform', options: ['console', 'pc', 'mobile'] },
 
-  { id: 'console', options: ['ps4', 'nintendo'], requires: ['moba'], excludes: ['rpg'] },
+  { id: 'console', options: ['ps4', 'nintendo'], requires: ['moba'] },
   { id: 'ps4', nextId: 'art_style' },
   { id: 'nintendo', nextId: 'art_style' },
 
-  { id: 'pc', options: ['browser', 'client'], excludes: ['moba'] },
+  { id: 'pc', options: ['browser', 'client'], excludes: ['rpg'] },
   { id: 'browser', nextId: 'art_style' },
   { id: 'client', nextId: 'art_style' },
 
