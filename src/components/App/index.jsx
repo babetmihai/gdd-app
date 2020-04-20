@@ -54,17 +54,6 @@ function App(props) {
   )
 }
 
-const filterOptions = ({ options, nodes, selected }) => {
-  return _.uniq(options
-    .filter((id) => {
-      const { excludes, requires } = _.get(nodes, id, {})
-      return (
-        (!excludes || excludes.every((_id) => !selected[_id])) &&
-        (!requires || requires.every((_id) => selected[_id]))
-      )
-    }))
-}
-
 const goToNode = (id) => {
   const { nodes, selected } = actions.get()
   const { options = [], nextId } = _.get(nodes, id, {})
@@ -90,6 +79,17 @@ const goToNode = (id) => {
       actions.set('nodeId', id)
     }
   }
+}
+
+const filterOptions = ({ options, nodes, selected }) => {
+  return _.uniq(options
+    .filter((id) => {
+      const { excludes, requires } = _.get(nodes, id, {})
+      return (
+        (!excludes || excludes.every((_id) => !selected[_id])) &&
+        (!requires || requires.every((_id) => selected[_id]))
+      )
+    }))
 }
 
 export default connect(() => actions.get())(App)
