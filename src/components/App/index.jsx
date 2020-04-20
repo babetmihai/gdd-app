@@ -42,7 +42,7 @@ function App(props) {
             event.preventDefault()
             const selection = filteredOptions.filter((id) => selected[id])
             actions.set(`history.${nodeId}`, selection)
-            actions.set( 'nodeId', getNext({ id: nextId, nodes, selected }))
+            actions.set('nodeId', getNext({ id: nextId, nodes, selected }))
           }}
         >
           next
