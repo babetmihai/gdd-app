@@ -29,16 +29,18 @@ function App(props) {
   return (
     <div className={styles.app}>
       <div className={styles.sidebar}>
-        {Object.keys(history).map((id) => {
-          return (
-            <div
-              key={id}
-              onClick={() => actions.set('nodeId', id)}
-            >
-              {id}
-            </div>
-          )
-        })}
+        {Object.keys(history)
+          .filter((id) => !_.isEmpty(history[id]))
+          .map((id) => {
+            return (
+              <div
+                key={id}
+                onClick={() => actions.set('nodeId', id)}
+              >
+                {id}
+              </div>
+            )
+          })}
       </div>
       <div className={styles.content}>
         <h4>{nodeId}</h4>
