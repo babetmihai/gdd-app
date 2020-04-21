@@ -8,6 +8,7 @@ export default [
   {
     id: 'gameSubtype',
     options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person', 'platformer', 'stealth'],
+    parentId: 'gameType',
     nextId: 'platform'
   },
 
@@ -27,6 +28,7 @@ export default [
 
   {
     id: 'platform_detail',
+    parentId: 'platform',
     options: ['ps4', 'nintendo', 'browser', 'client', 'ios', 'android'],
     nextId: 'art_style'
   },
@@ -44,6 +46,7 @@ export default [
 
   {
     id: 'art_style_detail',
+    parentId: 'art_style',
     options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded', 'realistic'],
     nextId: 'done'
   },

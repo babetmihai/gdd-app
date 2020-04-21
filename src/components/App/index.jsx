@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import actions from 'store/actions'
 import questions from './questions'
+import styles from './index.module.scss'
 
 function App(props) {
   React.useEffect(() => {
@@ -13,45 +14,66 @@ function App(props) {
     })
   }, [])
 
-  const [checked, setChecked] = React.useState({})
-
-  const { nodeId, nodes, history } = props
+  const { nodeId, nodes, history = {} } = props
   const { options = [], nextId } = _.get(nodes, nodeId, {})
   const filteredOptions = filterOptions({ options, nodes, history })
 
+  const [checked, setChecked] = React.useState({})
+  React.useEffect(() => {
+    setChecked(_.get(history, nodeId, []).reduce((acc, _id) => ({
+      ...acc,
+      [_id]: true
+    }), {}))
+  }, [nodeId]) // eslint-disable-line
+
   return (
-    <div>
-      <h4 onClick={() => actions.set('nodeId', 'gameType')}>{nodeId}</h4>
-      <form>
-        {filteredOptions.map((id) => (
-          <div key={id}>
-            <input
-              id={id}
-              type="checkbox"
-              checked={!!checked[id]}
-              onChange={() => setChecked({ ...checked, [id]: !checked[id] })}
-            />
-            <label htmlFor={id}>
+    <div className={styles.app}>
+      <div className={styles.sidebar}>
+        {Object.keys(history).map((id) => {
+          return (
+            <div
+              key={id}
+              onClick={() => actions.set('nodeId', id)}
+            >
               {id}
-            </label>
-          </div>
-        ))}
-        {nextId &&
-          <button
-            type="submit"
-            disabled={filteredOptions.every((id) => !checked[id])}
-            onClick={(event) => {
-              event.preventDefault()
-              const selection = filteredOptions.filter((id) => checked[id])
-              actions.set(`history.${nodeId}`, selection)
-              goToNode(nextId)
-            }}
-          >
-            next
-          </button>
-        }
-      </form>
+            </div>
+          )
+        })}
+      </div>
+      <div className={styles.content}>
+        <h4>{nodeId}</h4>
+        <form>
+          {filteredOptions.map((id) => (
+            <div key={id}>
+              <input
+                id={id}
+                type="checkbox"
+                checked={!!checked[id]}
+                onChange={() => setChecked({ ...checked, [id]: !checked[id] })}
+              />
+              <label htmlFor={id}>
+                {id}
+              </label>
+            </div>
+          ))}
+          {nextId &&
+            <button
+              type="submit"
+              disabled={filteredOptions.every((id) => !checked[id])}
+              onClick={(event) => {
+                event.preventDefault()
+                const selection = filteredOptions.filter((id) => checked[id])
+                actions.set(`history.${nodeId}`, selection)
+                goToNode(nextId)
+              }}
+            >
+              next
+            </button>
+          }
+        </form>
+      </div>
     </div>
+
   )
 }
 
