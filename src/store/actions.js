@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import { STORE_SET, STORE_UPDATE, STORE_DELETE } from './constants'
+import { STORE_SET, STORE_UPDATE, STORE_UNSET } from './constants'
 import store from 'store'
 
 const parse = (args) => {
@@ -29,8 +29,8 @@ export default {
       method: STORE_UPDATE
     })
   },
-  delete: (type) => store.dispatch({
+  unset: (type) => store.dispatch({
     type,
-    method: STORE_DELETE
+    method: STORE_UNSET
   })
 }

@@ -66,6 +66,9 @@ function App(props) {
                 event.preventDefault()
                 const selection = filteredOptions.filter((id) => checked[id])
                 actions.set(`history.${nodeId}`, selection)
+                if (!_.isEqual(history[nodeId], selection)) {
+                  deleteHistory(nextId)
+                }
                 goToNode(nextId)
               }}
             >
@@ -77,6 +80,16 @@ function App(props) {
     </div>
 
   )
+}
+
+const deleteHistory = (id) => {
+  const { nodes, history } = actions.get()
+  const { nextId } = _.get(nodes, id, {})
+
+  if (history[id]) {
+    actions.unset(`history.${id}`)
+    if (nextId) deleteHistory(nextId)
+  }
 }
 
 const goToNode = (id) => {

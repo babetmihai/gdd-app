@@ -4,7 +4,7 @@ import unset from 'lodash/fp/unset'
 import updateWith from 'lodash/fp/updateWith'
 import isFunction from 'lodash/isFunction'
 import isNil from 'lodash/isNil'
-import { STORE_SET, STORE_UPDATE, STORE_DELETE } from './constants'
+import { STORE_SET, STORE_UPDATE, STORE_UNSET } from './constants'
 
 export default (state = {}, action = {}) => {
   const { method, type, payload } = action
@@ -22,7 +22,7 @@ export default (state = {}, action = {}) => {
         case (isFunction(payload)): return updateWith(Object, type, payload, state)
         default: return updateWith(Object, type, (value) => ({ ...value, ...payload }), state)
       }
-    case (STORE_DELETE):
+    case (STORE_UNSET):
       if (!type) return {}
       return unset(type, state)
     default: return state
