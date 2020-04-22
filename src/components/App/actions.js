@@ -13,7 +13,7 @@ export const filterOptions = ({ options, nodes, history = {} }) => {
 }
 
 const isSelected = (id, history) => Object.values(history)
-  .some((value) => value[id])
+  .some((value) => _.get(value, id))
 
 export const submitNode = ({ id, value }) => {
   const { nodes, history } = actions.get()

@@ -4,8 +4,8 @@ export default function Textarea({ onChange, value }) {
 
   return (
     <div>
-      <input
-        checked={value}
+      <textarea
+        value={value}
         onChange={(event) => onChange(event.target.value)}
       />
     </div>

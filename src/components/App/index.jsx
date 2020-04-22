@@ -23,14 +23,14 @@ function App(props) {
 
   const [value, onChange] = React.useState({})
   React.useEffect(() => {
-    onChange(value)
+    onChange(_.get(history, nodeId))
   }, [nodeId]) // eslint-disable-line
 
   return (
     <div className={styles.app}>
       <div className={styles.sidebar}>
         {Object.keys(history)
-          .filter((id) => !_.isEmpty(history[id]))
+          .filter((id) => !_.isEmpty(_.get(history, id)))
           .map((id) => {
             return (
               <div
@@ -67,6 +67,7 @@ function App(props) {
               disabled={_.isEmpty(value)}
               onClick={(event) => {
                 event.preventDefault()
+                onChange(undefined)
                 submitNode({ id: nodeId, value })
               }}
             >
