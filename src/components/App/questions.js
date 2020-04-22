@@ -9,7 +9,7 @@ export default [
     id: 'gameSubtype',
     options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person', 'platformer', 'stealth'],
     parentId: 'gameType',
-    nextId: 'platform'
+    nextId: 'description'
   },
 
   { id: 'mmo', requires: ['rpg'] },
@@ -19,7 +19,11 @@ export default [
   { id: '1st_person', requires: ['shooter'] },
   { id: 'platformer', requires: ['action_adventure'] },
   { id: 'stealth', requires: ['action_adventure'] },
-
+  {
+    id: 'description',
+    type: 'input',
+    nextId: 'platform'
+  },
   {
     id: 'platform',
     options: ['console', 'pc', 'mobile'],
