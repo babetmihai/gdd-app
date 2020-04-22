@@ -2,24 +2,25 @@ import _ from 'lodash'
 import actions from 'store/actions'
 
 export const filterOptions = ({ options, nodes, history = {} }) => {
-  const selected = getSelected(history)
   return _.uniq(options)
     .filter((id) => {
       const { excludes, requires } = _.get(nodes, id, {})
       return (
-        (!excludes || excludes.every((_id) => !selected.includes(_id))) &&
-        (!requires || requires.every((_id) => selected.includes(_id)))
+        (!excludes || excludes.every((_id) => !isSelected(_id, history))) &&
+        (!requires || requires.every((_id) => isSelected(_id, history)))
       )
     })
 }
 
+const isSelected = (id, history) => Object.values(history)
+  .some((value) => value[id])
+
 export const submitNode = ({ id, value }) => {
   const { nodes, history } = actions.get()
-  const { type, nextId } = _.get(nodes, id, {})
+  const { nextId } = _.get(nodes, id, {})
 
-  const selection = mapSelection({ value, type })
-  actions.set(`history.${id}`, selection)
-  if (!_.isEqual(history[id], selection)) {
+  actions.set(`history.${id}`, value)
+  if (!_.isEqual(history[id], value)) {
     deleteHistory(nextId)
   }
   goToNode(nextId)
@@ -48,12 +49,3 @@ const goToNode = (id) => {
     actions.set('nodeId', id)
   }
 }
-
-export const mapSelection = ({ value, type }) => {
-  switch (type) {
-    case ('input'): return value
-    default: return Object.keys(value).filter((key) => value[key])
-  }
-}
-
-const getSelected = (history) => Object.values(history).flat()

@@ -23,10 +23,7 @@ function App(props) {
 
   const [value, onChange] = React.useState({})
   React.useEffect(() => {
-    onChange(_.get(history, nodeId, []).reduce((acc, _id) => ({
-      ...acc,
-      [_id]: true
-    }), {}))
+    onChange(value)
   }, [nodeId]) // eslint-disable-line
 
   return (
