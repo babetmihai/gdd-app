@@ -1,6 +1,11 @@
+@import 'constants.module.scss';
+
 .select {
   display: flex;
+  width: $md;
+  max-width: 90%;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .option {
