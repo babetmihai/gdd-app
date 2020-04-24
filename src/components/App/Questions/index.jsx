@@ -59,6 +59,7 @@ function Questions(props) {
           })}
           {nextId &&
             <Button
+              size="lg"
               variant={_.isEmpty(value) ? 'outline-success' : 'success'}
               type="submit"
               disabled={_.isEmpty(value)}
