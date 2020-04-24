@@ -51,14 +51,15 @@ export default [
   {
     id: 'art_style_detail',
     parentId: 'art_style',
-    options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded', 'realistic'],
-    type: 'done'
+    options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded'],
+    nextId: 'done'
   },
 
   { id: 'pixel_art', requires: ['2d'] },
   { id: 'cartoonish', requires: ['2d'] },
-  { id: 'cell_shaded', requires: ['3d'] }
+  { id: 'cell_shaded', requires: ['3d'] },
 
+  { id: 'done', type: 'done' }
 ].reduce((acc, node) => {
   acc[node.id] = node
   return acc

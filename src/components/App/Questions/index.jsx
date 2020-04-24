@@ -8,34 +8,34 @@ import styles from './index.module.scss'
 import Select from './Select'
 import Textarea from './Textarea'
 
-function App(props) {
+function Questions(props) {
   React.useEffect(() => {
     actions.set({
-      nodeId: 'gameType',
-      nodes: data,
-      history: {}
+      questions: data,
+      answers: {},
+      questionId: 'gameType'
     })
   }, [])
 
-  const { nodeId, nodes, history = {} } = props
-  const { type, options = [], nextId } = _.get(nodes, nodeId, {})
-  const filteredOptions = filterOptions({ options, nodes, history })
+  const { questionId, questions, answers = {} } = props
+  const { type, options = [], nextId } = _.get(questions, questionId, {})
+  const filteredOptions = filterOptions({ options, questions, answers })
 
   const [value, onChange] = React.useState({})
   React.useEffect(() => {
-    onChange(_.get(history, nodeId))
-  }, [nodeId]) // eslint-disable-line
+    onChange(_.get(answers, questionId))
+  }, [questionId]) // eslint-disable-line
 
   return (
     <div className={styles.app}>
       <div className={styles.sidebar}>
-        {Object.keys(history)
-          .filter((id) => !_.isEmpty(_.get(history, id)))
+        {Object.keys(answers)
+          .filter((id) => !_.isEmpty(_.get(answers, id)))
           .map((id) => {
             return (
               <div
                 key={id}
-                onClick={() => actions.set('nodeId', id)}
+                onClick={() => actions.set('questionId', id)}
               >
                 {id}
               </div>
@@ -43,7 +43,7 @@ function App(props) {
           })}
       </div>
       <div className={styles.content}>
-        <h4>{nodeId}</h4>
+        <h4>{questionId}</h4>
         <form>
           {type === 'input'
             ? (
@@ -68,7 +68,7 @@ function App(props) {
               onClick={(event) => {
                 event.preventDefault()
                 onChange(undefined)
-                submitNode({ id: nodeId, value })
+                submitNode({ id: questionId, value })
               }}
             >
               next
@@ -81,4 +81,4 @@ function App(props) {
   )
 }
 
-export default connect(() => actions.get())(App)
+export default connect(() => actions.get())(Questions)

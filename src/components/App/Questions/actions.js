@@ -1,51 +1,50 @@
 import _ from 'lodash'
 import actions from 'store/actions'
 
-export const filterOptions = ({ options, nodes, history = {} }) => {
+export const filterOptions = ({ options, questions, answers = {} }) => {
   return _.uniq(options)
     .filter((id) => {
-      const { excludes, requires } = _.get(nodes, id, {})
+      const { excludes, requires } = _.get(questions, id, {})
       return (
-        (!excludes || excludes.every((_id) => !isSelected(_id, history))) &&
-        (!requires || requires.every((_id) => isSelected(_id, history)))
+        (!excludes || excludes.every((_id) => !isSelected(_id, answers))) &&
+        (!requires || requires.every((_id) => isSelected(_id, answers)))
       )
     })
 }
 
-const isSelected = (id, history) => Object.values(history)
+const isSelected = (id, answers) => Object.values(answers)
   .some((value) => _.get(value, id))
 
 export const submitNode = ({ id, value }) => {
-  const { nodes, history } = actions.get()
-  const { nextId } = _.get(nodes, id, {})
+  const { questions, answers } = actions.get()
+  const { nextId } = _.get(questions, id, {})
 
-  actions.set(`history.${id}`, value)
-  if (!_.isEqual(history[id], value)) {
-    deleteHistory(nextId)
+  actions.set(`answers.${id}`, value)
+  if (!_.isEqual(answers[id], value)) {
+    deleteAnswers(nextId)
   }
   goToNode(nextId)
 }
 
-const deleteHistory = (id) => {
-  const { nodes, history } = actions.get()
-  const { nextId } = _.get(nodes, id, {})
+const deleteAnswers = (id) => {
+  const { questions, answers } = actions.get()
+  const { nextId } = _.get(questions, id, {})
 
-  if (history[id]) {
-    actions.unset(`history.${id}`)
-    if (nextId) deleteHistory(nextId)
+  if (answers[id]) {
+    actions.unset(`answers.${id}`)
+    if (nextId) deleteAnswers(nextId)
   }
 }
 
 const goToNode = (id) => {
-  const { nodes, history } = actions.get()
-  const { type, options = [], nextId } = _.get(nodes, id, {})
-  const filteredOptions = filterOptions({ options, nodes, history })
+  const { questions, answers } = actions.get()
+  const { type, options = [], nextId } = _.get(questions, id, {})
+  const filteredOptions = filterOptions({ options, questions, answers })
 
   if (nextId && type !== 'input' && filteredOptions.length <= 1) {
-    actions.set(`history.${id}`, filteredOptions)
+    actions.set(`answers.${id}`, filteredOptions)
     goToNode(nextId)
-
   } else {
-    actions.set('nodeId', id)
+    actions.set('questionId', id)
   }
 }
