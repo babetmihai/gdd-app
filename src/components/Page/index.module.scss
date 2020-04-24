@@ -1,5 +1,24 @@
+@import 'constants.module.scss';
+
 .page {
   display: flex;
   flex: 1;
   overflow: auto;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.children {
+  flex: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem .5rem;
+  width: 90%;
+  max-width: $lg;
 }

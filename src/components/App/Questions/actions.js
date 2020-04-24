@@ -42,7 +42,8 @@ const goToNode = (id) => {
   const filteredOptions = filterOptions({ options, questions, answers })
 
   if (nextId && type !== 'input' && filteredOptions.length <= 1) {
-    actions.set(`answers.${id}`, filteredOptions)
+    const value = filteredOptions.reduce((acc, id) => ({ ...acc, [id]: true }), {})
+    actions.set(`answers.${id}`, value)
     goToNode(nextId)
   } else {
     actions.set('questionId', id)

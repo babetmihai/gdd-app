@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './index.module.scss'
+import { Card } from 'react-bootstrap'
 
 export default function Page(props) {
 
@@ -7,13 +8,13 @@ export default function Page(props) {
 
   return (
     <div className={styles.page}>
-      <div className={styles.sidebar}>
+      <Card className={styles.sidebar}>
         {sidebar}
-      </div>
+      </Card>
       <div className={styles.content}>
-        <div className={styles.children}>
+        <Card className={styles.children}>
           {children}
-        </div>
+        </Card >
       </div>
     </div>
   )
