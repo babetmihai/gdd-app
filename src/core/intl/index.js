@@ -1,4 +1,4 @@
-  
+
 import capitalize from 'lodash/capitalize'
 import get from 'lodash/get'
 import actions from 'store/actions'
