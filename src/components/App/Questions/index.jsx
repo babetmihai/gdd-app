@@ -7,6 +7,7 @@ import data from './data'
 import styles from './index.module.scss'
 import Select from './Select'
 import Textarea from './Textarea'
+import Page from 'components/Page'
 
 function Questions(props) {
   React.useEffect(() => {
@@ -27,21 +28,25 @@ function Questions(props) {
   }, [questionId]) // eslint-disable-line
 
   return (
-    <div className={styles.app}>
-      <div className={styles.sidebar}>
-        {Object.keys(answers)
-          .filter((id) => !_.isEmpty(_.get(answers, id)))
-          .map((id) => {
-            return (
-              <div
-                key={id}
-                onClick={() => actions.set('questionId', id)}
-              >
-                {id}
-              </div>
-            )
-          })}
-      </div>
+    <Page
+      className={styles.questions}
+      sidebar={
+        <div className={styles.answers}>
+          {Object.keys(answers)
+            .filter((id) => !_.isEmpty(_.get(answers, id)))
+            .map((id) => {
+              return (
+                <div
+                  key={id}
+                  onClick={() => actions.set('questionId', id)}
+                >
+                  {id}
+                </div>
+              )
+            })}
+        </div>
+      }
+    >
       <div className={styles.content}>
         <h4>{questionId}</h4>
         <form>
@@ -76,7 +81,7 @@ function Questions(props) {
           }
         </form>
       </div>
-    </div>
+    </Page>
 
   )
 }
