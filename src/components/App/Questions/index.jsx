@@ -30,7 +30,6 @@ function Questions(props) {
 
   return (
     <Page
-      className={styles.questions}
       sidebar={
         <div className={styles.answers}>
           {Object.keys(answers)
@@ -48,32 +47,30 @@ function Questions(props) {
         </div>
       }
     >
-      <div className={styles.content}>
-        <h4>{questionId}</h4>
-        <form>
-          {renderInput({
-            type,
-            options: filteredOptions,
-            value,
-            onChange
-          })}
-          {nextId &&
-            <Button
-              size="lg"
-              variant={_.isEmpty(value) ? 'outline-success' : 'success'}
-              type="submit"
-              disabled={_.isEmpty(value)}
-              onClick={(event) => {
-                event.preventDefault()
-                onChange(undefined)
-                submitNode({ id: questionId, value })
-              }}
-            >
-              Next
-            </Button>
-          }
-        </form>
-      </div>
+      <form className={styles.questions}>
+        <h2>{questionId}</h2>
+        {renderInput({
+          type,
+          options: filteredOptions,
+          value,
+          onChange
+        })}
+        {nextId &&
+          <Button
+            size="lg"
+            variant={_.isEmpty(value) ? 'outline-success' : 'success'}
+            type="submit"
+            disabled={_.isEmpty(value)}
+            onClick={(event) => {
+              event.preventDefault()
+              onChange(undefined)
+              submitNode({ id: questionId, value })
+            }}
+          >
+            Next
+          </Button>
+        }
+      </form>
     </Page>
   )
 }

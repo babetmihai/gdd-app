@@ -1,8 +1,3 @@
-.questions {
-  flex: 1;
-  align-self: stretch;
-  display: flex;
-}
 
 .answers {
   flex: none;
@@ -12,9 +7,11 @@
   padding: .5rem;
 }
 
-.content {
+.questions {
   flex: 1;
-  display: flex;
+  display: flex;  
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: .5rem;
 }
