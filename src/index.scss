@@ -37,7 +37,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  margin: .35em 0;
+  margin: .35em .25rem;
 }
 
 i {
@@ -66,4 +66,13 @@ i {
 
 .spin {
   animation: spin 2*$std-transition linear;
+}
+
+
+.btn {
+  margin: .25rem;
+}
+
+textarea {
+  margin: .25rem;
 }

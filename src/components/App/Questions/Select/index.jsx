@@ -2,34 +2,35 @@ import React from 'react'
 import _ from 'lodash'
 import unset from 'lodash/fp/unset'
 import set from 'lodash/fp/set'
-export default function Select({ onChange, options, value, multiple }) {
+import { Button } from 'react-bootstrap'
+import styles from './index.module.scss'
 
+export default function Select(props) {
+  const { onChange, options, value, multiple } = props
   return (
     <div>
       {options.map((id) => {
         const checked = _.get(value, id)
         return (
-          <div key={id}>
-            <input
-              id={id}
-              type="checkbox"
-              checked={checked}
-              onChange={() => {
-                if (multiple) {
-                  if (checked) {
-                    onChange(unset(id, value))
-                  } else {
-                    onChange(set(id, true, value))
-                  }
+          <Button
+            key={id}
+            id={id}
+            className={styles.option}
+            variant={checked ? 'primary' : 'outline-primary'}
+            onClick={() => {
+              if (multiple) {
+                if (checked) {
+                  onChange(unset(id, value))
                 } else {
-                  onChange({ [id]: !value[id] })
+                  onChange(set(id, true, value))
                 }
-              }}
-            />
-            <label htmlFor={id}>
-              {id}
-            </label>
-          </div>
+              } else {
+                onChange({ [id]: !value[id] })
+              }
+            }}
+          >
+            {id}
+          </Button>
         )
       })}
     </div>

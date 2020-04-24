@@ -8,6 +8,7 @@ import styles from './index.module.scss'
 import Select from './Select'
 import Textarea from './Textarea'
 import Page from 'components/Page'
+import { Button } from 'react-bootstrap'
 
 function Questions(props) {
   React.useEffect(() => {
@@ -50,24 +51,15 @@ function Questions(props) {
       <div className={styles.content}>
         <h4>{questionId}</h4>
         <form>
-          {type === 'input'
-            ? (
-              <Textarea
-                value={value}
-                onChange={onChange}
-              />
-            )
-            : (
-              <Select
-                options={filteredOptions}
-                value={value}
-                multiple
-                onChange={onChange}
-              />
-            )
-          }
+          {renderInput({
+            type,
+            options: filteredOptions,
+            value,
+            onChange
+          })}
           {nextId &&
-            <button
+            <Button
+              variant={_.isEmpty(value) ? 'outline-success' : 'success'}
               type="submit"
               disabled={_.isEmpty(value)}
               onClick={(event) => {
@@ -76,14 +68,37 @@ function Questions(props) {
                 submitNode({ id: questionId, value })
               }}
             >
-              next
-            </button>
+              Next
+            </Button>
           }
         </form>
       </div>
     </Page>
-
   )
+}
+
+const renderInput = ({ type, options, value, onChange }) => {
+  switch (true) {
+    case (type === 'input'): {
+      return (
+        <Textarea
+          value={value}
+          onChange={onChange}
+        />
+      )
+    }
+    case (options.length > 0): {
+      return (
+        <Select
+          options={options}
+          value={value}
+          multiple
+          onChange={onChange}
+        />
+      )
+    }
+    default: return null
+  }
 }
 
 export default connect(() => actions.get())(Questions)
