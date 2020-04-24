@@ -52,7 +52,7 @@ export default [
     id: 'art_style_detail',
     parentId: 'art_style',
     options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded', 'realistic'],
-    nextId: 'done'
+    type: 'done'
   },
 
   { id: 'pixel_art', requires: ['2d'] },
