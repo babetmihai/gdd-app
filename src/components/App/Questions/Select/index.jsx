@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function Select(props) {
-  const { onChange, options, value, multiple } = props
+  const { onChange, options, value = {}, multiple } = props
   return (
     <div>
       {options.map((id) => {
@@ -25,7 +25,11 @@ export default function Select(props) {
                   onChange(set(id, true, value))
                 }
               } else {
-                onChange({ [id]: !value[id] })
+                if (checked) {
+                  onChange({})
+                } else {
+                  onChange({ [id]: true })
+                }
               }
             }}
           >

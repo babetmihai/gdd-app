@@ -2,12 +2,14 @@ export default [
   {
     id: 'gameType',
     options: ['rpg', 'moba', 'shooter', 'action_adventure'],
+    type: 'multiple',
     nextId: 'gameSubtype'
   },
 
   {
     id: 'gameSubtype',
     options: ['mmo', 'medieval', 'fantasy', '3rd_person', '1st_person', 'platformer', 'stealth'],
+    type: 'multiple',
     parentId: 'gameType',
     nextId: 'description'
   },

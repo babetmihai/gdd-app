@@ -92,7 +92,7 @@ const renderInput = ({ type, options, value, onChange }) => {
         <Select
           options={options}
           value={value}
-          multiple
+          multiple={type === 'multiple'}
           onChange={onChange}
         />
       )
