@@ -3,14 +3,15 @@ import styles from './index.module.scss'
 import { Card } from 'react-bootstrap'
 
 export default function Page(props) {
-
   const { children, sidebar } = props
 
   return (
     <div className={styles.page}>
-      <Card className={styles.sidebar}>
-        {sidebar}
-      </Card>
+      {sidebar &&
+        <Card className={styles.sidebar}>
+          {sidebar}
+        </Card>
+      }
       <div className={styles.content}>
         <Card className={styles.children}>
           {children}
