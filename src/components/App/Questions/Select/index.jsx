@@ -2,13 +2,13 @@ import React from 'react'
 import _ from 'lodash'
 import unset from 'lodash/fp/unset'
 import set from 'lodash/fp/set'
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function Select(props) {
   const { onChange, options, value = {}, multiple } = props
   return (
-    <div>
+    <Form.Group className={styles.select}>
       {options.map((id) => {
         const checked = _.get(value, id)
         return (
@@ -33,11 +33,11 @@ export default function Select(props) {
               }
             }}
           >
+            <i>extension</i>
             {id}
           </Button>
         )
       })}
-    </div>
-
+    </Form.Group>
   )
 }
