@@ -1,21 +1,38 @@
 import React from 'react'
 import styles from './index.module.scss'
-import { Card } from 'react-bootstrap'
+import { Card, Navbar, Nav } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default function Page(props) {
   const { children, sidebar } = props
 
   return (
     <div className={styles.page}>
-      {sidebar &&
-        <Card className={styles.sidebar}>
-          {sidebar}
-        </Card>
-      }
-      <div className={styles.content}>
-        <Card className={styles.children}>
-          {children}
-        </Card >
+      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+        <Navbar.Brand as={Link} to="/">
+          GDD Generator
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link as={Link} to="/questions">Create</Nav.Link>
+            <Nav.Link as={Link} to="/help">Help</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar >
+      <div className={styles.pageContent}>
+        <div className={styles.pageChildren}>
+          {sidebar &&
+            <Card className={styles.sidebar}>
+              {sidebar}
+            </Card>
+          }
+          <div className={styles.rightContent}>
+            <Card className={styles.children}>
+              {children}
+            </Card >
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -9,17 +9,17 @@ export default function Home() {
   return (
     <Page>
       <div className={styles.home}>
-        <h1>gdoc gerenrator</h1>
-
+        <h1>GDD Generator</h1>
+        <h4>Create your Game Design Document</h4>
         <Button
           size="lg"
           variant="success"
+          className={styles.button}
           onClick={() => history.push('/questions')}
         >
           Start
         </Button>
       </div>
-
     </Page>
   )
 }
