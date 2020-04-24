@@ -1,0 +1,7 @@
+@import 'constants.module.scss';
+
+.textarea {
+  width: $sm;
+  max-width: 90%;
+  display: flex;
+}
