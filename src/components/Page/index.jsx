@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.module.scss'
-import { Card, Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 export default function Page(props) {
@@ -21,9 +21,9 @@ export default function Page(props) {
         </Navbar.Collapse>
       </Navbar >
       <div className={styles.content}>
-        <Card className={styles.children}>
+        <div className={styles.children}>
           {children}
-        </Card >
+        </div >
       </div>
     </div>
   )
