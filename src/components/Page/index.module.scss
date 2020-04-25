@@ -6,42 +6,22 @@
   flex-direction: column;
 }
 
-.pageContent {
+.content {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
-
-.pageChildren {
-  flex: auto;
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap-reverse;
-  padding: .5rem;
-}
-
-.sidebar {
-  flex: auto;
-  margin: .5rem;
-}
-
-.rightContent {
-  flex: auto;
-  flex-grow: 999; 
-  width: $sm;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  overflow: auto;
 }
+
 
 .children {
   flex: auto;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  margin: .5rem;
-  width: calc(100% - 1rem);
+  margin: 1.5rem 1rem;
+  width: calc(100% - 2rem);
   max-width: $lg;
 }

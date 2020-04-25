@@ -1,0 +1,30 @@
+import React from 'react'
+import _ from 'lodash'
+import actions from 'store/actions'
+import { ListGroup } from 'react-bootstrap'
+import styles from './index.module.scss'
+
+export default function Answers(props) {
+  const { questionId, questions = {}, answers = {} } = props
+  return (
+
+    <ListGroup className={styles.answers}>
+      {Object.keys(questions)
+        .filter((id) => _.get(questions, `${id}.nextId`))
+        .map((id) => {
+          return (
+            <ListGroup.Item
+              key={id}
+              active={id === questionId}
+              disabled={_.isEmpty(_.get(answers, id))}
+              onClick={() => actions.set('questionId', id)}
+            >
+              {id}
+            </ListGroup.Item>
+          )
+        })}
+    </ListGroup>
+
+  )
+}
+

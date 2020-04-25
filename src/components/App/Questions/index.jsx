@@ -7,8 +7,9 @@ import data from './data'
 import styles from './index.module.scss'
 import Select from './Select'
 import Textarea from './Textarea'
+import Answers from './Answers'
 import Page from 'components/Page'
-import { Button, Form, ListGroup } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 
 function Questions(props) {
   React.useEffect(() => {
@@ -29,50 +30,39 @@ function Questions(props) {
   }, [questionId]) // eslint-disable-line
 
   return (
-    <Page
-      sidebar={
-        <ListGroup className={styles.answers}>
-          {Object.keys(questions)
-            .filter((id) => _.get(questions, `${id}.nextId`))
-            .map((id) => {
-              return (
-                <ListGroup.Item
-                  key={id}
-                  active={id === questionId}
-                  disabled={_.isEmpty(_.get(answers, id))}
-                  onClick={() => actions.set('questionId', id)}
-                >
-                  {id}
-                </ListGroup.Item>
-              )
-            })}
-        </ListGroup>
-      }
-    >
-      <Form className={styles.questions}>
-        <h2>{questionId}</h2>
-        {renderInput({
-          type,
-          options: filteredOptions,
-          value,
-          onChange
-        })}
-        {nextId &&
-          <Button
-            size="lg"
-            variant={_.isEmpty(value) ? 'outline-success' : 'success'}
-            type="submit"
-            disabled={_.isEmpty(value)}
-            onClick={(event) => {
-              event.preventDefault()
-              onChange(undefined)
-              submitNode({ id: questionId, value })
-            }}
-          >
-            Next
-          </Button>
-        }
-      </Form>
+    <Page>
+      <div className={styles.questions}>
+        <Answers
+          questions={questions}
+          answers={answers}
+          questionId={questionId}
+        />
+        <Form className={styles.form}>
+          <h2>{questionId}</h2>
+          {renderInput({
+            type,
+            options: filteredOptions,
+            value,
+            onChange
+          })}
+          {nextId &&
+            <Button
+              size="lg"
+              variant={_.isEmpty(value) ? 'outline-success' : 'success'}
+              type="submit"
+              disabled={_.isEmpty(value)}
+              onClick={(event) => {
+                event.preventDefault()
+                onChange(undefined)
+                submitNode({ id: questionId, value })
+              }}
+            >
+              Next
+            </Button>
+          }
+        </Form>
+
+      </div>
     </Page>
   )
 }

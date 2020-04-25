@@ -4,7 +4,7 @@ import { Card, Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 export default function Page(props) {
-  const { children, sidebar } = props
+  const { children } = props
 
   return (
     <div className={styles.page}>
@@ -20,19 +20,10 @@ export default function Page(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar >
-      <div className={styles.pageContent}>
-        <div className={styles.pageChildren}>
-          {sidebar &&
-            <Card className={styles.sidebar}>
-              {sidebar}
-            </Card>
-          }
-          <div className={styles.rightContent}>
-            <Card className={styles.children}>
-              {children}
-            </Card >
-          </div>
-        </div>
+      <div className={styles.content}>
+        <Card className={styles.children}>
+          {children}
+        </Card >
       </div>
     </div>
   )

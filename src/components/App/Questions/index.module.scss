@@ -1,18 +1,14 @@
 
-.answers {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  min-width: 15rem;
-  padding: .5rem;
-}
 
 .questions {
   flex: auto;
   flex-shrink: 0;
   display: flex;  
+}
+
+.form {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: .5rem;
+  justify-content: center;
 }
