@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.module.scss'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 export default function Page(props) {

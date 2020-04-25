@@ -1,9 +1,12 @@
 import 'index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router } from 'react-router-dom'
+
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import App from 'components/App'
+import Modals from 'core/modals/components/Modals'
+import Home from 'routes/Home'
+import Questions from 'routes/Questions'
 import store from 'store'
 import { initLocale } from 'core/intl'
 import history from 'core/history'
@@ -16,7 +19,12 @@ Promise.resolve()
       <React.StrictMode>
         <Provider store={store}>
           <Router history={history}>
-            <App />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/questions" component={Questions} />
+              <Redirect to="/" />
+            </Switch>
+            <Modals />
           </Router>
         </Provider>
       </React.StrictMode>,

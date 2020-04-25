@@ -4,11 +4,12 @@ import { goToQuestion, answerQuestion, filterOptions } from './actions'
 import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
-import styles from './index.module.scss'
-import FormInput from './FormInput'
+import FormText from './FormText'
+import FormSelect from './FormSelect'
 import Answers from './Answers'
 import Page from 'components/Page'
 import { Button, Form } from 'react-bootstrap'
+import styles from './index.module.scss'
 
 function Questions(props) {
   React.useEffect(() => {
@@ -33,13 +34,22 @@ function Questions(props) {
           questionId={questionId}
         />
         <Form className={styles.form}>
-          <FormInput
-            id={questionId}
-            type={type}
-            options={filteredOptions}
-            value={value}
-            onChange={(value) => answerQuestion({ id: questionId, value })}
-          />
+          {type === 'input' &&
+            <FormText
+              id={questionId}
+              value={value}
+              onChange={(value) => answerQuestion({ id: questionId, value })}
+            />
+          }
+          {options.length > 0 &&
+            <FormSelect
+              id={questionId}
+              options={filteredOptions}
+              value={value}
+              multiple={type === 'multiple'}
+              onChange={(value) => answerQuestion({ id: questionId, value })}
+            />
+          }
           {nextId &&
             <Button
               size="lg"

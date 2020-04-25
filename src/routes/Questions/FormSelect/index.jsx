@@ -5,7 +5,7 @@ import set from 'lodash/fp/set'
 import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
 
-export default function Select(props) {
+export default function FormSelect(props) {
   const { id, onChange, options, value = {}, multiple } = props
   React.useEffect(() => {
     onChange(value)
@@ -13,7 +13,7 @@ export default function Select(props) {
   return (
     <>
       <h2>{id}</h2>
-      <Form.Group className={styles.select}>
+      <Form.Group className={styles.formSelect}>
         {options.map((id) => {
           const checked = _.get(value, id)
           return (
