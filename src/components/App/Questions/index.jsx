@@ -33,7 +33,6 @@ function Questions(props) {
           questionId={questionId}
         />
         <Form className={styles.form}>
-          <h2>{questionId}</h2>
           <FormInput
             id={questionId}
             type={type}
