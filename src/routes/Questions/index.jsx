@@ -22,7 +22,9 @@ function Questions(props) {
   }, [])
 
   const { questionId, questions = {}, answers = {} } = props
-  const { type, options = [], nextId } = _.get(questions, questionId, {})
+  const { type, options = [], nextId, parentId } = _.get(questions, questionId, {})
+  const parentAnswers = parentId && Object.keys(_.get(answers, parentId, {}))
+
   const filteredOptions = filterOptions({ options, questions, answers })
   const value = _.get(answers, questionId)
 
@@ -36,6 +38,15 @@ function Questions(props) {
         />
         <Form className={styles.form}>
           <h2>{t(questionId)}</h2>
+          {parentId &&
+            <h5>
+              {t(
+                'details_question',
+                { parentAnswers },
+                'What type of {parentAnswers} game?'
+              )}
+            </h5>
+          }
           {type === 'input' &&
             <FormText
               id={questionId}

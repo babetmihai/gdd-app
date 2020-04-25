@@ -50,6 +50,7 @@ export default [
   },
 
   { id: 'platformer', requires: ['action'] },
+  { id: 'fighting', requires: ['action'] },
   { id: 'shooter', requires: ['action'] },
   { id: 'beat_em_up', requires: ['action'] },
   { id: 'stealth', requires: ['action'] },

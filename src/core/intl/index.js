@@ -34,7 +34,6 @@ const replaceParams = (message, params) => message.replace(/\{(.+?)\}/g, (_, key
 
 export const t = (id, params, defaultMessage = '') => {
   if (!id) return ''
-  console.log(id)
   const messages = actions.get('intl.messages', {})
   let message = messages[id] || defaultMessage
   if (params && message) message = replaceParams(message, params)
