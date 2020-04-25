@@ -34,6 +34,7 @@ function Questions(props) {
           questionId={questionId}
         />
         <Form className={styles.form}>
+          <h2>{questionId}</h2>
           {type === 'input' &&
             <FormText
               id={questionId}

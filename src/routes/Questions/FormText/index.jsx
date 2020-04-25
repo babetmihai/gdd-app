@@ -8,15 +8,12 @@ export default function FormText(props) {
     onChange(value)
   }, [id]) // eslint-disable-line
   return (
-    <>
-      <h2>{id}</h2>
-      <Form.Group className={styles.formText}>
-        <Form.Control as="textarea"
-          autoFocus
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-        />
-      </Form.Group>
-    </>
+    <Form.Group className={styles.formText}>
+      <Form.Control as="textarea"
+        autoFocus
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
+    </Form.Group>
   )
 }
