@@ -12,13 +12,6 @@ export default function Page(props) {
         <Navbar.Brand as={Link} to="/">
           GDD Generator
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link as={Link} to="/questions">Create</Nav.Link>
-            <Nav.Link as={Link} to="/help">Help</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
       </Navbar >
       <div className={styles.content}>
         <div className={styles.children}>
