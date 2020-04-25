@@ -6,7 +6,10 @@ import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function Select(props) {
-  const { onChange, options, value = {}, multiple } = props
+  const { id, onChange, options, value = {}, multiple } = props
+  React.useEffect(() => {
+    onChange(value)
+  }, [id]) // eslint-disable-line
   return (
     <Form.Group className={styles.select}>
       {options.map((id) => {
