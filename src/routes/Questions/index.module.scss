@@ -3,7 +3,8 @@
 .questions {
   flex: auto;
   flex-shrink: 0;
-  display: flex;  
+  display: flex;
+  padding-top: 5vh; 
 }
 
 .form {
@@ -11,6 +12,5 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  padding-top: 5vh;
   padding-left: 7vw;
 }
