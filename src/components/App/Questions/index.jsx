@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { submitNode, filterOptions } from './actions'
+import { goToQuestion, answerQuestion, filterOptions } from './actions'
 import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
@@ -23,11 +23,7 @@ function Questions(props) {
   const { questionId, questions = {}, answers = {} } = props
   const { type, options = [], nextId } = _.get(questions, questionId, {})
   const filteredOptions = filterOptions({ options, questions, answers })
-
-  const [value, onChange] = React.useState({})
-  React.useEffect(() => {
-    onChange(_.get(answers, questionId))
-  }, [questionId]) // eslint-disable-line
+  const value = _.get(answers, questionId)
 
   return (
     <Page>
@@ -43,7 +39,7 @@ function Questions(props) {
             type,
             options: filteredOptions,
             value,
-            onChange
+            onChange: (value) => answerQuestion({ id: questionId, value })
           })}
           {nextId &&
             <Button
@@ -53,15 +49,13 @@ function Questions(props) {
               disabled={_.isEmpty(value)}
               onClick={(event) => {
                 event.preventDefault()
-                onChange(undefined)
-                submitNode({ id: questionId, value })
+                goToQuestion(nextId)
               }}
             >
               Next
             </Button>
           }
         </Form>
-
       </div>
     </Page>
   )

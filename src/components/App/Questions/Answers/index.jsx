@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 
 export default function Answers(props) {
   const { questionId, questions = {}, answers = {} } = props
+  const lastId = _.last(Object.keys(answers))
   return (
 
     <ListGroup className={styles.answers}>
@@ -16,7 +17,7 @@ export default function Answers(props) {
             <ListGroup.Item
               key={id}
               active={id === questionId}
-              disabled={_.isEmpty(_.get(answers, id))}
+              disabled={_.isEmpty(_.get(answers, id)) && id !== lastId}
               onClick={() => actions.set('questionId', id)}
             >
               {id}

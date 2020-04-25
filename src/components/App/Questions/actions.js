@@ -15,7 +15,7 @@ export const filterOptions = ({ options, questions, answers = {} }) => {
 const isSelected = (id, answers) => Object.values(answers)
   .some((value) => _.get(value, id))
 
-export const submitNode = ({ id, value }) => {
+export const answerQuestion = ({ id, value }) => {
   const { questions, answers } = actions.get()
   const { nextId } = _.get(questions, id, {})
 
@@ -23,7 +23,6 @@ export const submitNode = ({ id, value }) => {
   if (!_.isEqual(answers[id], value)) {
     deleteAnswers(nextId)
   }
-  goToNode(nextId)
 }
 
 const deleteAnswers = (id) => {
@@ -36,7 +35,7 @@ const deleteAnswers = (id) => {
   }
 }
 
-const goToNode = (id) => {
+export const goToQuestion = (id) => {
   const { questions, answers } = actions.get()
   const { type, options = [], nextId } = _.get(questions, id, {})
   const filteredOptions = filterOptions({ options, questions, answers })
@@ -44,8 +43,9 @@ const goToNode = (id) => {
   if (nextId && type !== 'input' && filteredOptions.length <= 1) {
     const value = filteredOptions.reduce((acc, id) => ({ ...acc, [id]: true }), {})
     actions.set(`answers.${id}`, value)
-    goToNode(nextId)
+    goToQuestion(nextId)
   } else {
     actions.set('questionId', id)
   }
 }
+
