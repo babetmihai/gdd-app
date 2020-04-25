@@ -3,7 +3,6 @@ import _ from 'lodash'
 import reducer from './reducer'
 
 const PERSISTENT_PATHS = [
-  { path: 'selection', defaultValue: {} }
 ]
 
 const state = {}
