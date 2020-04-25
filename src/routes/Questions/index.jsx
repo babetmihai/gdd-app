@@ -10,6 +10,7 @@ import Answers from './Answers'
 import Page from 'components/Page'
 import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
+import { t } from 'core/intl'
 
 function Questions(props) {
   React.useEffect(() => {
@@ -34,7 +35,7 @@ function Questions(props) {
           questionId={questionId}
         />
         <Form className={styles.form}>
-          <h2>{questionId}</h2>
+          <h2>{t(questionId)}</h2>
           {type === 'input' &&
             <FormText
               id={questionId}

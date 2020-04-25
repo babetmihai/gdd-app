@@ -29,11 +29,12 @@ export const initLocale = async () => {
 
 export const selectLocale = () => actions.get('intl.locale')
 
-const formatId = (id) => capitalize(id.split('_').join(' '))
+const formatId = (id = '') => capitalize(id.split('_').join(' '))
 const replaceParams = (message, params) => message.replace(/\{(.+?)\}/g, (_, key) => get(params, key.trim(), ''))
 
 export const t = (id, params, defaultMessage = '') => {
   if (!id) return ''
+  console.log(id)
   const messages = actions.get('intl.messages', {})
   let message = messages[id] || defaultMessage
   if (params && message) message = replaceParams(message, params)

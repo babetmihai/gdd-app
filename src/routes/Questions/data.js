@@ -2,10 +2,10 @@ export default [
   {
     id: 'platform',
     options: ['console', 'pc', 'mobile'],
-    nextId: 'platform_detail'
+    nextId: 'platform_details'
   },
   {
-    id: 'platform_detail',
+    id: 'platform_details',
     parentId: 'platform',
     options: ['ps4', 'xbox', 'nintendo', 'web_browser', 'client', 'ios', 'android'],
     nextId: 'game_type'
@@ -30,11 +30,11 @@ export default [
       'puzzle',
       'idle_game'
     ],
-    nextId: 'game_type_detail'
+    nextId: 'game_type_details'
   },
 
   {
-    id: 'game_type_detail',
+    id: 'game_type_details',
     parentId: 'game_type',
     options: [
       'platformer', 'shooter', 'fighting', 'beat_em_up', 'stealth', 'survival', 'rhythm',
@@ -46,7 +46,7 @@ export default [
       'logic', 'trivia',
       'casual', 'party_game', 'board_game', 'educational'
     ],
-    nextId: 'description'
+    nextId: 'art_style'
   },
 
   { id: 'platformer', requires: ['action'] },
@@ -65,30 +65,98 @@ export default [
   { id: 'roguelike', requires: ['rpg'] },
   { id: 'sandbox_rpg', requires: ['rpg'] },
 
-  { id: '3rd_person', requires: ['shooter'] },
-  { id: '1st_person', requires: ['shooter'] },
-  { id: 'platformer', requires: ['action_adventure'] },
-  { id: 'stealth', requires: ['action_adventure'] },
-  {
-    id: 'description',
-    type: 'input',
-    nextId: 'platform'
-  },
+  { id: 'tycoon', requires: ['simulation'] },
+  { id: 'lifesyle', requires: ['simulation'] },
+  { id: 'vehicle', requires: ['simulation'] },
+
+  { id: 'build_and_conquer', requires: ['strategy'] },
+  { id: 'real_time_strategy', requires: ['strategy'] },
+  { id: 'real_time_tactics', requires: ['strategy'] },
+  { id: 'moba', requires: ['strategy'] },
+  { id: 'tower_defense', requires: ['strategy'] },
+
+  { id: 'team_sports', requires: ['sports'] },
+  { id: 'competitive', requires: ['sports'] },
+
+  { id: 'logic', requires: ['strategy'] },
+  { id: 'trivia', requires: ['strategy'] },
+
+  { id: 'casual', requires: ['idle_game'] },
+  { id: 'party_game', requires: ['idle_game'] },
+  { id: 'board_game', requires: ['idle_game'] },
+  { id: 'educational', requires: ['idle_game'] },
 
   { id: 'art_style', options: ['2d', '3d'], nextId: 'art_style_detail' },
-
-  { id: '2d', excludes: ['3rd_person'] },
-
   {
     id: 'art_style_detail',
     parentId: 'art_style',
-    options: ['pixel_art', 'cartoonish', 'realistic', 'cell_shaded'],
-    nextId: 'done'
+    nextId: 'core_mechanics',
+    options: ['pixel', 'vector', 'cutout', 'doodle', 'realistic', 'cell_shaded', 'low_poly', 'sci_fi_realistic']
   },
 
-  { id: 'pixel_art', requires: ['2d'] },
-  { id: 'cartoonish', requires: ['2d'] },
+  { id: 'pixel', requires: ['2d'] },
+  { id: 'vector', requires: ['2d'] },
+  { id: 'cutout', requires: ['2d'] },
+  { id: 'doodle', requires: ['2d'] },
+  { id: 'realistic', requires: ['3d'] },
   { id: 'cell_shaded', requires: ['3d'] },
+  { id: 'low_poly', requires: ['3d'] },
+  { id: 'sci_fi_realistic', requires: ['3d'] },
+
+  { id: 'core_mechanics', options: ['dynamic', 'achievemets'], nextId: 'core_mechanics_detail' },
+  {
+    id: 'core_mechanics_detail',
+    parentId: 'core_mechanics',
+    nextId: 'future_content',
+    options: [
+      'racing',
+      'running',
+      'jumping',
+      'dodging',
+      'flying',
+      'attacking',
+      'syncronizing',
+      'collecting',
+      'crafting',
+      'questing',
+      'matching',
+      'exploring',
+      'developing'
+    ]
+  },
+  { id: 'racing', requires: ['dynamic'] },
+  { id: 'running', requires: ['dynamic'] },
+  { id: 'jumping', requires: ['dynamic'] },
+  { id: 'dodging', requires: ['dynamic'] },
+  { id: 'flying', requires: ['dynamic'] },
+  { id: 'attacking', requires: ['dynamic'] },
+  { id: 'syncronizing', requires: ['dynamic'] },
+  { id: 'collecting', requires: ['achievemets'] },
+  { id: 'crafting', requires: ['achievemets'] },
+  { id: 'questing', requires: ['achievemets'] },
+  { id: 'matching', requires: ['achievemets'] },
+  { id: 'exploring', requires: ['achievemets'] },
+  { id: 'developing', requires: ['achievemets'] },
+
+  { id: 'future_content', options: ['expansion', 'sequel', 'new_game'], nextId: 'future_content_detail' },
+  {
+    id: 'future_content_detail',
+    parentId: 'future_content',
+    nextId: 'done',
+    options: [
+      'new_quests',
+      'new_maps',
+      'new_items',
+      'new_features',
+      'new_content'
+    ]
+  },
+
+  { id: 'new_quests', requires: ['expansion'] },
+  { id: 'new_maps', requires: ['expansion'] },
+  { id: 'new_items', requires: ['expansion'] },
+  { id: 'new_features', excludes: ['new_game'] },
+  { id: 'new_content', excludes: ['expansion'] },
 
   { id: 'done', type: 'done' }
 ].reduce((acc, node) => {

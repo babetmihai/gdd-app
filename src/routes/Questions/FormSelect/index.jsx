@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import { t } from 'core/intl'
 import unset from 'lodash/fp/unset'
 import set from 'lodash/fp/set'
 import { Button, Form } from 'react-bootstrap'
@@ -37,7 +38,7 @@ export default function FormSelect(props) {
             }}
           >
             <i>extension</i>
-            {id}
+            {t(id)}
           </Button>
         )
       })}

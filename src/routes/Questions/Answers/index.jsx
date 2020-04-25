@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import { t } from 'core/intl'
 import actions from 'store/actions'
 import { ListGroup } from 'react-bootstrap'
 import styles from './index.module.scss'
@@ -20,7 +21,7 @@ export default function Answers(props) {
               disabled={_.isEmpty(_.get(answers, id)) && id !== lastId}
               onClick={() => actions.set('questionId', id)}
             >
-              {id}
+              {t(id)}
             </ListGroup.Item>
           )
         })}
