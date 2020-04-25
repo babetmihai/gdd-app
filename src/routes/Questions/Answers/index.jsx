@@ -17,6 +17,7 @@ export default function Answers(props) {
           return (
             <ListGroup.Item
               key={id}
+              className={styles.item}
               active={id === questionId}
               disabled={_.isEmpty(_.get(answers, id)) && id !== lastId}
               onClick={() => actions.set('questionId', id)}
