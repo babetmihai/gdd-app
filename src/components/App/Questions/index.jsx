@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 import Select from './Select'
 import Textarea from './Textarea'
 import Page from 'components/Page'
-import { Button } from 'react-bootstrap'
+import { Button, Form, ListGroup } from 'react-bootstrap'
 
 function Questions(props) {
   React.useEffect(() => {
@@ -19,7 +19,7 @@ function Questions(props) {
     })
   }, [])
 
-  const { questionId, questions, answers = {} } = props
+  const { questionId, questions = {}, answers = {} } = props
   const { type, options = [], nextId } = _.get(questions, questionId, {})
   const filteredOptions = filterOptions({ options, questions, answers })
 
@@ -31,23 +31,25 @@ function Questions(props) {
   return (
     <Page
       sidebar={
-        <div className={styles.answers}>
-          {Object.keys(answers)
-            .filter((id) => !_.isEmpty(_.get(answers, id)))
+        <ListGroup className={styles.answers}>
+          {Object.keys(questions)
+            .filter((id) => _.get(questions, `${id}.nextId`))
             .map((id) => {
               return (
-                <div
+                <ListGroup.Item
                   key={id}
+                  active={id === questionId}
+                  disabled={_.isEmpty(_.get(answers, id))}
                   onClick={() => actions.set('questionId', id)}
                 >
                   {id}
-                </div>
+                </ListGroup.Item>
               )
             })}
-        </div>
+        </ListGroup>
       }
     >
-      <form className={styles.questions}>
+      <Form className={styles.questions}>
         <h2>{questionId}</h2>
         {renderInput({
           type,
@@ -70,7 +72,7 @@ function Questions(props) {
             Next
           </Button>
         }
-      </form>
+      </Form>
     </Page>
   )
 }
