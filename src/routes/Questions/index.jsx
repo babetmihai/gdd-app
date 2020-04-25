@@ -16,7 +16,7 @@ function Questions(props) {
     actions.set({
       questions: data,
       answers: {},
-      questionId: 'gameType'
+      questionId: _.first(Object.keys(data))
     })
   }, [])
 
