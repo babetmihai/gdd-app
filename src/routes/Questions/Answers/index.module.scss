@@ -5,13 +5,13 @@
   display: flex;
   flex-direction: column;
   min-width: 15rem;
-  margin: .5rem;
 
   @media screen and (max-width: $md) {
     display: none;
   }
+
+  .item {
+    cursor: pointer;
+  }
 }
 
-.item {
-  cursor: pointer;
-}

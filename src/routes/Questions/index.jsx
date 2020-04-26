@@ -8,7 +8,7 @@ import FormText from './FormText'
 import FormSelect from './FormSelect'
 import Answers from './Answers'
 import Page from 'components/Page'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Card } from 'react-bootstrap'
 import styles from './index.module.scss'
 import { t } from 'core/intl'
 
@@ -30,7 +30,7 @@ function Questions(props) {
 
   return (
     <Page>
-      <div className={styles.questions}>
+      <Card className={styles.questions}>
         <Answers
           questions={questions}
           answers={answers}
@@ -78,7 +78,7 @@ function Questions(props) {
             </Button>
           }
         </Form>
-      </div>
+      </Card>
     </Page>
   )
 }

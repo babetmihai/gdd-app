@@ -17,6 +17,7 @@ export default function Answers(props) {
           return (
             <ListGroup.Item
               key={id}
+              style={{ borderRadius: 0 }}
               className={styles.item}
               active={id === questionId}
               disabled={_.isEmpty(_.get(answers, id)) && id !== lastId}

@@ -1,10 +1,10 @@
-
+@import 'constants.module.scss';
 
 .questions {
-  flex: auto;
-  flex-shrink: 0;
   display: flex;
-  padding-top: 5vh; 
+  flex-direction: row;
+  margin-top: 5vh; 
+  border: 1px solid $border;
 }
 
 .form {
@@ -12,5 +12,7 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  padding: 1rem;
   padding-left: 7vw;
+  border: 1px solid $border;
 }
