@@ -1,3 +1,4 @@
+@import 'constants.module.scss';
 
 .answers {
   flex: none;
@@ -5,6 +6,10 @@
   flex-direction: column;
   min-width: 15rem;
   margin: .5rem;
+
+  @media screen and (max-width: $md) {
+    display: none;
+  }
 }
 
 .item {
