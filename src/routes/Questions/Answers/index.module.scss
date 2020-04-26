@@ -12,6 +12,14 @@
 
   .item {
     cursor: pointer;
+  
+    &:first-child {
+      border-top-right-radius: 0 !important;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 0 !important;
+    }
   }
 }
 
