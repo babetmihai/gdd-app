@@ -35,17 +35,3 @@ const deleteAnswers = (id) => {
   }
 }
 
-export const goToQuestion = (id) => {
-  const { questions, answers } = actions.get()
-  const { type, options = [], nextId } = _.get(questions, id, {})
-  const filteredOptions = filterOptions({ options, questions, answers })
-
-  if (nextId && type !== 'input' && filteredOptions.length <= 1) {
-    const value = filteredOptions.reduce((acc, id) => ({ ...acc, [id]: true }), {})
-    actions.set(`answers.${id}`, value)
-    goToQuestion(nextId)
-  } else {
-    actions.set('questionId', id)
-  }
-}
-

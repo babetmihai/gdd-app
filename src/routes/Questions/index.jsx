@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { goToQuestion, answerQuestion, filterOptions } from './actions'
+import { answerQuestion, filterOptions } from './actions'
 import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
@@ -27,6 +27,8 @@ function Questions(props) {
 
   const filteredOptions = filterOptions({ options, questions, answers })
   const value = _.get(answers, questionId)
+  const lastId = Object.keys(questions)
+    .find((_id) => _.get(questions, `${_id}.nextId`) === questionId)
 
   return (
     <Page>
@@ -63,20 +65,32 @@ function Questions(props) {
               onChange={(value) => answerQuestion({ id: questionId, value })}
             />
           }
-          {nextId &&
-            <Button
-              size="lg"
-              variant={_.isEmpty(value) ? 'outline-success' : 'success'}
-              type="submit"
-              disabled={_.isEmpty(value)}
-              onClick={(event) => {
-                event.preventDefault()
-                goToQuestion(nextId)
-              }}
-            >
-              Next
-            </Button>
-          }
+          <div className={styles.footer}>
+            {lastId &&
+              <Button
+                tabIndex={-1}
+                size="lg"
+                variant={'outline-dark'}
+                onClick={(event) => actions.set('questionId', lastId)}
+              >
+                Back
+              </Button>
+            }
+            {nextId &&
+              <Button
+                size="lg"
+                variant={_.isEmpty(value) ? 'outline-success' : 'success'}
+                type="submit"
+                disabled={_.isEmpty(value)}
+                onClick={(event) => {
+                  event.preventDefault()
+                  actions.set('questionId', nextId)
+                }}
+              >
+                Next
+              </Button>
+            }
+          </div>
         </Form>
       </Card>
     </Page>
