@@ -11,6 +11,7 @@ import store from 'store'
 import { initLocale } from 'core/intl'
 import history from 'core/history'
 import * as serviceWorker from './serviceWorker'
+import Result from 'routes/Result'
 
 Promise.resolve()
   .then(() => initLocale())
@@ -22,6 +23,7 @@ Promise.resolve()
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/questions" component={Questions} />
+              <Route exact path="/result" component={Result} />
               <Redirect to="/" />
             </Switch>
             <Modals />
