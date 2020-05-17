@@ -39,24 +39,17 @@ function Result(props) {
 
 const spreadAnswers = (answers) => Object.keys(answers).reduce((acc, answerId) => {
   const answer = answers[answerId]
-  const value = parseAnswer(answer)
   if (_.isPlainObject(answer)) {
+    const value = getValue(Object.keys(answer))
     return { ...acc, [answerId]: value, ...answer }
   } else {
-    return { ...acc, [answerId]: value }
+    return { ...acc, [answerId]: answer }
   }
 
 }, {})
 
-const parseAnswer = (answer) => {
-  if (_.isPlainObject(answer)) {
-    const list = Object.keys(answer)
-    if (list.length > 1) return list
-    if (list.length === 1) return _.first(list)
-    return undefined
-  } else {
-    return answer
-  }
+const getValue = (list) => {
+  if (list.length > 1) return list
+  if (list.length === 1) return _.first(list)
 }
-
 export default connect(() => actions.get())(Result)
