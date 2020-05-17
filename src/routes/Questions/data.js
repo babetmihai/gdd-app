@@ -8,7 +8,7 @@ export default [
     id: 'platform_details',
     parentId: 'platform',
     options: ['ps4', 'xbox', 'nintendo', 'web_browser', 'client', 'ios', 'android'],
-    nextId: 'game_type'
+    nextId: 'target_audience'
   },
   { id: 'ps4', requires: ['console'] },
   { id: 'nintendo', requires: ['console'] },
@@ -18,6 +18,12 @@ export default [
   { id: 'ios', requires: ['mobile'] },
   { id: 'android', requires: ['mobile'] },
 
+  { id: 'target_audience', type: 'input', nextId: 'monetization' },
+  {
+    id: 'monetization',
+    options: ['f2p', 'b2p', 'subscription'],
+    nextId: 'game_type'
+  },
   {
     id: 'game_type',
     options: [
@@ -32,7 +38,6 @@ export default [
     ],
     nextId: 'game_type_details'
   },
-
   {
     id: 'game_type_details',
     parentId: 'game_type',
