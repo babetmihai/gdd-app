@@ -19,7 +19,7 @@ function Result(props) {
         const { id, sections = {} } = chapter
         return (
           <div key={id}>
-            <h1>{t(id)}</h1>
+            <h4>{t(id)}</h4>
             {Object.keys(sections)
               .filter((sectionId) => answerObject[sectionId])
               .map((sectionId) => (
