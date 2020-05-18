@@ -71,7 +71,7 @@ function Questions(props) {
                 tabIndex={-1}
                 size="lg"
                 variant={'outline-dark'}
-                onClick={(event) => actions.set('questionId', lastId)}
+                onClick={() => actions.set('gdd.questionId', lastId)}
               >
                 Back
               </Button>
@@ -84,7 +84,7 @@ function Questions(props) {
                 disabled={_.isEmpty(value)}
                 onClick={(event) => {
                   event.preventDefault()
-                  actions.set('questionId', nextId)
+                  actions.set('gdd.questionId', nextId)
                 }}
               >
                 Next
