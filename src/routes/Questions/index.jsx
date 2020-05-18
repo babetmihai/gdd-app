@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { answerQuestion, filterOptions } from './actions'
+import { answerQuestion, filterOptions, selectGdd } from './actions'
 import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
@@ -14,7 +14,7 @@ import { t } from 'core/intl'
 
 function Questions(props) {
   React.useEffect(() => {
-    actions.set({
+    actions.set('gdd', {
       questions: data,
       answers: {},
       questionId: _.first(Object.keys(data))
@@ -97,4 +97,4 @@ function Questions(props) {
   )
 }
 
-export default connect(() => actions.get())(Questions)
+export default connect(() => selectGdd())(Questions)

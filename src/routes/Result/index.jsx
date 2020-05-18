@@ -5,13 +5,12 @@ import actions from 'store/actions'
 import Page from 'components/Page'
 import data from './data'
 import { t } from 'core/intl'
+import { selectGdd } from 'routes/Questions/actions'
 
 function Result(props) {
   const { results = [], answers = {} } = props
   React.useEffect(() => {
-    actions.update({
-      results: data
-    })
+    actions.update('gdd.results', data)
   }, [])
   const answerObject = spreadAnswers(answers)
   console.log(answerObject)
@@ -58,4 +57,4 @@ const getValue = (list) => {
   return undefined
 }
 
-export default connect(() => actions.get())(Result)
+export default connect(() => selectGdd())(Result)

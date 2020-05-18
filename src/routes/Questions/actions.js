@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import actions from 'store/actions'
 
+export const selectGdd = () => actions.get('gdd', {})
+
 export const filterOptions = ({ options, questions, answers = {} }) => {
   return _.uniq(options)
     .filter((id) => {
@@ -16,21 +18,21 @@ const isSelected = (id, answers) => Object.values(answers)
   .some((value) => _.get(value, id))
 
 export const answerQuestion = ({ id, value }) => {
-  const { questions, answers } = actions.get()
+  const { questions, answers } = selectGdd()
   const { nextId } = _.get(questions, id, {})
 
-  actions.set(`answers.${id}`, value)
+  actions.set(`gdd.answers.${id}`, value)
   if (!_.isEqual(answers[id], value)) {
     deleteAnswers(nextId)
   }
 }
 
 const deleteAnswers = (id) => {
-  const { questions, answers } = actions.get()
+  const { questions, answers } = selectGdd()
   const { nextId } = _.get(questions, id, {})
 
   if (answers[id]) {
-    actions.unset(`answers.${id}`)
+    actions.unset(`gdd.answers.${id}`)
     if (nextId) deleteAnswers(nextId)
   }
 }

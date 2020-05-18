@@ -3,12 +3,13 @@ import _ from 'lodash'
 import reducer from './reducer'
 
 const PERSISTENT_PATHS = [
+  'gdd'
 ]
 
 const state = {}
-PERSISTENT_PATHS.forEach(({ path, defaultValue }) => {
+PERSISTENT_PATHS.forEach((path) => {
   try {
-    const value = JSON.parse(localStorage.getItem(path)) || defaultValue
+    const value = JSON.parse(localStorage.getItem(path)) || undefined
     _.setWith(state, path, value, Object)
   } catch (error) {
     console.error(error)
@@ -25,7 +26,7 @@ const store = createStore(
 
 store.subscribe(_.debounce(() => {
   const state = store.getState()
-  PERSISTENT_PATHS.forEach(({ path }) => {
+  PERSISTENT_PATHS.forEach((path) => {
     const value = _.get(state, path)
     localStorage.setItem(path, JSON.stringify(value))
   })
