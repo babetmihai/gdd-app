@@ -14,9 +14,8 @@ import { t } from 'core/intl'
 
 function Questions(props) {
   React.useEffect(() => {
-    actions.set('gdd', {
+    actions.update('gdd', {
       questions: data,
-      answers: {},
       questionId: _.first(Object.keys(data))
     })
   }, [])

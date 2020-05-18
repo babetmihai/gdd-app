@@ -20,7 +20,7 @@ export default function Answers(props) {
               className={styles.item}
               active={id === questionId}
               disabled={_.isEmpty(_.get(answers, id)) && id !== lastId}
-              onClick={() => actions.set('questionId', id)}
+              onClick={() => actions.set('gdd.questionId', id)}
             >
               {t(id)}
             </ListGroup.Item>

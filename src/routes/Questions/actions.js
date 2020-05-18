@@ -22,7 +22,7 @@ export const answerQuestion = ({ id, value }) => {
   const { nextId } = _.get(questions, id, {})
 
   actions.set(`gdd.answers.${id}`, value)
-  if (!_.isEqual(answers[id], value)) {
+  if (!_.isEqual(_.get(answers, id), value)) {
     deleteAnswers(nextId)
   }
 }

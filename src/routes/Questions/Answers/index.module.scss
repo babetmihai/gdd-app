@@ -12,6 +12,10 @@
 
   .item {
     cursor: pointer;
+
+    &:not(:global(.disabled)) {
+      font-weight: 500;
+    }
   
     &:first-child {
       border-top-right-radius: 0 !important;
