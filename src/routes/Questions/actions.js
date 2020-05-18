@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import actions from 'store/actions'
+import history from 'core/history'
 
 export const selectGdd = () => actions.get('gdd', {})
 
@@ -27,14 +28,17 @@ export const answerQuestion = ({ id, value }) => {
   }
 }
 
-export const setQuestion = (id) => actions.set('gdd.questionId', id)
+export const setQuestion = (id) => {
+  actions.set('gdd.questionId', id)
+  if (id === 'done') history.push('/result')
+}
 
 const deleteAnswers = (id) => {
   const { questions, answers } = selectGdd()
   const { nextId } = _.get(questions, id, {})
 
   if (answers[id]) {
-    actions.delete(`gdd.answers.${id}`)
+    setQuestion(id)
     if (nextId) deleteAnswers(nextId)
   }
 }
