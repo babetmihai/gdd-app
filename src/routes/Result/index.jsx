@@ -2,7 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import actions from 'store/actions'
-import Page from 'components/Page'
 import data from './data'
 import { t } from 'core/intl'
 import { selectGdd } from 'routes/Questions/actions'
@@ -15,7 +14,7 @@ function Result(props) {
   const answerObject = spreadAnswers(answers)
   console.log(answerObject)
   return (
-    <Page>
+    <div>
       {results.map((chapter) => {
         const { id, sections = {} } = chapter
         return (
@@ -32,7 +31,7 @@ function Result(props) {
           </>
         )
       })}
-    </Page>
+    </div>
   )
 }
 
