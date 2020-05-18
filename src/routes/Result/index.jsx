@@ -18,7 +18,7 @@ function Result(props) {
       {results.map((chapter) => {
         const { id, sections = {} } = chapter
         return (
-          <>
+          <div key={id}>
             <h1>{t(id)}</h1>
             {Object.keys(sections)
               .filter((sectionId) => answerObject[sectionId])
@@ -28,7 +28,7 @@ function Result(props) {
                 </p>
               ))
             }
-          </>
+          </div>
         )
       })}
     </div>
