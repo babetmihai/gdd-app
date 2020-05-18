@@ -27,12 +27,14 @@ export const answerQuestion = ({ id, value }) => {
   }
 }
 
+export const setQuestion = (id) => actions.set('gdd.questionId', id)
+
 const deleteAnswers = (id) => {
   const { questions, answers } = selectGdd()
   const { nextId } = _.get(questions, id, {})
 
   if (answers[id]) {
-    actions.unset(`gdd.answers.${id}`)
+    actions.delete(`gdd.answers.${id}`)
     if (nextId) deleteAnswers(nextId)
   }
 }

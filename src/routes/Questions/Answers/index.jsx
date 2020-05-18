@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { t } from 'core/intl'
-import actions from 'store/actions'
+import { setQuestion } from '../actions'
 import { ListGroup } from 'react-bootstrap'
 import styles from './index.module.scss'
 
@@ -20,7 +20,7 @@ export default function Answers(props) {
               className={styles.item}
               active={id === questionId}
               disabled={_.isEmpty(_.get(answers, id)) && id !== lastId}
-              onClick={() => actions.set('gdd.questionId', id)}
+              onClick={() => setQuestion(id)}
             >
               {t(id)}
             </ListGroup.Item>

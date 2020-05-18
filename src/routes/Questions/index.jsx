@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { answerQuestion, filterOptions, selectGdd } from './actions'
+import { answerQuestion, filterOptions, selectGdd, setQuestion } from './actions'
 import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
@@ -70,7 +70,7 @@ function Questions(props) {
                 tabIndex={-1}
                 size="lg"
                 variant={'outline-dark'}
-                onClick={() => actions.set('gdd.questionId', lastId)}
+                onClick={() => setQuestion(lastId)}
               >
                 Back
               </Button>
@@ -83,7 +83,7 @@ function Questions(props) {
                 disabled={_.isEmpty(value)}
                 onClick={(event) => {
                   event.preventDefault()
-                  actions.set('gdd.questionId', nextId)
+                  setQuestion(nextId)
                 }}
               >
                 Next
