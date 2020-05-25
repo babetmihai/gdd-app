@@ -19,6 +19,27 @@
   border-left: none;
 }
 
+.formSelect {
+  margin-top: 1rem;
+  display: flex;
+  width: $md;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-width: 10rem;
+}
+
+.formText {
+  width: $sm;
+  max-width: 90%;
+  display: flex;
+}
+
 .footer {
   display: flex;
 }
