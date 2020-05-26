@@ -1,16 +1,15 @@
 import React from 'react'
 import _ from 'lodash'
 import { t } from 'core/intl'
-import { setQuestion } from '../actions'
+import { setQuestion } from './actions'
 import { ListGroup } from 'react-bootstrap'
 import styles from './index.module.scss'
 
-export default function Answers(props) {
+export default function FormSidebar(props) {
   const { questionId, questions = {}, answers = {} } = props
   const lastId = _.last(Object.keys(answers))
   return (
-
-    <ListGroup className={styles.answers}>
+    <ListGroup className={styles.formSidebar}>
       {Object.keys(questions)
         .map((id) => {
           return (

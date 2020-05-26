@@ -43,3 +43,31 @@
 .footer {
   display: flex;
 }
+
+.formSidebar {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-width: 15rem;
+
+  @media screen and (max-width: $md) {
+    display: none;
+  }
+
+  .item {
+    cursor: pointer;
+
+    &:not(:global(.disabled)) {
+      font-weight: 500;
+    }
+  
+    &:first-child {
+      border-top-right-radius: 0 !important;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+}
+
