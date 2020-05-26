@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import { submitAnswers } from './actions'
 import { t } from 'core/intl'
 import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
@@ -20,9 +21,13 @@ export default function FormSelect(props) {
               variant={checked ? 'primary' : 'outline-primary'}
               onClick={() => {
                 if (multiple) {
-                  onChange({ ...value, [optionId]: !checked })
+                  onChange({
+                    ...value,
+                    [optionId]: !checked
+                  })
                 } else {
                   onChange({
+                    ...value,
                     ...options.reduce((acc, _id) => ({ ...acc, [_id]: false }), {}),
                     [optionId]: !checked
                   })
@@ -30,11 +35,20 @@ export default function FormSelect(props) {
               }}
             >
               <i>extension</i>
-              {t(id)}
+              {t(optionId)}
             </Button>
           )
         })}
       </Form.Group>
+      <Button
+        size="lg"
+        variant={_.isEmpty(value) ? 'outline-success' : 'success'}
+        type="submit"
+        disabled={_.isEmpty(value)}
+        onClick={() => submitAnswers({ id, value })}
+      >
+        Next
+      </Button>
     </Form>
   )
 }

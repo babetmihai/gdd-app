@@ -1,5 +1,10 @@
 import { TYPES } from './actions'
 
+const answers = {
+  platform: { pc: true },
+  pc: { xbox: true }
+}
+
 export default [
   {
     id: 'platform',
@@ -15,7 +20,7 @@ export default [
     options: ['f2p', 'b2p', 'subscription'],
     nextId: 'done'
   },
-  { id: 'done' }
+  { id: 'done', type: TYPES.DONE }
   // {
   //   id: 'game_type',
   //   options: [

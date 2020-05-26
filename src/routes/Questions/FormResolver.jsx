@@ -4,9 +4,16 @@ import { TYPES } from './actions'
 import FormText from './FormText'
 import FormSelect from './FormSelect'
 
-export default function FormResolver({ id, value, onChange, type, options }) {
+export default function FormResolver({ id, answers, type, options }) {
+  const [value, onChange] = React.useState()
+  React.useEffect(() => {
+    onChange(answers)
+  }, [id]) // eslint-disable-line
 
   switch (type) {
+    case (TYPES.DONE): {
+      return null
+    }
     case (TYPES.INPUT):
       return (
         <FormText
