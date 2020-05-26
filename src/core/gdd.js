@@ -13,7 +13,7 @@ export const setQuestion = (id) => actions.set('gdd.questionId', id)
 
 
 export const submitAnswers = ({ id, value }) => {
-  const { answers } = selectGdd()
+  const { answers = {} } = selectGdd()
   if (!_.isEqual(_.get(answers, id), value)) {
     let done
     const _answers = Object.keys(answers).reduce((acc, key) => {

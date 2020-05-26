@@ -5,6 +5,7 @@ import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
 import FormResolver from './FormResolver'
+import FormSidebar from './FormSidebar'
 import { Card } from 'react-bootstrap'
 import styles from './index.module.scss'
 
@@ -23,6 +24,11 @@ export default function Questions() {
 
   return (
     <Card className={styles.questions}>
+      <FormSidebar
+        id={questionId}
+        answers={answers}
+        questions={questions}
+      />
       <FormResolver
         id={questionId}
         answer={answer}
