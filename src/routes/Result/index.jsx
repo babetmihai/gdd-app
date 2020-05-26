@@ -12,7 +12,7 @@ function Result(props) {
     actions.update('gdd.results', data)
   }, [])
   const answerObject = flattenAnswers(answers)
-
+  console.log(answerObject)
   return (
     <div>
       {results.map((chapter) => {

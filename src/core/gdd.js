@@ -16,15 +16,13 @@ export const submitAnswers = ({ id, value }) => {
   const { answers } = selectGdd()
   if (!_.isEqual(_.get(answers, id), value)) {
     let done
-    actions.set('gdd.answers', Object.keys(answers).reduce((acc, key) => {
-      if (key === id) {
-        acc[key] = value
-        done = true
-      }
-
+    const _answers = Object.keys(answers).reduce((acc, key) => {
+      if (key === id) done = true
       if (!done) acc[key] = answers[key]
       return acc
-    }, {}))
+    }, {})
+    _answers[id] = value
+    actions.set('gdd.answers', _answers)
   }
 
   const nextId = getNextId(id)
