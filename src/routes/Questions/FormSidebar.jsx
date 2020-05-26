@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { t } from 'core/intl'
-import { setQuestion } from 'core/gdd'
+import { setQuestion, TYPES } from 'core/gdd'
 import { ListGroup } from 'react-bootstrap'
 import styles from './index.module.scss'
 
@@ -10,8 +10,9 @@ export default function FormSidebar(props) {
   const lastId = _.last(Object.keys(answers))
   return (
     <ListGroup className={styles.formSidebar}>
-      {Object.keys(questions)
-        .map((_id) => {
+      {Object.values(questions)
+        .filter(({ type }) => TYPES.DONE !== type)
+        .map(({ id: _id }) => {
           return (
             <ListGroup.Item
               key={_id}

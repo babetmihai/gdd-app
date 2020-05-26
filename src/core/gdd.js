@@ -1,5 +1,6 @@
 import actions from 'store/actions'
 import _ from 'lodash'
+import history from './history'
 
 
 export const TYPES = {
@@ -10,6 +11,10 @@ export const TYPES = {
 
 export const selectGdd = () => actions.get('gdd', {})
 export const setQuestion = (id) => actions.set('gdd.questionId', id)
+
+export const submitForm = () => {
+  history.push('/result')
+}
 
 
 export const submitAnswers = ({ id, value }) => {

@@ -1,7 +1,9 @@
 import React from 'react'
-import { TYPES, submitAnswers } from 'core/gdd'
+import { TYPES, submitAnswers, submitForm } from 'core/gdd'
 import FormText from './FormText'
 import FormSelect from './FormSelect'
+import FormDone from './FormDone'
+
 
 export default function FormResolver({ id, answer, question }) {
   const { type, options = [] } = question
@@ -18,7 +20,11 @@ export default function FormResolver({ id, answer, question }) {
 
   switch (type) {
     case (TYPES.DONE): {
-      return null
+      return (
+        <FormDone
+          onSubmit={submitForm}
+        />
+      )
     }
     case (TYPES.INPUT):
       return (
