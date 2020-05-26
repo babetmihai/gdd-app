@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import { t } from 'core/intl'
 import { Button } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
