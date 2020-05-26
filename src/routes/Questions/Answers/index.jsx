@@ -12,7 +12,6 @@ export default function Answers(props) {
 
     <ListGroup className={styles.answers}>
       {Object.keys(questions)
-        .filter((id) => _.get(questions, `${id}.nextId`))
         .map((id) => {
           return (
             <ListGroup.Item

@@ -35,10 +35,11 @@ export const submitAnswers = ({ id, value }) => {
 const getNextId = (id) => {
   const { questions, answers } = selectGdd()
   const filteredQuestions = filterQuestions({ questions, answers })
-  const nextQuestion = filteredQuestions.find((q, index) => {
-    const { id: lastId } = filteredQuestions[index - 1] || {}
-    if (lastId === id) return true
-    else return false
+  let previousId
+  const nextQuestion = filteredQuestions.find(({ id: _id }) => {
+    if (previousId === id) return true
+    previousId = _id
+    return false
   })
   return nextQuestion.id
 }
