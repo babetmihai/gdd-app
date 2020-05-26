@@ -1,14 +1,18 @@
 import React from 'react'
 import { TYPES } from './actions'
-
+import { submitAnswers } from './actions'
 import FormText from './FormText'
 import FormSelect from './FormSelect'
 
-export default function FormResolver({ id, answers, type, options }) {
+export default function FormResolver({ id, answer, question }) {
+  const { type, options = [] } = question
   const [value, onChange] = React.useState()
+
   React.useEffect(() => {
-    onChange(answers)
+    onChange(answer)
   }, [id]) // eslint-disable-line
+
+  const handleSubmit = () => submitAnswers({ id, value })
 
   switch (type) {
     case (TYPES.DONE): {
@@ -20,6 +24,7 @@ export default function FormResolver({ id, answers, type, options }) {
           id={id}
           value={value}
           onChange={onChange}
+          onSubmit={handleSubmit}
         />
       )
     case (TYPES.MULTIPLE):
@@ -30,6 +35,7 @@ export default function FormResolver({ id, answers, type, options }) {
           value={value}
           multiple
           onChange={onChange}
+          onSubmit={handleSubmit}
         />
       )
     default:
@@ -39,6 +45,7 @@ export default function FormResolver({ id, answers, type, options }) {
           options={options}
           value={value}
           onChange={onChange}
+          onSubmit={handleSubmit}
         />
       )
   }

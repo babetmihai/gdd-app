@@ -51,7 +51,7 @@
       "anonymous": "never"
       }],
     "space-before-blocks": ["warn"],
-    "no-multiple-empty-lines": ["warn", {"max": 1, "maxEOF": 1, "maxBOF": 1}],
+    "no-multiple-empty-lines": ["warn", {"max": 2, "maxEOF": 1, "maxBOF": 1}],
     "spaced-comment": ["warn", "always"],
     "jsx-quotes": ["warn", "prefer-double"],
     "react/jsx-uses-vars": [2],

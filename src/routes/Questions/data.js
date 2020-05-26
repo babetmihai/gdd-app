@@ -1,10 +1,5 @@
 import { TYPES } from './actions'
 
-const answers = {
-  platform: { pc: true },
-  pc: { xbox: true }
-}
-
 export default [
   {
     id: 'platform',

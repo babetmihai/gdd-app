@@ -1,12 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
-import { submitAnswers } from './actions'
+import unset from 'lodash/fp/unset'
+import set from 'lodash/fp/set'
 import { t } from 'core/intl'
 import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function FormSelect(props) {
-  const { id, onChange, options, value = {}, multiple } = props
+  const { id, onChange, onSubmit, options, value = {}, multiple } = props
   return (
     <Form className={styles.form}>
       <h2>{t(id)}</h2>
@@ -21,16 +22,17 @@ export default function FormSelect(props) {
               variant={checked ? 'primary' : 'outline-primary'}
               onClick={() => {
                 if (multiple) {
-                  onChange({
-                    ...value,
-                    [optionId]: !checked
-                  })
+                  if (checked) {
+                    onChange(unset(optionId, value))
+                  } else {
+                    onChange(set(optionId, true, value))
+                  }
                 } else {
-                  onChange({
-                    ...value,
-                    ...options.reduce((acc, _id) => ({ ...acc, [_id]: false }), {}),
-                    [optionId]: !checked
-                  })
+                  if (checked) {
+                    onChange({})
+                  } else {
+                    onChange({ [optionId]: true })
+                  }
                 }
               }}
             >
@@ -45,7 +47,7 @@ export default function FormSelect(props) {
         variant={_.isEmpty(value) ? 'outline-success' : 'success'}
         type="submit"
         disabled={_.isEmpty(value)}
-        onClick={() => submitAnswers({ id, value })}
+        onClick={onSubmit}
       >
         Next
       </Button>
