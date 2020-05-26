@@ -1,4 +1,4 @@
-import { TYPES } from './actions'
+import { TYPES } from 'core/gdd'
 
 export default [
   {

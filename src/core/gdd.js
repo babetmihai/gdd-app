@@ -45,7 +45,7 @@ const getNextId = (id) => {
 }
 
 
-const flattenAnswers = (answers) => Object.values(answers)
+export const flattenAnswers = (answers) => Object.values(answers)
   .map((answer) => Object.entries(answer))
   .flat()
   .filter(([key, value]) => value)

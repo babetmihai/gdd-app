@@ -1,6 +1,5 @@
 import React from 'react'
-import { TYPES } from './actions'
-import { submitAnswers } from './actions'
+import { TYPES, submitAnswers } from 'core/gdd'
 import FormText from './FormText'
 import FormSelect from './FormSelect'
 
@@ -12,7 +11,10 @@ export default function FormResolver({ id, answer, question }) {
     onChange(answer)
   }, [id]) // eslint-disable-line
 
-  const handleSubmit = () => submitAnswers({ id, value })
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    submitAnswers({ id, value })
+  }
 
   switch (type) {
     case (TYPES.DONE): {

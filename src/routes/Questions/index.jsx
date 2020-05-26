@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectGdd } from './actions'
+import { selectGdd } from 'core/gdd'
 import _ from 'lodash'
 import actions from 'store/actions'
 import data from './data'
