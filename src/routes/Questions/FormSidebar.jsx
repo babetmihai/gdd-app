@@ -1,12 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
 import { t } from 'core/intl'
-import { setQuestion, TYPES } from 'core/gdd'
+import { setQuestion, TYPES, flattenAnswers } from 'core/gdd'
 import { ListGroup } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function FormSidebar(props) {
   const { id, questions = {}, answers = {} } = props
+  const flatAnswers = flattenAnswers(answers)
   const lastId = _.last(Object.keys(answers))
   return (
     <ListGroup className={styles.formSidebar}>
@@ -16,7 +17,10 @@ export default function FormSidebar(props) {
           !Object.values(questions)
             .some(({ options = [] }) => options.includes(_id))
         ))
-        .map(({ id: _id, options }) => {
+        .map(({ id: _id, options = [] }) => {
+          const questionOptions = options
+            .filter((optionId) => questions[optionId] && flatAnswers[optionId])
+
           return (
             <ListGroup.Item
               key={_id}
@@ -26,9 +30,9 @@ export default function FormSidebar(props) {
               onClick={() => setQuestion(_id)}
             >
               {t(_id)}
-              {options &&
+              {questionOptions.length > 0 &&
                 <ListGroup>
-                  {options.map((optionsId) => (
+                  {questionOptions.map((optionsId) => (
                     <ListGroup.Item key={optionsId}>
                       {t(optionsId)}
                     </ListGroup.Item>
