@@ -13,7 +13,7 @@ export default function FormSelect(props) {
 
   React.useEffect(() => {
     onChange(answer)
-  }, []) // eslint-disable-line
+  }, [id]) // eslint-disable-line
 
   return (
     <Form className={styles.form}>

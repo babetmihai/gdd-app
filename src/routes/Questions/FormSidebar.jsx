@@ -33,7 +33,12 @@ export default function FormSidebar(props) {
               {questionOptions.length > 0 &&
                 <ListGroup>
                   {questionOptions.map((optionsId) => (
-                    <ListGroup.Item key={optionsId}>
+                    <ListGroup.Item
+                      className={styles.item}
+                      key={optionsId}
+                      disabled={_.isEmpty(_.get(answers, optionsId)) && optionsId !== lastId}
+                      active={optionsId === id}
+                    >
                       {t(optionsId)}
                     </ListGroup.Item>
                   ))}

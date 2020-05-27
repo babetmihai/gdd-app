@@ -4,7 +4,7 @@ export default [
   {
     id: 'platform',
     type: TYPES.MULTIPLE,
-    options: ['console', 'pc', 'mobile']
+    options: ['pc', 'console', 'mobile']
   },
   { id: 'pc', options: ['client', 'browser'], requires: ['pc'] },
   { id: 'console', options: ['ps4', 'xbox', 'nintendo'], requires: ['console'] },
