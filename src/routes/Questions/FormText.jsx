@@ -1,12 +1,18 @@
 import React from 'react'
 import _ from 'lodash'
 import { t } from 'core/intl'
+import { submitAnswers } from 'core/gdd'
 import { Button } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function FormText(props) {
-  const { id, onSubmit, onChange, value = {} } = props
+  const { id, answer = {} } = props
+  const [value, onChange] = React.useState()
+
+  React.useEffect(() => {
+    onChange(answer)
+  }, []) // eslint-disable-line
 
   return (
     <Form className={styles.form}>
@@ -23,7 +29,10 @@ export default function FormText(props) {
         variant={_.isEmpty(value) ? 'outline-success' : 'success'}
         type="submit"
         disabled={_.isEmpty(value)}
-        onClick={onSubmit}
+        onClick={(event) => {
+          event.preventDefault()
+          submitAnswers({ id, value })
+        }}
       >
         Next
       </Button>

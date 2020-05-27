@@ -26,10 +26,10 @@ export const submitAnswers = ({ id, value }) => {
       if (!done) acc[key] = answers[key]
       return acc
     }, {})
-    _answers[id] = value
     actions.set('gdd.answers', _answers)
   }
 
+  actions.set(`gdd.answers.${id}`, value)
   const nextId = getNextId(id)
   setQuestion(nextId)
 }
@@ -44,6 +44,7 @@ const getNextId = (id) => {
     previousId = _id
     return false
   })
+  if (!nextQuestion) return id
   return nextQuestion.id
 }
 

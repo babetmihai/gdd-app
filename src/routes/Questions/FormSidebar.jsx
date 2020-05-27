@@ -11,8 +11,12 @@ export default function FormSidebar(props) {
   return (
     <ListGroup className={styles.formSidebar}>
       {Object.values(questions)
-        .filter(({ type }) => TYPES.DONE !== type)
-        .map(({ id: _id }) => {
+        .filter(({ id: _id, type }) => (
+          TYPES.DONE !== type &&
+          !Object.values(questions)
+            .some(({ options = [] }) => options.includes(_id))
+        ))
+        .map(({ id: _id, options }) => {
           return (
             <ListGroup.Item
               key={_id}
@@ -22,6 +26,15 @@ export default function FormSidebar(props) {
               onClick={() => setQuestion(_id)}
             >
               {t(_id)}
+              {options &&
+                <ListGroup>
+                  {options.map((optionsId) => (
+                    <ListGroup.Item key={optionsId}>
+                      {t(optionsId)}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              }
             </ListGroup.Item>
           )
         })}

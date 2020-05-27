@@ -1,5 +1,5 @@
 import React from 'react'
-import { TYPES, submitAnswers, submitForm } from 'core/gdd'
+import { TYPES } from 'core/gdd'
 import FormText from './FormText'
 import FormSelect from './FormSelect'
 import FormDone from './FormDone'
@@ -7,32 +7,14 @@ import FormDone from './FormDone'
 
 export default function FormResolver({ id, answer, question }) {
   const { type, options = [] } = question
-  const [value, onChange] = React.useState()
-
-  React.useEffect(() => {
-    onChange(answer)
-  }, [id]) // eslint-disable-line
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    submitAnswers({ id, value })
-  }
 
   switch (type) {
-    case (TYPES.DONE): {
-      return (
-        <FormDone
-          onSubmit={submitForm}
-        />
-      )
-    }
+    case (TYPES.DONE): return <FormDone />
     case (TYPES.INPUT):
       return (
         <FormText
           id={id}
-          value={value}
-          onChange={onChange}
-          onSubmit={handleSubmit}
+          answer={answer}
         />
       )
     case (TYPES.MULTIPLE):
@@ -40,10 +22,8 @@ export default function FormResolver({ id, answer, question }) {
         <FormSelect
           id={id}
           options={options}
-          value={value}
+          answer={answer}
           multiple
-          onChange={onChange}
-          onSubmit={handleSubmit}
         />
       )
     default:
@@ -51,9 +31,7 @@ export default function FormResolver({ id, answer, question }) {
         <FormSelect
           id={id}
           options={options}
-          value={value}
-          onChange={onChange}
-          onSubmit={handleSubmit}
+          answer={answer}
         />
       )
   }

@@ -3,11 +3,18 @@ import _ from 'lodash'
 import unset from 'lodash/fp/unset'
 import set from 'lodash/fp/set'
 import { t } from 'core/intl'
+import { submitAnswers } from 'core/gdd'
 import { Button, Form } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function FormSelect(props) {
-  const { id, onChange, onSubmit, options, value = {}, multiple } = props
+  const { id, options, answer = {}, multiple } = props
+  const [value, onChange] = React.useState()
+
+  React.useEffect(() => {
+    onChange(answer)
+  }, []) // eslint-disable-line
+
   return (
     <Form className={styles.form}>
       <h2>{t(id)}</h2>
@@ -47,7 +54,10 @@ export default function FormSelect(props) {
         variant={_.isEmpty(value) ? 'outline-success' : 'success'}
         type="submit"
         disabled={_.isEmpty(value)}
-        onClick={onSubmit}
+        onClick={(event) => {
+          event.preventDefault()
+          submitAnswers({ id, value })
+        }}
       >
         Next
       </Button>
