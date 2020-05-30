@@ -12,7 +12,7 @@ export default function Result() {
   }, [])
 
   const gddModule = useSelector(() => selectGdd())
-  const { chapters = [], results = {} } = gddModule
+  const { chapters = [], result = {} } = gddModule
 
   return (
     <div className={styles.result}>
@@ -22,10 +22,10 @@ export default function Result() {
           <div key={id}>
             <h4>{t(id)}</h4>
             {Object.keys(sections)
-              .filter((sectionId) => results[sectionId])
+              .filter((sectionId) => result[sectionId])
               .map((sectionId) => (
                 <p key={sectionId}>
-                  {t(`sections_${sectionId}`, results, sections[sectionId])}
+                  {t(`sections_${sectionId}`, result, sections[sectionId])}
                 </p>
               ))
             }

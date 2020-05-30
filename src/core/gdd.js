@@ -1,7 +1,7 @@
 import actions from 'store/actions'
 import _ from 'lodash'
 import history from './history'
-
+import firebase from 'core/firebase'
 
 export const TYPES = {
   INPUT: 'INPUT',
@@ -14,7 +14,9 @@ export const setQuestion = (id) => actions.set('gdd.questionId', id)
 
 export const submitForm = () => {
   const { answers = {} } = selectGdd()
-  actions.set('gdd.results', flattenAnswers(answers))
+  const result = flattenAnswers(answers)
+  actions.set('gdd.result', result)
+  firebase.database().ref('results').push(result)
   history.push('/result')
 }
 

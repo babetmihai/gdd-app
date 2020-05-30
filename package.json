@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
+    "firebase": "^7.14.6",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",

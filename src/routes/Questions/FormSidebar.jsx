@@ -9,6 +9,7 @@ export default function FormSidebar(props) {
   const { id, questions = {}, answers = {} } = props
   const flatAnswers = flattenAnswers(answers)
   const lastId = _.last(Object.keys(answers))
+
   return (
     <div className={styles.formSidebar}>
       {Object.values(questions)
@@ -22,6 +23,7 @@ export default function FormSidebar(props) {
           const disabled = _.isEmpty(_.get(answers, questionId)) &&
             questionId !== lastId &&
             questionId !== id
+
           return (
             <Fragment key={questionId}>
               <div
@@ -41,6 +43,7 @@ export default function FormSidebar(props) {
                   const disabled = _.isEmpty(_.get(answers, optionId)) &&
                       optionId !== lastId &&
                       optionId !== id
+
                   return (
                     <div
                       key={optionId}
@@ -55,10 +58,12 @@ export default function FormSidebar(props) {
                       {t(optionId)}
                     </div>
                   )
-                })}
+                })
+              }
             </Fragment>
           )
-        })}
+        })
+      }
     </div>
   )
 }
