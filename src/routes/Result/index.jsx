@@ -1,17 +1,18 @@
 import React from 'react'
-
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import actions from 'store/actions'
 import data from './data'
 import { t } from 'core/intl'
 import { selectGdd } from 'core/gdd'
 import styles from './index.module.scss'
 
-function Result(props) {
-  const { chapters = [], results = {} } = props
+export default function Result() {
   React.useEffect(() => {
     actions.update('gdd.chapters', data)
   }, [])
+
+  const gddModule = useSelector(() => selectGdd())
+  const { chapters = [], results = {} } = gddModule
 
   return (
     <div className={styles.result}>
@@ -34,5 +35,3 @@ function Result(props) {
     </div>
   )
 }
-
-export default connect(() => selectGdd())(Result)
