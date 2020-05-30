@@ -13,6 +13,8 @@ export const selectGdd = () => actions.get('gdd', {})
 export const setQuestion = (id) => actions.set('gdd.questionId', id)
 
 export const submitForm = () => {
+  const { answers = {} } = selectGdd()
+  actions.set('gdd.results', flattenAnswers(answers))
   history.push('/result')
 }
 

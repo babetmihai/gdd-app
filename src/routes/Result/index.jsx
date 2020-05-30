@@ -4,27 +4,27 @@ import { connect } from 'react-redux'
 import actions from 'store/actions'
 import data from './data'
 import { t } from 'core/intl'
-import { selectGdd, flattenAnswers } from 'core/gdd'
+import { selectGdd } from 'core/gdd'
+import styles from './index.module.scss'
 
 function Result(props) {
-  const { results = [], answers = {} } = props
+  const { chapters = [], results = {} } = props
   React.useEffect(() => {
-    actions.update('gdd.results', data)
+    actions.update('gdd.chapters', data)
   }, [])
-  const answerObject = flattenAnswers(answers)
-  console.log(answerObject)
+
   return (
-    <div>
-      {results.map((chapter) => {
+    <div className={styles.result}>
+      {chapters.map((chapter) => {
         const { id, sections = {} } = chapter
         return (
           <div key={id}>
             <h4>{t(id)}</h4>
             {Object.keys(sections)
-              .filter((sectionId) => answerObject[sectionId])
+              .filter((sectionId) => results[sectionId])
               .map((sectionId) => (
                 <p key={sectionId}>
-                  {t(`sections_${sectionId}`, answerObject, sections[sectionId])}
+                  {t(`sections_${sectionId}`, results, sections[sectionId])}
                 </p>
               ))
             }

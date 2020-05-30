@@ -47,7 +47,6 @@
   flex-direction: column;
   min-width: 15rem;
   
-
   @media screen and (max-width: $md) {
     display: none;
   }
@@ -58,7 +57,6 @@
     background-color: grey;
     color: lightgrey;
     border-left: .25rem solid transparent;
-    
   }
 
   .child {
