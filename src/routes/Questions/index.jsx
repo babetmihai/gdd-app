@@ -23,7 +23,7 @@ export default function Questions() {
   const answer = _.get(answers, questionId, {})
 
   return (
-    <Card className={styles.questions}>
+    <div className={styles.questions}>
       <FormSidebar
         id={questionId}
         answers={answers}
@@ -34,6 +34,6 @@ export default function Questions() {
         answer={answer}
         question={question}
       />
-    </Card>
+    </div>
   )
 }

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import _ from 'lodash'
+import join from 'classnames'
 import { t } from 'core/intl'
 import { setQuestion, TYPES, flattenAnswers } from 'core/gdd'
-import { ListGroup } from 'react-bootstrap'
 import styles from './index.module.scss'
 
 export default function FormSidebar(props) {
@@ -10,44 +10,55 @@ export default function FormSidebar(props) {
   const flatAnswers = flattenAnswers(answers)
   const lastId = _.last(Object.keys(answers))
   return (
-    <ListGroup className={styles.formSidebar}>
+    <div className={styles.formSidebar}>
       {Object.values(questions)
-        .filter(({ id: _id, type }) => (
+        .filter(({ id: questionId, type }) => (
           TYPES.DONE !== type &&
           !Object.values(questions)
-            .some(({ options = [] }) => options.includes(_id))
+            .some(({ options = [] }) => options.includes(questionId))
         ))
-        .map(({ id: _id, options = [] }) => {
+        .map(({ id: questionId, options = [] }) => {
           const questionOptions = options
             .filter((optionId) => questions[optionId] && flatAnswers[optionId])
 
+          const active = questionId === id
+          const disabled = _.isEmpty(_.get(answers, questionId)) && questionId !== lastId && questionId !== id
           return (
-            <ListGroup.Item
-              key={_id}
-              className={styles.item}
-              active={_id === id}
-              disabled={_.isEmpty(_.get(answers, _id)) && _id !== lastId}
-              onClick={() => setQuestion(_id)}
-            >
-              {t(_id)}
+            <Fragment key={questionId}>
+              <div
+                onClick={() => setQuestion(questionId)}
+                className={join(
+                  styles.item,
+                  active && styles.active,
+                  disabled && styles.disabled
+                )}
+              >
+                {t(questionId)}
+              </div>
               {questionOptions.length > 0 &&
-                <ListGroup>
-                  {questionOptions.map((optionsId) => (
-                    <ListGroup.Item
-                      className={styles.item}
-                      key={optionsId}
-                      disabled={_.isEmpty(_.get(answers, optionsId)) && optionsId !== lastId}
-                      active={optionsId === id}
-                    >
-                      {t(optionsId)}
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
+                <div className={styles.children}>
+                  {questionOptions.map((optionId) => {
+                    const active = optionId === id
+                    const disabled = _.isEmpty(_.get(answers, optionId)) && optionId !== lastId && optionId !== id
+                    return (
+                      <div
+                        key={optionId}
+                        onClick={() => setQuestion(optionId)}
+                        className={join(
+                          styles.item,
+                          active && styles.active,
+                          disabled && styles.disabled
+                        )}
+                      >
+                        {t(optionId)}
+                      </div>
+                    )
+                  })}
+                </div>
               }
-            </ListGroup.Item>
+            </Fragment>
           )
         })}
-    </ListGroup>
+    </div>
   )
 }
-
