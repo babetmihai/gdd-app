@@ -12,12 +12,27 @@ export const TYPES = {
 export const selectGdd = () => actions.get('gdd', {})
 export const setQuestion = (id) => actions.set('gdd.questionId', id)
 
-export const submitForm = () => {
+export const submitForm = async () => {
   const { answers = {} } = selectGdd()
   const result = flattenAnswers(answers)
-  actions.set('gdd.result', result)
-  firebase.database().ref('results').push(result)
-  history.push('/result')
+  const ref = await firebase.database().ref('results').push()
+  const id = ref.key
+  actions.update('gdd', { resultId: id, result })
+  await ref.set(result)
+  history.push(`/results/${id}`)
+}
+
+
+export const initResults = async ({ id }) => {
+  const result = await firebase.database().ref(`/results/${id}`).once('value')
+    .then((snap) => snap.val())
+  if (result) {
+    actions.update('gdd', { resultId: id, result })
+  } else {
+    const { resultId, result } = selectGdd()
+    if (!result || resultId !== id) history.replace('/')
+  }
+
 }
 
 

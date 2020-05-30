@@ -12,7 +12,10 @@ export default function FormDone(props) {
       <Button
         size="lg"
         type="submit"
-        onClick={submitForm}
+        onClick={(event) => {
+          event.preventDefault()
+          submitForm()
+        }}
       >
         Get Results
       </Button>

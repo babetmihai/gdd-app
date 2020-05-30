@@ -2,7 +2,7 @@ import 'index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styles from './index.module.scss'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import { Link, Router, Switch, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Home from 'routes/Home'
@@ -25,17 +25,13 @@ Promise.resolve()
                 <Navbar.Brand as={Link} to="/">
                   GDD Generator
                 </Navbar.Brand>
-                <Nav className="mr-auto">
-                  <Nav.Link as={Link} to="/questions">Questions</Nav.Link>
-                  <Nav.Link as={Link} to="/result">Results</Nav.Link>
-                </Nav>
               </Navbar >
               <div className={styles.content}>
                 <div className={styles.children}>
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/questions" component={Questions} />
-                    <Route exact path="/result" component={Result} />
+                    <Route exact path="/results/:id" component={Result} />
                     <Redirect to="/" />
                   </Switch>
                 </div >

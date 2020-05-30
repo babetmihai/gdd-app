@@ -3,13 +3,19 @@ import { useSelector } from 'react-redux'
 import actions from 'store/actions'
 import data from './data'
 import { t } from 'core/intl'
-import { selectGdd } from 'core/gdd'
+import { selectGdd, initResults } from 'core/gdd'
 import styles from './index.module.scss'
+import { useParams } from 'react-router'
 
 export default function Result() {
   React.useEffect(() => {
     actions.update('gdd.chapters', data)
   }, [])
+  const { id } = useParams()
+
+  React.useEffect(() => {
+    initResults({ id })
+  }, [id])
 
   const gddModule = useSelector(() => selectGdd())
   const { chapters = [], result = {} } = gddModule
