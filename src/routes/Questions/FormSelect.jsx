@@ -51,7 +51,7 @@ export default function FormSelect(props) {
       </Form.Group>
       <Button
         size="lg"
-        variant={_.isEmpty(value) ? 'outline-success' : 'success'}
+        variant="primary"
         type="submit"
         disabled={_.isEmpty(value)}
         onClick={(event) => {

@@ -1,9 +1,12 @@
 @import 'constants.module.scss';
 
 .questions {
+  flex: auto;
   display: flex;
   flex-direction: row;
+  margin: 2.5rem;
   margin-top: 5vh; 
+  background-color: #000000;
 }
 
 .form {
@@ -46,6 +49,7 @@
   display: flex;
   flex-direction: column;
   min-width: 15rem;
+  background-color: $secondary;
   
   @media screen and (max-width: $md) {
     display: none;
@@ -54,7 +58,7 @@
   .item {
     cursor: pointer;
     padding: .5rem 1rem;
-    background-color: #171717;
+
     color: white;
     border-left: .25rem solid transparent;
   }
@@ -65,9 +69,7 @@
   }
 
   .active {
-    color: white;
-    background-color: red;
-    border-left: .25rem solid #1b006b;
+    border-left: .25rem solid $primary;
   }
 
   .disabled {
