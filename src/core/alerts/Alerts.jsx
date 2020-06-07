@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Alert } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { clearAlert, selectAlerts } from 'core/alerts'
-import styles from './Alerts.module.scss'
+import styles from './index.module.scss'
 
 export default function Alerts() {
   const alerts = useSelector(selectAlerts)

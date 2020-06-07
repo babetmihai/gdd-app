@@ -54,8 +54,8 @@
   .item {
     cursor: pointer;
     padding: .5rem 1rem;
-    background-color: grey;
-    color: lightgrey;
+    background-color: #171717;
+    color: white;
     border-left: .25rem solid transparent;
   }
 
@@ -66,15 +66,15 @@
 
   .active {
     color: white;
-    background-color: black;
-    border-left: .25rem solid purple;
+    background-color: red;
+    border-left: .25rem solid #1b006b;
   }
 
   .disabled {
     pointer-events: none;
     cursor: auto;
-    background-color: lightgrey;
-    color: whitesmoke;
+    background-color: #171717;
+    color: #343434;
     border-left: .25rem solid transparent;
   }
 }

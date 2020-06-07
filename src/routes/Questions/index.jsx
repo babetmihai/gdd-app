@@ -19,7 +19,7 @@ export default function Questions() {
   const gddModule = useSelector(() => selectGdd())
   const { questionId, questions = {}, answers = {} } = gddModule
   const question = _.get(questions, questionId, {})
-  const answer = _.get(answers, questionId, {})
+  const answer = _.get(answers, questionId, {}) || {}
 
   return (
     <div className={styles.questions}>
