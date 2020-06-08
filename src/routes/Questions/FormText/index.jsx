@@ -15,9 +15,9 @@ export default function FormText(props) {
   }, [id]) // eslint-disable-line
 
   return (
-    <Form className={styles.form}>
+    <Form className={styles.formText}>
       <h2>{t(id)}</h2>
-      <Form.Group className={styles.formText}>
+      <Form.Group className={styles.content}>
         <Form.Control as="textarea"
           autoFocus
           className={styles.textarea}

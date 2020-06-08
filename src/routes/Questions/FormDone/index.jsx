@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 
 export default function FormDone(props) {
   return (
-    <Form className={styles.form}>
+    <Form className={styles.formDone}>
       <h2>{t('you_are_done')}</h2>
       <Button
         variant="primary"

@@ -1,25 +1,26 @@
 @import 'constants.module.scss';
 
-.form {
+.formText {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 1rem 5vw;
   padding-bottom: 1.5rem;
-}
 
-.formText {
-  flex: auto;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-
+  .content {
+    flex: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  
   .textarea {
     flex: auto;
   }
+  
+  .submitBtn {
+    min-width: 7rem;
+    align-self: flex-end;
+  }
 }
 
-.submitBtn {
-  min-width: 7rem;
-  align-self: flex-end;
-}

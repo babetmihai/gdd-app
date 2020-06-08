@@ -16,9 +16,9 @@ export default function FormSelect(props) {
   }, [id]) // eslint-disable-line
 
   return (
-    <Form className={styles.form}>
+    <Form className={styles.formSelect}>
       <h2>{t(id)}</h2>
-      <Form.Group className={styles.formSelect}>
+      <Form.Group className={styles.content}>
         {options.map((optionId) => {
           const checked = _.get(value, optionId)
           return (
