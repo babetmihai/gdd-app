@@ -50,10 +50,10 @@ export default function FormSelect(props) {
         })}
       </Form.Group>
       <Button
-        size="lg"
         variant="primary"
         type="submit"
         disabled={_.isEmpty(value)}
+        className={styles.submitBtn}
         onClick={(event) => {
           event.preventDefault()
           submitAnswers({ id, value })

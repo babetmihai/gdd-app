@@ -10,8 +10,9 @@ export default function FormDone(props) {
     <Form className={styles.form}>
       <h2>{t('you_are_done')}</h2>
       <Button
-        size="lg"
+        variant="primary"
         type="submit"
+        className={styles.submitBtn}
         onClick={(event) => {
           event.preventDefault()
           submitForm()

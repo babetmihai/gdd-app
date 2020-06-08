@@ -20,15 +20,16 @@ export default function FormText(props) {
       <Form.Group className={styles.formText}>
         <Form.Control as="textarea"
           autoFocus
+          className={styles.textarea}
           value={_.get(value, id, '')}
           onChange={(event) => onChange({ [id]: event.target.value })}
         />
       </Form.Group>
       <Button
-        size="lg"
-        variant={_.isEmpty(value) ? 'outline-success' : 'success'}
+        variant="primary"
         type="submit"
         disabled={_.isEmpty(value)}
+        className={styles.submitBtn}
         onClick={(event) => {
           event.preventDefault()
           submitAnswers({ id, value })

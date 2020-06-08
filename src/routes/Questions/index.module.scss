@@ -12,36 +12,41 @@
 .form {
   flex: 1;
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1rem 5vw;
   padding-bottom: 1.5rem;
-  padding-left: 7vw;
 }
 
 .formSelect {
-  margin-top: 1rem;
+  flex: auto;
   display: flex;
-  width: $md;
-  max-width: 90%;
   flex-wrap: wrap;
-}
-
-.option {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-width: 10rem;
+  align-content: flex-start;
+  align-items: flex-start;
+  margin-top: 1rem;
+  
+  .option {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 10rem;
+  }
 }
 
 .formText {
-  width: $sm;
-  max-width: 90%;
+  flex: auto;
   display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+
+  .textarea {
+    flex: auto;
+  }
 }
 
-.footer {
-  display: flex;
+.submitBtn {
+  min-width: 7rem;
+  align-self: flex-end;
 }
 
 .formSidebar {
@@ -57,14 +62,14 @@
 
   .item {
     cursor: pointer;
-    padding: .5rem 1rem;
+    padding: .8rem 1.2rem;
+    border-bottom: 1px solid rgba($light, .1);
 
-    color: white;
+    color: $light;
     border-left: .25rem solid transparent;
   }
 
   .child {
-    padding: .25rem 1rem;
     padding-left: 2.25rem;
   }
 
