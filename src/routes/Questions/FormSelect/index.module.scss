@@ -1,14 +1,5 @@
 @import 'constants.module.scss';
 
-.questions {
-  flex: auto;
-  display: flex;
-  flex-direction: row;
-  margin: 2.5rem;
-  margin-top: 5vh; 
-  background-color: #000000;
-}
-
 .form {
   flex: 1;
   display: flex;
@@ -33,56 +24,7 @@
   }
 }
 
-.formText {
-  flex: auto;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-
-  .textarea {
-    flex: auto;
-  }
-}
-
 .submitBtn {
   min-width: 7rem;
   align-self: flex-end;
 }
-
-.formSidebar {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  min-width: 15rem;
-  background-color: $secondary;
-  
-  @media screen and (max-width: $md) {
-    display: none;
-  }
-
-  .item {
-    cursor: pointer;
-    padding: .8rem 1.2rem;
-    border-bottom: 1px solid rgba($light, .1);
-
-    color: $light;
-    border-left: .25rem solid transparent;
-  }
-
-  .child {
-    padding-left: 2.25rem;
-  }
-
-  .active {
-    border-left: .25rem solid $primary;
-  }
-
-  .disabled {
-    pointer-events: none;
-    cursor: auto;
-    background-color: #171717;
-    color: #343434;
-    border-left: .25rem solid transparent;
-  }
-}
-
