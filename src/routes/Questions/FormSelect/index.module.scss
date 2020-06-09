@@ -1,31 +1,43 @@
 @import 'constants.module.scss';
 
-.formSelect {
-  flex: 1;
+.content {
+  flex: auto;
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
   flex-direction: column;
-  padding: 1rem 5vw;
-  padding-bottom: 1.5rem;
-  
-  .content {
-    flex: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-top: 1rem;
-  }
+  min-width: 10rem;
+  font-size: 1.4rem;
+  background-color: inherit;
+  color: $primary;
+  outline: 0 !important;
+  border: 2px solid transparent;
+  padding: 1.25rem .5rem;
+  margin: .35rem;
+  border-radius: 5px;
 
-  .option {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    min-width: 10rem;
+  >i {
+    font-size: 2.5rem;
+    margin-bottom: .5rem;
   }
+}
 
-  .submitBtn {
-    min-width: 7rem;
-    align-self: flex-end;
-  }
+.checked {
+  color: $light;
+  border: 2px solid rgba($primary, .65);
+}
+
+.submitBtn {
+  min-width: 7rem;
+  border-radius: 5rem;
+  align-self: flex-end;
 }
 

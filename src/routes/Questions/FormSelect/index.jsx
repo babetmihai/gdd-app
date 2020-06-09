@@ -1,4 +1,5 @@
 import React from 'react'
+import join from 'classnames'
 import _ from 'lodash'
 import unset from 'lodash/fp/unset'
 import set from 'lodash/fp/set'
@@ -16,17 +17,19 @@ export default function FormSelect(props) {
   }, [id]) // eslint-disable-line
 
   return (
-    <Form className={styles.formSelect}>
+    <>
       <h2>{t(id)}</h2>
       <Form.Group className={styles.content}>
         {options.map((optionId) => {
           const checked = _.get(value, optionId)
           return (
-            <Button
+            <button
               key={optionId}
               id={optionId}
-              className={styles.option}
-              variant={checked ? 'primary' : 'outline-primary'}
+              className={join(
+                styles.option,
+                checked && styles.checked
+              )}
               onClick={() => {
                 if (multiple) {
                   if (checked) {
@@ -45,7 +48,7 @@ export default function FormSelect(props) {
             >
               <i>extension</i>
               {t(optionId)}
-            </Button>
+            </button>
           )
         })}
       </Form.Group>
@@ -61,6 +64,6 @@ export default function FormSelect(props) {
       >
         Next
       </Button>
-    </Form>
+    </>
   )
 }

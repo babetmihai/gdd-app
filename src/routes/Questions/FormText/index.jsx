@@ -15,16 +15,14 @@ export default function FormText(props) {
   }, [id]) // eslint-disable-line
 
   return (
-    <Form className={styles.formText}>
+    <>
       <h2>{t(id)}</h2>
-      <Form.Group className={styles.content}>
-        <Form.Control as="textarea"
-          autoFocus
-          className={styles.textarea}
-          value={_.get(value, id, '')}
-          onChange={(event) => onChange({ [id]: event.target.value })}
-        />
-      </Form.Group>
+      <Form.Control as="textarea"
+        autoFocus
+        className={styles.textarea}
+        value={_.get(value, id, '')}
+        onChange={(event) => onChange({ [id]: event.target.value })}
+      />
       <Button
         variant="primary"
         type="submit"
@@ -37,6 +35,6 @@ export default function FormText(props) {
       >
         Next
       </Button>
-    </Form>
+    </>
   )
 }

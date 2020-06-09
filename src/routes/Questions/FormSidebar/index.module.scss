@@ -1,10 +1,10 @@
 @import 'constants.module.scss';
 
 .formSidebar {
-  flex: none;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 15rem;
+  min-width: 13.5rem;
   background-color: $secondary;
   
   @media screen and (max-width: $md) {

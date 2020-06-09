@@ -7,6 +7,7 @@ import data from './data'
 import FormResolver from './FormResolver'
 import FormSidebar from './FormSidebar'
 import styles from './index.module.scss'
+import { Form } from 'react-bootstrap'
 
 export default function Questions() {
   React.useEffect(() => {
@@ -28,11 +29,14 @@ export default function Questions() {
         answers={answers}
         questions={questions}
       />
-      <FormResolver
-        id={questionId}
-        answer={answer}
-        question={question}
-      />
+      <Form className={styles.form}>
+        <FormResolver
+          id={questionId}
+          answer={answer}
+          question={question}
+        />
+      </Form>
+
     </div>
   )
 }
