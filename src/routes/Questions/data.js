@@ -9,79 +9,31 @@ export default [
   { id: 'pc', options: ['client', 'browser'], requires: ['pc'] },
   { id: 'console', options: ['ps4', 'xbox', 'nintendo'], requires: ['console'] },
   { id: 'mobile', options: ['android', 'ios'], requires: ['mobile'] },
-  { id: 'target_audience', type: TYPES.INPUT, nextId: 'monetization' },
+  { id: 'target_audience', type: TYPES.INPUT },
+  { id: 'monetization', options: ['f2p', 'b2p', 'subscription'] },
   {
-    id: 'monetization',
-    options: ['f2p', 'b2p', 'subscription'],
-    nextId: 'done'
+    id: 'game_type',
+    options: [
+      'action',
+      'adventure',
+      'rpg',
+      'simulation',
+      'strategy',
+      'sports',
+      'puzzle',
+      'idle_game'
+    ]
   },
+  { id: 'action', options: ['platformer', 'shooter', 'fighting', 'beat_em_up', 'stealth', 'survival', 'rhythm'], requires: ['action'] },
+  { id: 'adventure', options: ['visual_novel', 'point_and_click', '3d_adventure'], requires: ['adventure'] },
+  { id: 'rpg', options: ['action_rpg', 'mmo_rpg', 'roguelike', 'sandbox_rpg'], requires: ['rpg'] },
+  { id: 'simulation', options: ['tycoon', 'lifesyle', 'vehicle'], requires: ['simulation'] },
+  { id: 'strategy', options: [ 'build_and_conquer', 'real_time_strategy', 'real_time_tactics', 'moba', 'tower_defense'], requires: ['strategy'] },
+  { id: 'sports', options: ['team_sports', 'competitive'], requires: ['sports'] },
+  { id: 'puzzle', options: ['logic', 'trivia'], requires: ['puzzle'] },
+  { id: 'idle_game', options: ['casual', 'party_game', 'board_game', 'educational'], requires: ['puzzle'] },
   { id: 'done', type: TYPES.DONE }
-  // {
-  //   id: 'game_type',
-  //   options: [
-  //     'action',
-  //     'adventure',
-  //     'rpg',
-  //     'simulation',
-  //     'strategy',
-  //     'sports',
-  //     'puzzle',
-  //     'idle_game'
-  //   ],
-  //   nextId: 'game_type_details'
-  // },
-  // {
-  //   id: 'game_type_details',
-  //   parentId: 'game_type',
-  //   options: [
-  //     'platformer', 'shooter', 'fighting', 'beat_em_up', 'stealth', 'survival', 'rhythm',
-  //     'visual_novel', 'point_and_click', '3d_adventure',
-  //     'action_rpg', 'mmo_rpg', 'roguelike', 'sandbox_rpg',
-  //     'tycoon', 'lifesyle', 'vehicle',
-  //     'build_and_conquer', 'real_time_strategy', 'real_time_tactics', 'moba', 'tower_defense',
-  //     'team_sports', 'competitive',
-  //     'logic', 'trivia',
-  //     'casual', 'party_game', 'board_game', 'educational'
-  //   ],
-  //   nextId: 'art_style'
-  // },
 
-  // { id: 'platformer', requires: ['action'] },
-  // { id: 'fighting', requires: ['action'] },
-  // { id: 'shooter', requires: ['action'] },
-  // { id: 'beat_em_up', requires: ['action'] },
-  // { id: 'stealth', requires: ['action'] },
-  // { id: 'survival', requires: ['action'] },
-  // { id: 'rhythm', requires: ['action'] },
-
-  // { id: 'visual_novel', requires: ['adventure'] },
-  // { id: 'point_and_click', requires: ['adventure'] },
-  // { id: '3d_adventure', requires: ['adventure'] },
-
-  // { id: 'action_rpg', requires: ['rpg'] },
-  // { id: 'mmo_rpg', requires: ['rpg'] },
-  // { id: 'roguelike', requires: ['rpg'] },
-  // { id: 'sandbox_rpg', requires: ['rpg'] },
-
-  // { id: 'tycoon', requires: ['simulation'] },
-  // { id: 'lifesyle', requires: ['simulation'] },
-  // { id: 'vehicle', requires: ['simulation'] },
-
-  // { id: 'build_and_conquer', requires: ['strategy'] },
-  // { id: 'real_time_strategy', requires: ['strategy'] },
-  // { id: 'real_time_tactics', requires: ['strategy'] },
-  // { id: 'moba', requires: ['strategy'] },
-  // { id: 'tower_defense', requires: ['strategy'] },
-
-  // { id: 'team_sports', requires: ['sports'] },
-  // { id: 'competitive', requires: ['sports'] },
-
-  // { id: 'logic', requires: ['strategy'] },
-  // { id: 'trivia', requires: ['strategy'] },
-
-  // { id: 'casual', requires: ['idle_game'] },
-  // { id: 'party_game', requires: ['idle_game'] },
-  // { id: 'board_game', requires: ['idle_game'] },
   // { id: 'educational', requires: ['idle_game'] },
 
   // { id: 'art_style', options: ['2d', '3d'], nextId: 'art_style_detail' },
