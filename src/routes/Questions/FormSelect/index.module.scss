@@ -1,7 +1,9 @@
 @import 'constants.module.scss';
 
 .content {
-  flex: auto;
+  flex: 1;
+  align-self: stretch;
+  overflow: auto;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -11,6 +13,7 @@
 }
 
 .option {
+  flex: auto;
   display: flex;
   align-items: center;
   flex-direction: column;

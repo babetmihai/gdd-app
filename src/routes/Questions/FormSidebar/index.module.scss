@@ -6,12 +6,14 @@
   flex-direction: column;
   min-width: 13.5rem;
   background-color: $secondary;
+  overflow: auto;
   
   @media screen and (max-width: $md) {
     display: none;
   }
 
   .item {
+    flex: none;
     cursor: pointer;
     padding: .8rem 1.2rem;
     border-bottom: 1px solid rgba($light, .1);

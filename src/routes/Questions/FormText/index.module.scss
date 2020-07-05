@@ -1,8 +1,9 @@
 @import 'constants.module.scss';
 
 .textarea {
-  flex: auto;
+  flex: 1;
   margin: 1rem 0;
+  resize: none;
 }
 
 .submitBtn {
