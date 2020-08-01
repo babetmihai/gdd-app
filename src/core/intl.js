@@ -10,14 +10,15 @@ export const DEFAULT_LOCALE = 'en'
 export const initLocale = async () => {
   let locale = navigator.language.substr(0, 2)
   if (!LOCALE_LIST.includes(locale)) locale = DEFAULT_LOCALE
-
-  if (locale === 'de') await import('moment/locale/de')
-  if (locale === 'es') await import('moment/locale/es')
   moment.locale(locale)
 
-  const messages = await import(`./messages/${locale}.json`)
-    .then(({ default: messages }) => messages)
-    .catch(() => DEFAULT_MESSAGES)
+  let messages
+  try {
+    messages = await import(`messages/${locale}.json`)
+      .then(({ default: messages }) => messages)
+  } catch {
+    // do nothing
+  }
 
   actions.set('intl', {
     locale,
