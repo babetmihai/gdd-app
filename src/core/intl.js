@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import actions from 'store/actions'
 import moment from 'moment'
-import DEFAULT_MESSAGES from './messages/en.json'
+import DEFAULT_MESSAGES from 'messages/en.json'
 
 export const LOCALE_LIST = ['en', 'ro']
 

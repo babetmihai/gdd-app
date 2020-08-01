@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import Home from 'croutes/home'
+import Home from 'routes/Home'
 
 
 const routes = [

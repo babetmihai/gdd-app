@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 import * as serviceWorker from 'serviceWorker'
-import { getRedirectResult } from 'core/auth'
 import store from 'store'
 import { initLocale } from 'core/intl'
 import history from 'core/history'
@@ -43,7 +42,6 @@ theme = responsiveFontSizes(theme)
 
 Promise.resolve()
   .then(() => initLocale())
-  .then(() => getRedirectResult())
   .then(() => {
     ReactDOM.render((
       <React.StrictMode>
