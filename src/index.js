@@ -1,17 +1,59 @@
+import 'index.scss'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { Provider } from 'react-redux'
+import { Router } from 'react-router-dom'
+import * as serviceWorker from 'core/serviceWorker'
+import { getRedirectResult } from 'core/auth'
+import store from 'store'
+import { initLocale } from 'core/intl'
+import history from 'core/history'
+import { create } from 'jss'
+import { StylesProvider, ThemeProvider, jssPreset, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
+import purple from '@material-ui/core/colors/purple'
+import green from '@material-ui/core/colors/green'
 import App from './App'
-import * as serviceWorker from './core/serviceWorker'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+const styleNode = document.createComment('jss-insertion-point')
+document.head.insertBefore(styleNode, document.head.firstChild)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+const jss = create({
+  ...jssPreset(),
+  insertionPoint: 'jss-insertion-point'
+})
+
+let theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: purple[500]
+    },
+    secondary: {
+      main: green[500]
+    }
+  }
+})
+theme = responsiveFontSizes(theme)
+
+
+Promise.resolve()
+  .then(() => initLocale())
+  .then(() => getRedirectResult())
+  .then(() => {
+    ReactDOM.render((
+      <React.StrictMode>
+        <StylesProvider jss={jss}>
+          <ThemeProvider theme={theme}>
+            <Provider store={store}>
+              <Router history={history}>
+                <App />
+              </Router>
+            </Provider>
+          </ThemeProvider>
+        </StylesProvider>
+
+      </React.StrictMode>
+    ), document.getElementById('root'))
+  })
+
 serviceWorker.unregister()

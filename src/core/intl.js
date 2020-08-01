@@ -1,15 +1,13 @@
-import capitalize from 'lodash/capitalize'
-import get from 'lodash/get'
+import _ from 'lodash'
 import actions from 'store/actions'
 import moment from 'moment'
 import DEFAULT_MESSAGES from './messages/en.json'
 
-export const LOCALE_LIST = ['en', 'de', 'es']
-export const DEFAULT_LOCALE = 'en'
+export const LOCALE_LIST = ['en', 'ro']
 
 export const initLocale = async () => {
   let locale = navigator.language.substr(0, 2)
-  if (!LOCALE_LIST.includes(locale)) locale = DEFAULT_LOCALE
+  if (!LOCALE_LIST.includes(locale)) locale = _.first(LOCALE_LIST)
   moment.locale(locale)
 
   let messages
@@ -30,8 +28,8 @@ export const initLocale = async () => {
 
 export const selectLocale = () => actions.get('intl.locale')
 
-const formatId = (id) => capitalize(id.split('.').join(' '))
-const replaceParams = (message, params) => message.replace(/\{(.+?)\}/g, (_, key) => get(params, key.trim(), ''))
+const formatId = (id) => _.capitalize(id.split('.').join(' '))
+const replaceParams = (message, params) => message.replace(/\{(.+?)\}/g, (val, key) => _.get(params, key.trim(), ''))
 
 export const t = (id, params, defaultMessage = '') => {
   if (!id) return ''
