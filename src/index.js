@@ -34,6 +34,9 @@ let theme = createMuiTheme({
     },
     secondary: {
       main: styles.secondary
+    },
+    background: {
+      main: styles.background
     }
   }
 })
