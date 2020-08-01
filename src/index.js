@@ -10,10 +10,15 @@ import store from 'store'
 import { initLocale } from 'core/intl'
 import history from 'core/history'
 import { create } from 'jss'
-import { StylesProvider, ThemeProvider, jssPreset, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import purple from '@material-ui/core/colors/purple'
-import green from '@material-ui/core/colors/green'
+import {
+  StylesProvider,
+  ThemeProvider,
+  jssPreset,
+  createMuiTheme,
+  responsiveFontSizes
+} from '@material-ui/core/styles'
 import App from './App'
+import styles from './constants.module.scss'
 
 const styleNode = document.createComment('jss-insertion-point')
 document.head.insertBefore(styleNode, document.head.firstChild)
@@ -26,10 +31,10 @@ const jss = create({
 let theme = createMuiTheme({
   palette: {
     primary: {
-      main: purple[500]
+      main: styles.primary
     },
     secondary: {
-      main: green[500]
+      main: styles.secondary
     }
   }
 })
