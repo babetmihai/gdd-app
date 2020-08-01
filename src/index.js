@@ -57,7 +57,6 @@ Promise.resolve()
             </Provider>
           </ThemeProvider>
         </StylesProvider>
-
       </React.StrictMode>
     ), document.getElementById('root'))
   })

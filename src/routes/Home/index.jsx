@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './index.module.scss'
 import { Typography, Button } from '@material-ui/core'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Home({ id }) {
+export default function Home() {
   return (
     <div className={styles.home}>
       <Typography variant="h2">GDD Generator</Typography>
@@ -12,7 +12,7 @@ export default function Home({ id }) {
         color="secondary"
         variant="outlined"
         size="large"
-        component={NavLink}
+        component={Link}
         to="/form"
       >
         Start
