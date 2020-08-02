@@ -5,12 +5,12 @@ export default {
   },
   pc: {
     id: 'pc',
-    parentId: 'platform',
+    requires: 'pc',
     options: ['client', 'web_browser']
   },
   console: {
     id: 'console',
-    parentId: 'platform',
+    requires: 'console',
     options: ['ps', 'xbox', 'nintendo']
   },
   gameplay: {

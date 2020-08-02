@@ -15,6 +15,11 @@ export default function Home() {
     if (!questionId) actions.set('gdd.questionId', _.first(questionIds))
   }, []) // eslint-disable-line
 
+  const filteredIds = questionIds.filter((id) => {
+    const { requires } = _.get(QUESTIONS, id, {})
+    return !requires || _.get(results, requires)
+  })
+
   return (
     <div className={styles.dddForm}>
       <Typography variant="h2">Form</Typography>
@@ -38,21 +43,45 @@ export default function Home() {
         disabled={!options.some((id) => _.get(results, id))}
         onClick={() => {
           let afterCurrent
-          for (const id of questionIds) {
+          let afterNext
+          for (const id of filteredIds) {
             if (id === questionId) {
               afterCurrent = true
-            } else {
-              const { parentId } = _.get(QUESTIONS, id, {})
-              const enabled = !parentId || _.get(results, parentId)
-              if (afterCurrent && enabled) {
+            } else if (!afterNext) {
+              if (afterCurrent) {
                 actions.set('gdd.questionId', id)
-                break
+                afterNext = true
               }
+            } else {
+              const { options } = _.get(QUESTIONS, id, {})
+              actions.update('gdd.results', (results = {}) => ({
+                ...results,
+                ...options.reduce((acc, id) => {
+                  acc[id] = false
+                  return acc
+                }, {})
+              }))
             }
           }
         }}
       >
         Next
+      </Button>
+      <Button
+        color="primary"
+        onClick={() => {
+          let lastId
+          for (const id of filteredIds) {
+            if (lastId && id === questionId) {
+              actions.set('gdd.questionId', lastId)
+              break
+            } else {
+              lastId = id
+            }
+          }
+        }}
+      >
+        Back
       </Button>
     </div>
   )
