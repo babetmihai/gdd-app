@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from 'routes/Home'
-import Form from 'routes/Form'
+import Form from 'routes/GddForm'
 import Layout from 'core/layout/Layout'
 
 
