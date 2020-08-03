@@ -1,12 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
 import Divider from '@material-ui/core/Divider'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import MailIcon from '@material-ui/icons/Mail'
 
 import { useSelector } from 'react-redux'
 import QUESTIONS from '../questions'
@@ -21,19 +18,28 @@ export default function Sidebar() {
     const { requires } = _.get(QUESTIONS, id, {})
     return !requires || _.get(results, requires)
   })
+
   return (
-    <div>
-      <div className={styles.toolbar} />
+    <div className={styles.sidebar}>
+      <div className={styles.top} />
       <Divider />
-      <List>
-        {filteredIds.map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <List className={styles.list}>
+        {filteredIds.map((id) => {
+          const isFirst = _.first(filteredIds) === id
+          const hasResults = _.get(QUESTIONS, `${id}.options`, []).some((optionId) => _.get(results, optionId))
+
+          return (
+            <ListItem
+              button
+              key={id}
+              disabled={!isFirst && !hasResults}
+              onClick={() => actions.set('gdd.questionId', id)}
+            >
+              <ListItemText primary={id} />
+            </ListItem>
+          )
+        })}
       </List>
     </div>
-
   )
 }
