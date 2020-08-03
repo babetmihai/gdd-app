@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import QUESTIONS from './questions'
 import actions from 'core/intl'
 
+
 export default function Home() {
   const questionIds = Object.keys(QUESTIONS)
   const { questionId, results } = useSelector(() => actions.get('gdd', {}))
@@ -19,61 +20,58 @@ export default function Home() {
     const { requires } = _.get(QUESTIONS, id, {})
     return !requires || _.get(results, requires)
   })
+  const questionIndex = filteredIds.indexOf(questionId)
+  const lastId = _.get(filteredIds, questionIndex - 1)
+  const afterIds = filteredIds.slice(questionIndex + 1)
+  const nextId = _.first(afterIds)
 
   return (
     <div className={styles.gddForm}>
       <Typography variant="h2">Form</Typography>
-      {options.map((id) => {
-        const selected = _.get(results, id)
-        return (
-          <Button
-            color={selected ? 'secondary' : 'primary'}
-            size="large"
-            key={id}
-            variant="outlined"
-            onClick={() => {
-              actions.update(`gdd.results.${id}`, (toggle) => !toggle)
-            }}
-          >
-            {id}
-          </Button>
-        )
-      })}
-      <Button
-        color="primary"
-        disabled={!options.some((id) => _.get(results, id))}
-        onClick={() => {
-          const questionIdex = filteredIds.indexOf(questionId)
-          const afterIds = filteredIds.slice(questionIdex + 1)
-          const nextId = _.first(afterIds)
+      <div className={styles.options}>
+        {options.map((id) => {
+          const selected = _.get(results, id)
+          return (
+            <Button
+              color={selected ? 'secondary' : 'primary'}
+              size="large"
+              key={id}
+              variant="outlined"
+              onClick={() => {
+                actions.update(`gdd.results.${id}`, (toggle) => !toggle)
+              }}
+            >
+              {id}
+            </Button>
+          )
+        })}
+      </div>
+      <div className={styles.actions}>
+        <Button
+          color="primary"
+          disabled={!nextId || !options.some((id) => _.get(results, id))}
+          onClick={() => {
+            actions.set('gdd.questionId', nextId)
+            const allOptions = afterIds.reduce((acc, id) => {
+              const { options = [] } = _.get(QUESTIONS, id, {})
+              return [...acc, ...options]
+            }, [])
 
-          if (nextId) actions.set('gdd.questionId', nextId)
-          const allOptions = afterIds.reduce((acc, id) => {
-            const { options = [] } = _.get(QUESTIONS, id, {})
-            return [...acc, ...options]
-          }, [])
-          console.log(allOptions)
-          actions.set('gdd.results', _.omit(results, ...allOptions))
-        }}
-      >
-        Next
-      </Button>
-      <Button
-        color="primary"
-        onClick={() => {
-          let lastId
-          for (const id of filteredIds) {
-            if (lastId && id === questionId) {
-              actions.set('gdd.questionId', lastId)
-              break
-            } else {
-              lastId = id
-            }
-          }
-        }}
-      >
-        Back
-      </Button>
+            actions.set('gdd.results', _.omit(results, ...allOptions))
+          }}
+        >
+          Next
+        </Button>
+        <Button
+          color="primary"
+          disabled={!lastId}
+          onClick={() => {
+            actions.set('gdd.questionId', lastId)
+          }}
+        >
+          Back
+        </Button>
+      </div>
     </div>
   )
 }
