@@ -21,13 +21,14 @@ export default function Home() {
   })
 
   return (
-    <div className={styles.dddForm}>
+    <div className={styles.gddForm}>
       <Typography variant="h2">Form</Typography>
       {options.map((id) => {
         const selected = _.get(results, id)
         return (
           <Button
             color={selected ? 'secondary' : 'primary'}
+            size="large"
             key={id}
             variant="outlined"
             onClick={() => {
@@ -42,27 +43,17 @@ export default function Home() {
         color="primary"
         disabled={!options.some((id) => _.get(results, id))}
         onClick={() => {
-          let afterCurrent
-          let afterNext
-          for (const id of filteredIds) {
-            if (id === questionId) {
-              afterCurrent = true
-            } else if (!afterNext) {
-              if (afterCurrent) {
-                actions.set('gdd.questionId', id)
-                afterNext = true
-              }
-            } else {
-              const { options } = _.get(QUESTIONS, id, {})
-              actions.update('gdd.results', (results = {}) => ({
-                ...results,
-                ...options.reduce((acc, id) => {
-                  acc[id] = false
-                  return acc
-                }, {})
-              }))
-            }
-          }
+          const questionIdex = filteredIds.indexOf(questionId)
+          const afterIds = filteredIds.slice(questionIdex + 1)
+          const nextId = _.first(afterIds)
+
+          if (nextId) actions.set('gdd.questionId', nextId)
+          const allOptions = afterIds.reduce((acc, id) => {
+            const { options = [] } = _.get(QUESTIONS, id, {})
+            return [...acc, ...options]
+          }, [])
+          console.log(allOptions)
+          actions.set('gdd.results', _.omit(results, ...allOptions))
         }}
       >
         Next
