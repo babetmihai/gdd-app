@@ -57,7 +57,7 @@ export default function Home() {
               return [...acc, ...options]
             }, [])
 
-            actions.set('gdd.results', _.omit(results, ...allOptions))
+            actions.set('gdd.results', _.omit(results, allOptions))
           }}
         >
           Next
