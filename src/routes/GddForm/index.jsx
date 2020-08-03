@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import { Typography, Button } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import QUESTIONS from '../../core/questions'
-import actions from 'core/intl'
+import actions from 'store/actions'
 
 
 export default function Home() {

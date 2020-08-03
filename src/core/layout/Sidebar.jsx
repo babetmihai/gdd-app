@@ -10,7 +10,7 @@ import MailIcon from '@material-ui/icons/Mail'
 
 import { useSelector } from 'react-redux'
 import QUESTIONS from '../questions'
-import actions from 'core/intl'
+import actions from 'store/actions'
 
 import styles from './index.module.scss'
 

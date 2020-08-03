@@ -39,5 +39,3 @@ export const t = (id, params, defaultMessage = '') => {
   if (!message) message = formatId(id) || ''
   return message
 }
-
-export default actions
