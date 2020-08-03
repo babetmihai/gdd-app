@@ -3,7 +3,7 @@ import _ from 'lodash'
 import styles from './index.module.scss'
 import { Typography, Button } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import QUESTIONS from './questions'
+import QUESTIONS from '../../core/questions'
 import actions from 'core/intl'
 
 
@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <div className={styles.gddForm}>
-      <Typography variant="h2">Form</Typography>
+      <Typography variant="h2">{questionId}</Typography>
       <div className={styles.options}>
         {options.map((id) => {
           const selected = _.get(results, id)
