@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import styles from './index.module.scss'
-import { Typography, Button, Card } from '@material-ui/core'
+import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import QUESTIONS from './questions'
 import Sidebar from './Sidebar'
@@ -40,15 +40,23 @@ export default function Home() {
       <Card
         style={{
           margin: 5,
-          padding: 10
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
-        <Typography variant="h2">{questionId}</Typography>
-        <div className={styles.options}>
+        <CardContent style={{ flex: 1 }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            style={{ margin: 4 }}
+          >
+            {questionId}
+          </Typography>
           {options.map((id) => {
             const selected = _.get(results, id)
             return (
               <Button
+                style={{ margin: 4 }}
                 color={selected ? 'secondary' : undefined}
                 size="large"
                 key={id}
@@ -61,9 +69,10 @@ export default function Home() {
               </Button>
             )
           })}
-        </div>
-        <div className={styles.actions}>
+        </CardContent>
+        <CardActions style={{ justifyContent: 'flex-end' }}>
           <Button
+            style={{ margin: 4 }}
             color="primary"
             disabled={!nextId || !completed}
             onClick={() => {
@@ -79,6 +88,7 @@ export default function Home() {
             Next
           </Button>
           <Button
+            style={{ margin: 4 }}
             color="primary"
             disabled={!lastId}
             onClick={() => {
@@ -87,7 +97,7 @@ export default function Home() {
           >
             Back
           </Button>
-        </div>
+        </CardActions>
       </Card>
 
     </div>
