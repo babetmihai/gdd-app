@@ -1,13 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
-import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import { useSelector } from 'react-redux'
 import QUESTIONS from './questions'
 import actions from 'store/actions'
-import styles from './index.module.scss'
 import { Button, Card } from '@material-ui/core'
 
 export default function Sidebar() {
@@ -24,7 +19,9 @@ export default function Sidebar() {
         padding: 10,
         margin: 5,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: '30vw',
+        maxWidth: 225
       }}
     >
       {filteredIds.map((id) => {

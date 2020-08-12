@@ -1,6 +1,5 @@
 import React from 'react'
 import _ from 'lodash'
-import styles from './index.module.scss'
 import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import QUESTIONS from './questions'
@@ -35,16 +34,31 @@ export default function Home() {
   const nextId = _.first(afterIds)
 
   return (
-    <div className={styles.gddForm}>
+    <div
+      style={{
+        height: '90vh',
+        maxHeight: 400,
+        display: 'flex'
+      }}
+    >
       <Sidebar />
       <Card
         style={{
           margin: 5,
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          width: '50vw',
+          maxWidth: 600
         }}
       >
-        <CardContent style={{ flex: 1 }}>
+        <CardContent
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+        >
           <Typography
             gutterBottom
             variant="h5"
@@ -52,41 +66,37 @@ export default function Home() {
           >
             {questionId}
           </Typography>
-          {options.map((id) => {
-            const selected = _.get(results, id)
-            return (
-              <Button
-                style={{ margin: 4 }}
-                color={selected ? 'secondary' : undefined}
-                size="large"
-                key={id}
-                variant="outlined"
-                onClick={() => {
-                  actions.update(`gdd.results.${id}`, (toggle) => !toggle)
-                }}
-              >
-                {id}
-              </Button>
-            )
-          })}
-        </CardContent>
-        <CardActions style={{ justifyContent: 'flex-end' }}>
-          <Button
-            style={{ margin: 4 }}
-            color="primary"
-            disabled={!nextId || !completed}
-            onClick={() => {
-              actions.set('gdd.questionId', nextId)
-              const allOptions = afterIds.reduce((acc, id) => {
-                const { options = [] } = _.get(QUESTIONS, id, {})
-                return [...acc, ...options]
-              }, [])
-
-              actions.set('gdd.results', _.omit(results, allOptions))
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'flex-start'
             }}
           >
-            Next
-          </Button>
+            {options.map((id) => {
+              const selected = _.get(results, id)
+              return (
+                <Button
+                  style={{
+                    margin: 4,
+                    fontSize: 18
+                  }}
+                  color={selected ? 'secondary' : undefined}
+                  size="large"
+                  key={id}
+                  variant="outlined"
+                  onClick={() => {
+                    actions.update(`gdd.results.${id}`, (toggle) => !toggle)
+                  }}
+                >
+                  {id}
+                </Button>
+              )
+            })}
+          </div>
+        </CardContent>
+        <CardActions style={{ justifyContent: 'flex-end' }}>
           <Button
             style={{ margin: 4 }}
             color="primary"
@@ -97,9 +107,23 @@ export default function Home() {
           >
             Back
           </Button>
+          <Button
+            style={{ margin: 4 }}
+            color="primary"
+            disabled={!nextId || !completed}
+            onClick={() => {
+              actions.set('gdd.questionId', nextId)
+              const allOptions = afterIds.reduce((acc, id) => {
+                const { options = [] } = _.get(QUESTIONS, id, {})
+                return [...acc, ...options]
+              }, [])
+              actions.set('gdd.results', _.omit(results, allOptions))
+            }}
+          >
+            Next
+          </Button>
         </CardActions>
       </Card>
-
     </div>
   )
 }
