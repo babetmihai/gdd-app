@@ -70,8 +70,10 @@ export default function Home() {
             style={{
               flex: 1,
               display: 'flex',
+              justifyContent: 'center',
               flexWrap: 'wrap',
-              alignItems: 'flex-start'
+              alignItems: 'flex-start',
+              alignContent: 'flex-start'
             }}
           >
             {options.map((id) => {
