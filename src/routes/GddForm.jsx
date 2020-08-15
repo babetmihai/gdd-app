@@ -145,7 +145,6 @@ export default function Home() {
                     <ExtensionIcon />
                     {id}
                   </div>
-
                 </Button>
               )
             })}
