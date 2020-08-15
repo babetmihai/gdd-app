@@ -3,12 +3,12 @@ import _ from 'lodash'
 import reducer from './reducer'
 
 
-const PERSISTENT_PATHS = ['intl.locale']
+const PERSISTENT_PATHS = ['gdd', 'intl.locale']
 
 const state = {}
 PERSISTENT_PATHS.forEach((path) => {
   try {
-    const value = JSON.parse(localStorage.getItem(path))
+    const value = JSON.parse(localStorage.getItem(path)) || undefined
     _.setWith(state, path, value, Object)
   } catch (error) {
     console.error(error.message) // eslint-disable-line

@@ -1,24 +1,30 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
+import { t } from 'core/intl'
 import actions from 'store/actions'
+import { Card } from '@material-ui/core'
 
 
 export default function Results() {
-  const { results } = useSelector(() => actions.get('gdd', {}))
+  const { results = {} } = useSelector(() => actions.get('gdd', {}))
 
   return (
-    <div
+    <Card
       style={{
+        padding: 10,
         height: '90vh',
         maxHeight: 400,
-        display: 'flex'
+        maxWidth: 835,
+        display: 'flex',
+        flexDirection: 'column'
       }}
     >
       {Object.keys(results).map((result) => (
-        <span key={result}>
-          {result}
-        </span>
+        <Fragment key={result}>
+          <h5>{result}</h5>
+          <p>{t(`results.${result}`)}</p>
+        </Fragment>
       ))}
-    </div>
+    </Card>
   )
 }
