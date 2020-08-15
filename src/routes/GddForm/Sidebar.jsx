@@ -7,7 +7,7 @@ import { Button, Card } from '@material-ui/core'
 
 export default function Sidebar() {
   const questionIds = Object.keys(QUESTIONS)
-  const { results } = useSelector(() => actions.get('gdd', {}))
+  const { questionId, results } = useSelector(() => actions.get('gdd', {}))
   const filteredIds = questionIds.filter((id) => {
     const { requires } = _.get(QUESTIONS, id, {})
     return !requires || _.get(results, requires)
@@ -28,10 +28,12 @@ export default function Sidebar() {
         const isFirst = _.first(filteredIds) === id
         const { options = [] } = _.get(QUESTIONS, id, [])
         const filteredOptions = options.filter((optionId) => _.get(results, optionId))
+        const selected = id === questionId
         return (
           <Button
             key={id}
             variant="outlined"
+            color={selected ? 'secondary' : 'primary'}
             style={{
               margin: 4
             }}

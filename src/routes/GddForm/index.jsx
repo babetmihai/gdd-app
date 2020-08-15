@@ -1,6 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
+import ExtensionIcon from '@material-ui/icons/Extension'
 import { useSelector } from 'react-redux'
 import QUESTIONS from './questions'
 import Sidebar from './Sidebar'
@@ -32,6 +33,14 @@ export default function Home() {
   const lastId = _.get(filteredIds, questionIndex - 1)
   const afterIds = filteredIds.slice(questionIndex + 1)
   const nextId = _.first(afterIds)
+
+  const clearResults = () => {
+    const allOptions = afterIds.reduce((acc, id) => {
+      const { options = [] } = _.get(QUESTIONS, id, {})
+      return [...acc, ...options]
+    }, [])
+    actions.set('gdd.results', _.omit(results, allOptions))
+  }
 
   return (
     <div
@@ -89,10 +98,22 @@ export default function Home() {
                   key={id}
                   variant="outlined"
                   onClick={() => {
+                    clearResults()
                     actions.update(`gdd.results.${id}`, (toggle) => !toggle)
                   }}
                 >
-                  {id}
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: 5
+                    }}
+                  >
+                    <ExtensionIcon />
+                    {id}
+                  </div>
+
                 </Button>
               )
             })}
@@ -112,14 +133,11 @@ export default function Home() {
           <Button
             style={{ margin: 4 }}
             color="primary"
+            variant="contained"
             disabled={!nextId || !completed}
             onClick={() => {
+              clearResults()
               actions.set('gdd.questionId', nextId)
-              const allOptions = afterIds.reduce((acc, id) => {
-                const { options = [] } = _.get(QUESTIONS, id, {})
-                return [...acc, ...options]
-              }, [])
-              actions.set('gdd.results', _.omit(results, allOptions))
             }}
           >
             Next
