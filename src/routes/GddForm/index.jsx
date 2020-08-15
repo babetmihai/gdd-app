@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import QUESTIONS from './questions'
 import Sidebar from './Sidebar'
 import actions from 'store/actions'
+import history from 'core/history'
 
 
 export default function Home() {
@@ -15,12 +16,12 @@ export default function Home() {
   const completed = options.some((id) => _.get(results, id))
 
   React.useEffect(() => {
-    if (!questionId) actions.set('gdd.questionId', _.first(questionIds))
+    actions.set('gdd.questionId', _.first(questionIds))
   }, []) // eslint-disable-line
 
   React.useEffect(() => {
-    if (!completed) {
-      const firstId = _.first(options)
+    const firstId = _.first(options)
+    if (questionId && !completed) {
       actions.set(`gdd.results.${firstId}`, true)
     }
   }, [questionId]) // eslint-disable-line
@@ -33,6 +34,8 @@ export default function Home() {
   const lastId = _.get(filteredIds, questionIndex - 1)
   const afterIds = filteredIds.slice(questionIndex + 1)
   const nextId = _.first(afterIds)
+
+  const isLastQuation = questionId === _.last(filteredIds)
 
   const clearResults = () => {
     const allOptions = afterIds.reduce((acc, id) => {
@@ -130,18 +133,33 @@ export default function Home() {
           >
             Back
           </Button>
-          <Button
-            style={{ margin: 4 }}
-            color="primary"
-            variant="contained"
-            disabled={!nextId || !completed}
-            onClick={() => {
-              clearResults()
-              actions.set('gdd.questionId', nextId)
-            }}
-          >
-            Next
-          </Button>
+          {!isLastQuation &&
+            <Button
+              style={{ margin: 4 }}
+              color="primary"
+              variant="contained"
+              disabled={!completed}
+              onClick={() => {
+                clearResults()
+                actions.set('gdd.questionId', nextId)
+              }}
+            >
+              Next
+            </Button>
+          }
+          {isLastQuation &&
+            <Button
+              style={{ margin: 4 }}
+              color="secondary"
+              variant="contained"
+              disabled={!completed}
+              onClick={() => {
+                history.push('/results')
+              }}
+            >
+              Finish
+            </Button>
+          }
         </CardActions>
       </Card>
     </div>
