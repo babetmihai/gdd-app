@@ -3,8 +3,7 @@ import _ from 'lodash'
 import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
 import ExtensionIcon from '@material-ui/icons/Extension'
 import { useSelector } from 'react-redux'
-import QUESTIONS from '../../core/questions'
-import Sidebar from './Sidebar'
+import QUESTIONS from 'core/questions'
 import actions from 'store/actions'
 import history from 'core/history'
 
@@ -53,7 +52,37 @@ export default function Home() {
         display: 'flex'
       }}
     >
-      <Sidebar />
+      <Card
+        style={{
+          padding: 10,
+          margin: 5,
+          display: 'flex',
+          flexDirection: 'column',
+          width: '30vw',
+          maxWidth: 225
+        }}
+      >
+        {filteredIds.map((id) => {
+          const isFirst = _.first(filteredIds) === id
+          const { options = [] } = _.get(QUESTIONS, id, [])
+          const filteredOptions = options.filter((optionId) => _.get(results, optionId))
+          const selected = id === questionId
+          return (
+            <Button
+              key={id}
+              variant="outlined"
+              color={selected ? 'secondary' : 'primary'}
+              style={{
+                margin: 4
+              }}
+              disabled={!isFirst && _.isEmpty(filteredOptions)}
+              onClick={() => actions.set('gdd.questionId', id)}
+            >
+              {id}
+            </Button>
+          )
+        })}
+      </Card>
       <Card
         style={{
           margin: 5,
