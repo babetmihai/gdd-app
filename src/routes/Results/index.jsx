@@ -11,7 +11,7 @@ export default function Results() {
   return (
     <Card
       style={{
-        padding: 10,
+        padding: 13,
         height: '90vh',
         maxHeight: 400,
         maxWidth: 835,
@@ -20,10 +20,26 @@ export default function Results() {
       }}
     >
       {Object.keys(results).map((result) => (
-        <Fragment key={result}>
+        <div
+          key={result}
+          style={{
+            margin: 2,
+            fontFamily: 'inherit',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
           <h5>{result}</h5>
-          <p>{t(`results.${result}`)}</p>
-        </Fragment>
+          <span>
+            {t(`results.${result}`).split('\n').map((item, index) => (
+              <Fragment key={index}>
+                {item}
+                <br />
+              </Fragment>
+            ))}
+          </span>
+          <br />
+        </div>
       ))}
     </Card>
   )

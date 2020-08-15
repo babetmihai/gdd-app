@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { useSelector } from 'react-redux'
-import QUESTIONS from './questions'
+import QUESTIONS from '../../core/questions'
 import actions from 'store/actions'
 import { Button, Card } from '@material-ui/core'
 
