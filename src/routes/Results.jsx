@@ -15,7 +15,8 @@ export default function Results() {
         height: '90vh',
         maxWidth: 835,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        overflow: 'auto'
       }}
     >
       {Object.keys(results).map((result) => (
@@ -25,7 +26,8 @@ export default function Results() {
             margin: 2,
             fontFamily: 'inherit',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            flex: 'none'
           }}
         >
           <Typography
