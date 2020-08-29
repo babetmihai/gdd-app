@@ -70,6 +70,62 @@ export default function Results() {
           <p>{t('tech_input_description')}</p>
           <p>{t('tech_engines_description')}</p>
         </section>
+        <section>
+          <h2>{t('multiplayer_specifics')}</h2>
+          {results.singleplayer && <p>{t('singleplayer_story')}</p>}
+          {results.multiplayer && <p>{t('multiplayer_story')}</p>}
+          <p>{t('multiplayer_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('style')}</h2>
+          <h3>{t('style_specifics')}</h3>
+          <p>{t('style_specifics_input_description')}</p>
+          <h3>{t('interface')}</h3>
+          {results.pc && <p>{t('pc_interface_story')}</p>}
+          {results.pc && <p>{t('console_interface_story')}</p>}
+          <p>{t('interface_input_description')}</p>
+          <h3>{t('controls_mapping')}</h3>
+          <p>{t('controls_mapping_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('core_mechanics')}</h2>
+          <p>{t('core_mechanics_story')}</p>
+        </section>
+        <section>
+          <h2>{t('story_and_content')}</h2>
+          <h3>{t('backstory')}</h3>
+          <p>{t('backstory_input_description')}</p>
+          <h3>{t('characters')}</h3>
+          <p>{t('characters_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('rythm')}</h2>
+          <p>{t('rythm_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('resonance')}</h2>
+          <p>{t('resonance_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('core_loop')}</h2>
+          <p>{t('core_loop_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('rewards')}</h2>
+          <p>{t('rewards_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('punishment')}</h2>
+          <p>{t('punishment_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('social')}</h2>
+          <p>{t('social_input_description')}</p>
+        </section>
+        <section>
+          <h2>{t('future_planning')}</h2>
+          <p>{t('future_planning_input_description')}</p>
+        </section>
       </div>
     </Card>
   )
