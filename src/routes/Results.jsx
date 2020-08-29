@@ -77,7 +77,7 @@ export default function Results() {
         </section>
         <section>
           <h2>{t('style')}</h2>
-          <h3>{t('style_specifics')}</h3>
+          <h3>{t('specifics')}</h3>
           <p>{t('style_specifics_input_description')}</p>
           <h3>{t('interface')}</h3>
           {results.pc && <p>{t('pc_interface_story')}</p>}
@@ -85,10 +85,6 @@ export default function Results() {
           <p>{t('interface_input_description')}</p>
           <h3>{t('controls_mapping')}</h3>
           <p>{t('controls_mapping_input_description')}</p>
-        </section>
-        <section>
-          <h2>{t('core_mechanics')}</h2>
-          <p>{t('core_mechanics_story')}</p>
         </section>
         <section>
           <h2>{t('story_and_content')}</h2>
