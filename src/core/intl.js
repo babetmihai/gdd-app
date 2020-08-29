@@ -28,7 +28,7 @@ export const initLocale = async () => {
 
 export const selectLocale = () => actions.get('intl.locale')
 
-const formatId = (id) => _.capitalize(id.split('.').join(' '))
+const formatId = (id) => _.capitalize(id.split('_').join(' '))
 const replaceParams = (message, params) => message.replace(/\{(.+?)\}/g, (val, key) => _.get(params, key.trim(), ''))
 
 export const t = (id, params, defaultMessage = '') => {

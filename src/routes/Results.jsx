@@ -19,34 +19,37 @@ export default function Results() {
         overflow: 'auto'
       }}
     >
-      {Object.keys(results).map((result) => (
-        <div
-          key={result}
-          style={{
-            margin: 2,
-            fontFamily: 'inherit',
-            display: 'flex',
-            flexDirection: 'column',
-            flex: 'none'
-          }}
-        >
-          <Typography
-            gutterBottom
-            variant="h5"
-          >
-            {result}
-          </Typography>
-          <p>
-            {t(`results.${result}`).split('\n').map((item, index) => (
-              <Fragment key={index}>
-                {item}
-                <br />
-              </Fragment>
-            ))}
-          </p>
-          <br />
-        </div>
-      ))}
+      <div
+        style={{
+          margin: 2,
+          fontFamily: 'inherit',
+          display: 'flex',
+          flexDirection: 'column',
+          flex: 'none'
+        }}
+      >
+        <h1>{t('place_in_game_culture')}</h1>
+        {results.pc &&
+          <>
+            <p>{t('pc_story')}</p>
+            <br />
+            {results.client && <p>{t('pc_client_story')}</p>}
+            {results.browser && <p>{t('pc_browser_story')}</p>}
+          </>
+        }
+        {results.console &&
+          <>
+            <p>{t('console_story')}</p>
+            <br />
+            {results.ps && <p>{t('console_ps_story')}</p>}
+            {results.xbox && <p>{t('console_xbox_story')}</p>}
+            {results.nintendo && <p>{t('console_nintendo_story')}</p>}
+          </>
+        }
+        <p>
+          {t('specify_culture')}
+        </p>
+      </div>
     </Card>
   )
 }
