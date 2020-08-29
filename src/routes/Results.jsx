@@ -29,12 +29,11 @@ export default function Results() {
         }}
       >
         <h1>{t('game_design_document')}</h1>
-        <>
+        <section>
           <h2>{t('place_in_game_culture')}</h2>
           {results.pc &&
             <>
               <p>{t('pc_story')}</p>
-              <br />
               {results.client && <p>{t('pc_client_story')}</p>}
               {results.browser && <p>{t('pc_browser_story')}</p>}
             </>
@@ -42,31 +41,35 @@ export default function Results() {
           {results.console &&
             <>
               <p>{t('console_story')}</p>
-              <br />
               {results.ps && <p>{t('console_ps_story')}</p>}
               {results.xbox && <p>{t('console_xbox_story')}</p>}
               {results.nintendo && <p>{t('console_nintendo_story')}</p>}
             </>
           }
           <p>{t('culture_input_description')}</p>
-        </>
-        <>
+        </section>
+        <section>
           <h2>{t('game_type')}</h2>
           <p>{t('game_type_story')}</p>
-        </>
-        <br />
-        <>
+        </section>
+        <section>
           <h2>{t('target_audience')}</h2>
           <p>{t('target_audience_story')}</p>
-        </>
-        <>
+        </section>
+        <section>
           <h2>{t('monetization')}</h2>
           {results.free2play && <p>{t('free2play_story')}</p>}
           {results.buy2play && <p>{t('buy2play_story')}</p>}
           {results.subscription && <p>{t('subscription_story')}</p>}
           <p>{t('monetization_input_description')}</p>
-        </>
-
+        </section>
+        <section>
+          <h2>{t('tech')}</h2>
+          {results.pc && <p>{t('pc_tech')}</p>}
+          {results.console && <p>{t('console_tech')}</p>}
+          <p>{t('tech_input_description')}</p>
+          <p>{t('tech_engines_description')}</p>
+        </section>
       </div>
     </Card>
   )
