@@ -65,8 +65,8 @@ export default function Results() {
         </section>
         <section>
           <h2>{t('tech')}</h2>
-          {results.pc && <p>{t('pc_tech')}</p>}
-          {results.console && <p>{t('console_tech')}</p>}
+          {results.pc && <p>{t('pc_tech_story')}</p>}
+          {results.console && <p>{t('console_tech_story')}</p>}
           <p>{t('tech_story')}</p>
         </section>
         <section>
