@@ -81,7 +81,7 @@ export default function Results() {
           <p>{t('style_specifics_input_description')}</p>
           <h3>{t('interface')}</h3>
           {results.pc && <p>{t('pc_interface_story')}</p>}
-          {results.pc && <p>{t('console_interface_story')}</p>}
+          {results.console && <p>{t('console_interface_story')}</p>}
           <p>{t('interface_input_description')}</p>
           <h3>{t('controls_mapping')}</h3>
           <p>{t('controls_mapping_input_description')}</p>
