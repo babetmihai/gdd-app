@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { t } from 'core/intl'
 import actions from 'store/actions'
-import { Card, Typography } from '@material-ui/core'
+import { Card } from '@material-ui/core'
 
 
 export default function Results() {
@@ -50,11 +50,11 @@ export default function Results() {
         </section>
         <section>
           <h2>{t('game_type')}</h2>
-          <p>{t('game_type_story')}</p>
+          <p>{t('game_type_input_description')}</p>
         </section>
         <section>
           <h2>{t('target_audience')}</h2>
-          <p>{t('target_audience_story')}</p>
+          <p>{t('target_audience_input_description')}</p>
         </section>
         <section>
           <h2>{t('monetization')}</h2>
@@ -67,8 +67,7 @@ export default function Results() {
           <h2>{t('tech')}</h2>
           {results.pc && <p>{t('pc_tech')}</p>}
           {results.console && <p>{t('console_tech')}</p>}
-          <p>{t('tech_input_description')}</p>
-          <p>{t('tech_engines_description')}</p>
+          <p>{t('tech_story')}</p>
         </section>
         <section>
           <h2>{t('multiplayer_specifics')}</h2>
