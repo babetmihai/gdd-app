@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import actions from 'store/actions'
-import { Card } from '@material-ui/core'
+import { Card, Button } from '@material-ui/core'
 import RESULT_TEMPLATE from './template'
+import { generateDocx } from './actions'
 import ResultNode from './ResultNode'
 
 export default function ResultsPage() {
@@ -28,6 +29,12 @@ export default function ResultsPage() {
           flex: 'none'
         }}
       >
+        <Button
+          style={{ alignSelf: 'flex-start' }}
+          onClick={() => generateDocx({ results })}
+        >
+          Download
+        </Button>
         {RESULT_TEMPLATE.map((node, index) => (
           <ResultNode
             node={node}
@@ -35,6 +42,7 @@ export default function ResultsPage() {
             results={results}
           />
         ))}
+
       </div>
     </Card>
   )
