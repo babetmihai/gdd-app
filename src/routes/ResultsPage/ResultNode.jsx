@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { t } from 'core/intl'
 
 
@@ -8,7 +9,7 @@ export default function ResultNode({ node, ...props }) {
 
   return (
     <Component id={id}>
-      {t(id)}
+      {_.isEmpty(children) && id && t(id)}
       {children
         .filter(({ requires }) => {
           console.log(requires, results[requires])
