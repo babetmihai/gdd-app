@@ -11,10 +11,7 @@ export default function ResultNode({ node, ...props }) {
     <Component id={id}>
       {_.isEmpty(children) && id && t(id)}
       {children
-        .filter(({ requires }) => {
-          console.log(requires, results[requires])
-          return !requires || results[requires]
-        })
+        .filter(({ requires }) => !requires || _.get(results, requires))
         .map((childNode, index) => (
           <ResultNode
             {...props}
