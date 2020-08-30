@@ -12,7 +12,7 @@ export default function Home() {
         variant="outlined"
         size="large"
         component={Link}
-        to="/form"
+        to="/questions"
       >
         Start
       </Button>

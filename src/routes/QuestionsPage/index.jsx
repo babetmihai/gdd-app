@@ -3,15 +3,15 @@ import _ from 'lodash'
 import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
 import ExtensionIcon from '@material-ui/icons/Extension'
 import { useSelector } from 'react-redux'
-import QUESTIONS from 'routes/GddForm/questions'
+import QUESTION_TEMPLATE from './template'
 import actions from 'store/actions'
 import history from 'core/history'
 
 
 export default function Home() {
-  const questionIds = Object.keys(QUESTIONS)
+  const questionIds = Object.keys(QUESTION_TEMPLATE)
   const { questionId, results } = useSelector(() => actions.get('gdd', {}))
-  const { options = [] } = _.get(QUESTIONS, questionId, {})
+  const { options = [] } = _.get(QUESTION_TEMPLATE, questionId, {})
   const completed = options.some((id) => _.get(results, id))
 
   React.useEffect(() => {
@@ -26,7 +26,7 @@ export default function Home() {
   }, [questionId]) // eslint-disable-line
 
   const filteredIds = questionIds.filter((id) => {
-    const { requires } = _.get(QUESTIONS, id, {})
+    const { requires } = _.get(QUESTION_TEMPLATE, id, {})
     return !requires || _.get(results, requires)
   })
   const questionIndex = filteredIds.indexOf(questionId)
@@ -38,7 +38,7 @@ export default function Home() {
 
   const clearResults = () => {
     const allOptions = afterIds.reduce((acc, id) => {
-      const { options = [] } = _.get(QUESTIONS, id, {})
+      const { options = [] } = _.get(QUESTION_TEMPLATE, id, {})
       return [...acc, ...options]
     }, [])
     actions.set('gdd.results', _.omit(results, allOptions))
@@ -64,7 +64,7 @@ export default function Home() {
       >
         {filteredIds.map((id) => {
           const isFirst = _.first(filteredIds) === id
-          const { options = [] } = _.get(QUESTIONS, id, [])
+          const { options = [] } = _.get(QUESTION_TEMPLATE, id, [])
           const filteredOptions = options.filter((optionId) => _.get(results, optionId))
           const selected = id === questionId
           return (
