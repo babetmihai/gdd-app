@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
 import ExtensionIcon from '@material-ui/icons/Extension'
 import { useSelector } from 'react-redux'
-import QUESTIONS from 'core/questions'
+import QUESTIONS from 'routes/GddForm/questions'
 import actions from 'store/actions'
 import history from 'core/history'
 
@@ -131,7 +131,17 @@ export default function Home() {
                   variant="outlined"
                   onClick={() => {
                     clearResults()
-                    actions.update(`gdd.results.${id}`, (toggle) => !toggle)
+                    actions.update('gdd.results', (_results) => {
+                      const newResults = _.clone(_results)
+                      options.forEach((_option) => {
+                        if (_option === id) {
+                          _.set(newResults, _option, true)
+                        } else {
+                          _.unset(newResults, _option)
+                        }
+                      })
+                      return newResults
+                    })
                   }}
                 >
                   <div
