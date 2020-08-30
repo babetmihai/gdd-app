@@ -28,15 +28,13 @@ export default function ResultsPage() {
           flex: 'none'
         }}
       >
-        {template
-          .filter(({ requires }) => !requires || results[requires])
-          .map((node, index) => (
-            <ResultNode
-              node={node}
-              key={index}
-              results={results}
-            />
-          ))}
+        {template.map((node, index) => (
+          <ResultNode
+            node={node}
+            key={index}
+            results={results}
+          />
+        ))}
       </div>
     </Card>
   )
