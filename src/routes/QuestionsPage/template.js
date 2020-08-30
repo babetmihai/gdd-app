@@ -22,7 +22,3 @@ export default {
     options: ['buy2play', 'free2play', 'subscription']
   }
 }
-
-export const template = `
-  {title}
-`
