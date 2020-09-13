@@ -4,7 +4,7 @@ export default [
     tagName: 'section',
     children: [
       { id: 'pc_story', requires: 'pc', tagName: 'p' },
-      { id: 'pc_client_story', requires: 'client', tagName: 'h4' },
+      { id: 'pc_client_story', requires: 'client', tagName: 'p' },
       { id: 'pc_browser_story', requires: 'browser', tagName: 'p' },
       { id: 'console', requires: 'console', tagName: 'h2' },
       { id: 'console_story', requires: 'console', tagName: 'p' },
@@ -35,7 +35,7 @@ export default [
       { id: 'monetization', tagName: 'h2' },
       { id: 'free2play_story', requires: 'free2play', tagName: 'p' },
       { id: 'buy2play_story', requires: 'buy2play', tagName: 'p' },
-      { id: 'subscription', requires: 'subscription', tagName: 'p' },
+      { id: 'subscription_story', requires: 'subscription', tagName: 'p' },
       { id: 'monetization_input_description', tagName: 'p' }
     ]
   },
@@ -61,13 +61,10 @@ export default [
     tagName: 'section',
     children: [
       { id: 'style', tagName: 'h2' },
-      { id: 'specifics', tagName: 'h3' },
       { id: 'style_specifics_input_description', tagName: 'p' },
-      { id: 'interface', tagName: 'h3' },
       { id: 'pc_interface_story', requires: 'pc', tagName: 'p' },
       { id: 'console_interface_story', requires: 'console', tagName: 'p' },
       { id: 'interface_input_description', tagName: 'p' },
-      { id: 'controls_mapping', tagName: 'h3' },
       { id: 'controls_mapping_input_description', tagName: 'p' }
     ]
   },
@@ -75,9 +72,7 @@ export default [
     tagName: 'section',
     children: [
       { id: 'story_and_content', tagName: 'h2' },
-      { id: 'backstory', tagName: 'h3' },
       { id: 'backstory_input_description', tagName: 'p' },
-      { id: 'characters', tagName: 'h3' },
       { id: 'characters_input_description', tagName: 'p' }
     ]
   },

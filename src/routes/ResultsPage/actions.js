@@ -1,4 +1,4 @@
-import { Document, Paragraph, Packer, TextRun } from 'docx'
+import { HeadingLevel, Document, Paragraph, Packer, TextRun } from 'docx'
 import RESULT_TEMPLATE from './template'
 import { t } from 'core/intl'
 
@@ -7,6 +7,7 @@ export const generateDocx = ({ results }) => {
   doc.addSection({
     children: RESULT_TEMPLATE
       .map((node) => composeDoc({ node }))
+      .flat(999)
       .filter(Boolean)
   })
   Packer.toBlob(doc).then((blob) => {
@@ -19,17 +20,18 @@ export const composeDoc = ({ node }) => {
   const { id, children = [], tagName } = node
 
   switch (true) {
-    case (tagName === 'p'): return new TextRun({ text: t(id) })
-    case (tagName === 'section'): return new Paragraph({
-      children: children
-        .map((childNode) => composeDoc({ node: childNode }))
-        .filter(Boolean)
+    case (tagName === 'p'): return new Paragraph({
+      children: [new TextRun({ text: `${t(id)}\n` })]
     })
+    case (tagName === 'section'): return children
+      .map((childNode) => composeDoc({ node: childNode }))
+      .filter(Boolean)
+
     case (tagName.startsWith('h')): {
-      const no = tagName.slice(-1, 0)
+      const no = tagName.slice(tagName.length - 1)
       return new Paragraph({
-        heading: `HEADING_${no}`,
-        children: [new TextRun({ text: t(id) })]
+        heading: HeadingLevel[`HEADING_${no}`],
+        text: t(id)
       })
     }
     default: return null
