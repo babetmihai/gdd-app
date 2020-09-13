@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import actions from 'store/actions'
 import { Card, Button } from '@material-ui/core'
@@ -36,13 +36,14 @@ export default function ResultsPage() {
           Download
         </Button>
         {RESULT_TEMPLATE.map((node, index) => (
-          <ResultNode
-            node={node}
-            key={index}
-            results={results}
-          />
+          <Fragment key={index}>
+            <ResultNode
+              node={node}
+              results={results}
+            />
+            <br />
+          </Fragment>
         ))}
-
       </div>
     </Card>
   )

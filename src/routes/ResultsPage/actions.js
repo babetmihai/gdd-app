@@ -20,13 +20,16 @@ export const composeDoc = ({ node }) => {
   const { id, children = [], tagName } = node
 
   switch (true) {
-    case (tagName === 'p'): return new Paragraph({
-      children: [new TextRun({ text: `${t(id)}\n` })]
-    })
-    case (tagName === 'section'): return children
-      .map((childNode) => composeDoc({ node: childNode }))
-      .filter(Boolean)
-
+    case (tagName === 'p'): {
+      return new Paragraph({
+        children: [new TextRun({ text: `${t(id)}\n` })]
+      })
+    }
+    case (tagName === 'section'): {
+      return children
+        .map((childNode) => composeDoc({ node: childNode }))
+        .filter(Boolean)
+    }
     case (tagName.startsWith('h')): {
       const no = tagName.slice(tagName.length - 1)
       return new Paragraph({
