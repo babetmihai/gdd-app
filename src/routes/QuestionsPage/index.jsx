@@ -107,7 +107,7 @@ export default function Home() {
             variant="h4"
             style={{ margin: 7, marginBottom: 4 }}
           >
-            {t(questionId)}
+            {t(`select_${questionId}`)}
           </Typography>
           <Typography
             variant="p"
