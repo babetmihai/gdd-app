@@ -38,6 +38,12 @@ let theme = createMuiTheme({
     background: {
       main: styles.background
     }
+  },
+  typography: {
+    button: {
+      fontSize: '1rem',
+      textTransform: 'none'
+    }
   }
 })
 theme = responsiveFontSizes(theme)

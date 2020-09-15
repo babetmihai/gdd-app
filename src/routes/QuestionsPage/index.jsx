@@ -1,6 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { Typography, Button, Paper } from '@material-ui/core'
+import { t } from 'core/intl'
 import ExtensionIcon from '@material-ui/icons/Extension'
 import { useSelector } from 'react-redux'
 import QUESTION_TEMPLATE from './template'
@@ -47,7 +48,7 @@ export default function Home() {
   return (
     <div
       style={{
-        height: '90vh',
+        height: '95vh',
         maxHeight: 400,
         display: 'flex'
       }}
@@ -90,8 +91,8 @@ export default function Home() {
           margin: 5,
           display: 'flex',
           flexDirection: 'column',
-          width: '50vw',
-          maxWidth: 600
+          width: '60vw',
+          maxWidth: 750
         }}
       >
         <div
@@ -99,15 +100,20 @@ export default function Home() {
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center'
+            alignSelf: 'center'
           }}
         >
           <Typography
-            gutterBottom
-            variant="h5"
-            style={{ margin: 4 }}
+            variant="h4"
+            style={{ margin: 7, marginBottom: 4 }}
           >
-            {questionId}
+            {t(questionId)}
+          </Typography>
+          <Typography
+            variant="p"
+            style={{ margin: 7, marginBottom: 10 }}
+          >
+            {t(`${questionId}_description`)}
           </Typography>
           <div
             style={{
@@ -167,6 +173,7 @@ export default function Home() {
           <Button
             style={{ margin: 4 }}
             color="primary"
+            variant="outlined"
             disabled={!lastId}
             onClick={() => {
               actions.set('gdd.questionId', lastId)
