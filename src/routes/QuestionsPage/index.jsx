@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { Typography, Button, Card, CardActions, CardContent } from '@material-ui/core'
+import { Typography, Button, Paper } from '@material-ui/core'
 import ExtensionIcon from '@material-ui/icons/Extension'
 import { useSelector } from 'react-redux'
 import QUESTION_TEMPLATE from './template'
@@ -52,7 +52,7 @@ export default function Home() {
         display: 'flex'
       }}
     >
-      <Card
+      <div
         style={{
           padding: 10,
           margin: 5,
@@ -70,10 +70,12 @@ export default function Home() {
           return (
             <Button
               key={id}
-              variant="outlined"
+              component={Paper}
               color={selected ? 'secondary' : 'primary'}
               style={{
-                margin: 4
+                margin: 7,
+                padding: '.35em 1.35em',
+                fontSize: 18
               }}
               disabled={!isFirst && _.isEmpty(filteredOptions)}
               onClick={() => actions.set('gdd.questionId', id)}
@@ -82,8 +84,8 @@ export default function Home() {
             </Button>
           )
         })}
-      </Card>
-      <Card
+      </div>
+      <div
         style={{
           margin: 5,
           display: 'flex',
@@ -92,7 +94,7 @@ export default function Home() {
           maxWidth: 600
         }}
       >
-        <CardContent
+        <div
           style={{
             flex: 1,
             display: 'flex',
@@ -122,13 +124,14 @@ export default function Home() {
               return (
                 <Button
                   style={{
-                    margin: 4,
-                    fontSize: 18
+                    margin: 7,
+                    padding: '.35em 1.35em',
+                    fontSize: 24
                   }}
+                  component={Paper}
                   color={selected ? 'secondary' : undefined}
                   size="large"
                   key={id}
-                  variant="outlined"
                   onClick={() => {
                     clearResults()
                     actions.update('gdd.results', (_results) => {
@@ -152,15 +155,15 @@ export default function Home() {
                       padding: 5
                     }}
                   >
-                    <ExtensionIcon />
+                    <ExtensionIcon style={{ margin: 3, fontSize: 32 }} />
                     {id}
                   </div>
                 </Button>
               )
             })}
           </div>
-        </CardContent>
-        <CardActions style={{ justifyContent: 'flex-end' }}>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
             style={{ margin: 4 }}
             color="primary"
@@ -198,8 +201,8 @@ export default function Home() {
               Finish
             </Button>
           }
-        </CardActions>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
