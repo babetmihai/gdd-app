@@ -162,7 +162,7 @@ export default function Home() {
                     }}
                   >
                     <ExtensionIcon style={{ margin: 3, fontSize: 32 }} />
-                    {id}
+                    {t(id)}
                   </div>
                 </Button>
               )
