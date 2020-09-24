@@ -7,6 +7,8 @@ export default function Layout({ children }) {
 
   return (
     <main className={styles.layout}>
+      <div className={styles.rightRectangle} />
+      <div className={styles.centerTriangle} />
       <nav className={styles.header}>
         <NavLink className={styles.link} to="/">
           <Typography variant="h4">GDD Generator</Typography>

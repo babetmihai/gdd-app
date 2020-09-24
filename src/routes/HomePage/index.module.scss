@@ -1,0 +1,16 @@
+@import 'constants.module.scss';
+
+.homePage {
+  margin: 5vh;
+  width: 90vw;
+  min-height: 700px;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+}
+
+.nextButton {
+  margin-top: .5rem;
+  font-size: 1.5rem;
+  padding: .5rem 3rem;
+}

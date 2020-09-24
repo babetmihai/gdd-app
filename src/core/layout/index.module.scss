@@ -5,6 +5,30 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  .rightRectangle {
+    z-index: -1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 25vw;
+    background-color: rgba($primary, .05);
+  }
+
+  .centerTriangle {
+    z-index: -1;
+    position: absolute;
+    right: 25vw;
+    top: 0;
+    bottom: 0;
+    width: 45vw;
+    border-style: solid;
+    border-color: transparent  rgba($primary, .05);
+    border-style: solid;
+    border-width: 100vh 45vw 100vh 0px;
+  }
 }
 
 .header {
@@ -19,7 +43,7 @@
   }
 
   .link {
-    margin: .5rem;
+    margin: .5rem 1rem;
     text-decoration: none;
   }
 }
