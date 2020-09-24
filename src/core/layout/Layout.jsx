@@ -11,17 +11,19 @@ export default function Layout({ children }) {
         <NavLink className={styles.link} to="/">
           <Typography variant="h4">GDD Generator</Typography>
         </NavLink>
-        <NavLink className={styles.link} to="/questions">
-          <Typography variant="h5">Questions</Typography>
-        </NavLink>
-        <NavLink className={styles.link} to="/results">
-          <Typography variant="h5">Results</Typography>
-        </NavLink>
+        <div className={styles.right}>
+          <NavLink className={styles.link} to="/questions">
+            <Typography variant="h6">Questions</Typography>
+          </NavLink>
+          <NavLink className={styles.link} to="/results">
+            <Typography variant="h6">Results</Typography>
+          </NavLink>
+        </div>
+
       </nav>
       <div className={styles.content}>
         {children}
       </div>
-
     </main>
 
   )

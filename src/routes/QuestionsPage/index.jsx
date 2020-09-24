@@ -1,10 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
-import { Typography, Button, Paper, IconButton } from '@material-ui/core'
+import { Card, Typography, Button, Paper, IconButton } from '@material-ui/core'
 import { t } from 'core/intl'
 import ExtensionIcon from '@material-ui/icons/Extension'
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord'
-import Page from 'core/layout/Page'
 import { useSelector } from 'react-redux'
 import QUESTION_TEMPLATE from './template'
 import actions from 'store/actions'
@@ -48,7 +47,10 @@ export default function Home() {
   }
 
   return (
-    <Page>
+    <Card
+      elevation={4}
+      className={styles.questionsPage}
+    >
       <div className={styles.header}>
         <Typography
           variant="h4"
@@ -141,6 +143,6 @@ export default function Home() {
           </Button>
         }
       </div>
-    </Page>
+    </Card>
   )
 }
