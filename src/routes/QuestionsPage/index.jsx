@@ -34,7 +34,6 @@ export default function Home() {
     return !requires || _.get(results, requires)
   })
   const questionIndex = filteredIds.indexOf(questionId)
-  const lastId = _.get(filteredIds, questionIndex - 1)
   const afterIds = filteredIds.slice(questionIndex + 1)
   const nextId = _.first(afterIds)
 

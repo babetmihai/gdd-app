@@ -5,8 +5,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 2rem 1rem;
-  height: 25%;
+  padding: 3rem 1rem;
   background-color: rgba($primary, .1);
 
   .title {
@@ -25,6 +24,7 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 1.5rem 2rem;
 
 
@@ -54,8 +54,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 2.5rem;
-  height: 20%;
+  padding: 1rem;
+  padding-bottom: 3rem;
 
   .nextButton {
     margin: 1rem;

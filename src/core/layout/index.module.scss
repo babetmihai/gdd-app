@@ -1,3 +1,4 @@
+@import 'constants.module.scss';
 
 .layout {
   flex: 1;
@@ -9,7 +10,7 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 1rem .5rem;
+  padding: 1rem 2rem;
 
   .link {
     margin: .5rem;
@@ -23,13 +24,13 @@
   display: flex;
   flex-direction: column;
   align-items: center; 
+  overflow: auto;
 }
 
 .page {
   margin: 5vh;
-  height: 95vh;
-  width: 95vw;
-  max-height: 700px;
+  width: 90vw;
+  min-height: 700px;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
