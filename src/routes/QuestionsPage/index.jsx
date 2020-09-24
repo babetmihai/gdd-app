@@ -44,6 +44,7 @@ export default function Home() {
       return [...acc, ...options]
     }, [])
     actions.set('gdd.results', _.omit(results, allOptions))
+    actions.delete('gdd.results.done')
   }
 
   return (
@@ -136,6 +137,7 @@ export default function Home() {
             variant="contained"
             disabled={!completed}
             onClick={() => {
+              actions.set('gdd.results.done', true)
               history.push('/results')
             }}
           >
