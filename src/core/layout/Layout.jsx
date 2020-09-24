@@ -1,21 +1,27 @@
+import { Typography } from '@material-ui/core'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import styles from './index.module.scss'
+
 export default function Layout({ children }) {
 
   return (
-    <main>
-      <nav>
-        <NavLink to="/">
-          GDD Generator
+    <main className={styles.layout}>
+      <nav className={styles.header}>
+        <NavLink className={styles.link} to="/">
+          <Typography variant="h4">GDD Generator</Typography>
         </NavLink>
-        <NavLink to="/questions">
-          Questions
+        <NavLink className={styles.link} to="/questions">
+          <Typography variant="h5">Questions</Typography>
         </NavLink>
-        <NavLink to="/results">
-          Results
+        <NavLink className={styles.link} to="/results">
+          <Typography variant="h5">Results</Typography>
         </NavLink>
       </nav>
-      {children}
+      <div className={styles.content}>
+        {children}
+      </div>
+
     </main>
 
   )

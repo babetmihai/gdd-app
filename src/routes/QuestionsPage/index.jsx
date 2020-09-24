@@ -1,12 +1,15 @@
 import React from 'react'
 import _ from 'lodash'
-import { Typography, Button, Paper } from '@material-ui/core'
+import { Typography, Button, Paper, IconButton } from '@material-ui/core'
 import { t } from 'core/intl'
 import ExtensionIcon from '@material-ui/icons/Extension'
+import FiberManualRecord from '@material-ui/icons/FiberManualRecord'
+import Page from 'core/layout/Page'
 import { useSelector } from 'react-redux'
 import QUESTION_TEMPLATE from './template'
 import actions from 'store/actions'
 import history from 'core/history'
+import styles from './index.module.scss'
 
 
 export default function Home() {
@@ -46,170 +49,99 @@ export default function Home() {
   }
 
   return (
-    <div
-      style={{
-        height: '95vh',
-        maxHeight: 400,
-        display: 'flex'
-      }}
-    >
-      <div
-        style={{
-          padding: 10,
-          margin: 5,
-          display: 'flex',
-          flexDirection: 'column',
-          width: '30vw',
-          maxWidth: 225
-        }}
-      >
-        {filteredIds.map((id) => {
-          const isFirst = _.first(filteredIds) === id
-          const { options = [] } = _.get(QUESTION_TEMPLATE, id, [])
-          const filteredOptions = options.filter((optionId) => _.get(results, optionId))
-          const selected = id === questionId
+    <Page>
+      <div className={styles.header}>
+        <Typography
+          variant="h4"
+          className={styles.title}
+        >
+          {t(`select_${questionId}`)}
+        </Typography>
+        <div className={styles.breadcrumbs}>
+          {filteredIds.map((id) => {
+            const isFirst = _.first(filteredIds) === id
+            const { options = [] } = _.get(QUESTION_TEMPLATE, id, [])
+            const filteredOptions = options.filter((optionId) => _.get(results, optionId))
+            const selected = id === questionId
+            return (
+              <IconButton
+                size="small"
+                key={id}
+                color={selected ? 'secondary' : 'primary'}
+                disabled={!isFirst && _.isEmpty(filteredOptions)}
+                onClick={() => actions.set('gdd.questionId', id)}
+              >
+                <FiberManualRecord />
+              </IconButton>
+            )
+          })}
+        </div>
+      </div>
+      <div className={styles.content}>
+        {options.map((id) => {
+          const selected = _.get(results, id)
           return (
             <Button
-              key={id}
+              className={styles.option}
               component={Paper}
-              color={selected ? 'secondary' : 'primary'}
-              style={{
-                margin: 7,
-                padding: '.35em 1.35em',
-                fontSize: 18
+              elevation={3}
+              color={selected ? 'secondary' : undefined}
+              size="large"
+              key={id}
+              onClick={() => {
+                clearResults()
+                actions.update('gdd.results', (_results) => {
+                  const newResults = _.clone(_results)
+                  options.forEach((_option) => {
+                    if (_option === id) {
+                      _.set(newResults, _option, true)
+                    } else {
+                      _.unset(newResults, _option)
+                    }
+                  })
+                  return newResults
+                })
               }}
-              disabled={!isFirst && _.isEmpty(filteredOptions)}
-              onClick={() => actions.set('gdd.questionId', id)}
             >
-              {id}
+              <div className={styles.optionContent}>
+                <ExtensionIcon className={styles.icon} />
+                {t(id)}
+              </div>
             </Button>
           )
         })}
       </div>
-      <div
-        style={{
-          margin: 5,
-          display: 'flex',
-          flexDirection: 'column',
-          width: '60vw',
-          maxWidth: 750
-        }}
-      >
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            alignSelf: 'center'
-          }}
-        >
-          <Typography
-            variant="h4"
-            style={{ margin: 7, marginBottom: 4 }}
-          >
-            {t(`select_${questionId}`)}
-          </Typography>
-          <Typography
-            variant="p"
-            style={{ margin: 7, marginBottom: 10 }}
-          >
-            {t(`${questionId}_description`)}
-          </Typography>
-          <div
-            style={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              alignItems: 'flex-start',
-              alignContent: 'flex-start'
-            }}
-          >
-            {options.map((id) => {
-              const selected = _.get(results, id)
-              return (
-                <Button
-                  style={{
-                    margin: 7,
-                    padding: '.35em 1.35em',
-                    fontSize: 24
-                  }}
-                  component={Paper}
-                  color={selected ? 'secondary' : undefined}
-                  size="large"
-                  key={id}
-                  onClick={() => {
-                    clearResults()
-                    actions.update('gdd.results', (_results) => {
-                      const newResults = _.clone(_results)
-                      options.forEach((_option) => {
-                        if (_option === id) {
-                          _.set(newResults, _option, true)
-                        } else {
-                          _.unset(newResults, _option)
-                        }
-                      })
-                      return newResults
-                    })
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: 5
-                    }}
-                  >
-                    <ExtensionIcon style={{ margin: 3, fontSize: 32 }} />
-                    {t(id)}
-                  </div>
-                </Button>
-              )
-            })}
-          </div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div className={styles.footer}>
+        {!isLastQuation &&
           <Button
-            style={{ margin: 4 }}
+            size="large"
+            className={styles.nextButton}
             color="primary"
-            variant="outlined"
-            disabled={!lastId}
+            variant="contained"
+            disabled={!completed}
             onClick={() => {
-              actions.set('gdd.questionId', lastId)
+              clearResults()
+              actions.set('gdd.questionId', nextId)
             }}
           >
-            Back
+            Next
           </Button>
-          {!isLastQuation &&
-            <Button
-              style={{ margin: 4 }}
-              color="primary"
-              variant="contained"
-              disabled={!completed}
-              onClick={() => {
-                clearResults()
-                actions.set('gdd.questionId', nextId)
-              }}
-            >
-              Next
-            </Button>
-          }
-          {isLastQuation &&
-            <Button
-              style={{ margin: 4 }}
-              color="secondary"
-              variant="contained"
-              disabled={!completed}
-              onClick={() => {
-                history.push('/results')
-              }}
-            >
-              Finish
-            </Button>
-          }
-        </div>
+        }
+        {isLastQuation &&
+          <Button
+            size="large"
+            className={styles.nextButton}
+            color="secondary"
+            variant="contained"
+            disabled={!completed}
+            onClick={() => {
+              history.push('/results')
+            }}
+          >
+            Done
+          </Button>
+        }
       </div>
-    </div>
+    </Page>
   )
 }

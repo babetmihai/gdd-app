@@ -1,0 +1,36 @@
+
+.layout {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem .5rem;
+
+  .link {
+    margin: .5rem;
+    text-decoration: none;
+  }
+}
+
+.content {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+.page {
+  height: 95vh;
+  width: 95vw;
+  max-height: 700px;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+}
