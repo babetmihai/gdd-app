@@ -12,7 +12,7 @@ export const generateDocx = ({ results }) => {
   })
   Packer.toBlob(doc).then((blob) => {
     // saveAs from FileSaver will download the file
-    downloadFile(blob, 'example.docx')
+    downloadFile(blob, 'Game Design Doc.docx')
   })
 }
 

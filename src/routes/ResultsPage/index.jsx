@@ -43,7 +43,6 @@ export default function ResultsPage() {
           Download
         </Button>
       </div>
-
     </Card>
   )
 }
