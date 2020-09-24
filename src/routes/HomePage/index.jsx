@@ -9,11 +9,16 @@ export default function HomePage() {
     <div className={styles.homePage}>
       <div className={styles.content}>
         <Typography variant="h2">GDD Generator</Typography>
-        <Typography variant="h4">Create yout Game Design Document</Typography>
+        <Typography
+          variant="h4"
+          className={styles.subtitle}
+        >
+          Create your Game Design Document
+        </Typography>
         <Button
           className={styles.nextButton}
           color="secondary"
-          variant="outlined"
+          variant="contained"
           size="large"
           component={Link}
           to="/questions"

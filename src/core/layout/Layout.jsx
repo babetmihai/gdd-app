@@ -10,9 +10,15 @@ export default function Layout({ children }) {
       <div className={styles.rightRectangle} />
       <div className={styles.centerTriangle} />
       <nav className={styles.header}>
-        <NavLink className={styles.link} to="/">
-          <Typography variant="h4">GDD Generator</Typography>
-        </NavLink>
+        <div className={styles.left}>
+          <NavLink
+            className={styles.link}
+            to="/"
+          >
+            <Typography variant="h4">GDD Generator</Typography>
+          </NavLink>
+        </div>
+
         <div className={styles.right}>
           <NavLink className={styles.link} to="/questions">
             <Typography variant="h6">Questions</Typography>

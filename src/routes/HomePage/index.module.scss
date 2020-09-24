@@ -7,10 +7,19 @@
   max-width: 1000px;
   display: flex;
   align-items: center;
+  padding: 1rem;
+}
+
+.content { 
+  flex: 1;
+
+  .subtitle {
+    opacity: .6;
+  }
 }
 
 .nextButton {
-  margin-top: .5rem;
+  margin-top: .75rem;
   font-size: 1.5rem;
   padding: .5rem 3rem;
 }
