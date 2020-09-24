@@ -1,13 +1,14 @@
 export default [
-  { id: 'game_design_document', tagName: 'h1' },
   {
     tagName: 'section',
     children: [
+      { id: 'pc', requires: 'pc', tagName: 'h2' },
       { id: 'pc_story', requires: 'pc', tagName: 'p' },
       { id: 'pc_client_story', requires: 'client', tagName: 'p' },
       { id: 'pc_browser_story', requires: 'browser', tagName: 'p' },
       { id: 'console', requires: 'console', tagName: 'h2' },
       { id: 'console_story', requires: 'console', tagName: 'p' },
+      { id: 'mobile', requires: 'mobile', tagName: 'h2' },
       { id: 'console_ps_story', requires: 'ps', tagName: 'p' },
       { id: 'xbox', requires: 'xbox', tagName: 'h3' },
       { id: 'console_xbox_story', requires: 'xbox', tagName: 'p' },
