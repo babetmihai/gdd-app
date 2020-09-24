@@ -1,10 +1,13 @@
 import { Typography } from '@material-ui/core'
+import _ from 'lodash'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import actions from 'store/actions'
 import styles from './index.module.scss'
 
 export default function Layout({ children }) {
-
+  const { results = {} } = useSelector(() => actions.get('gdd', {}))
   return (
     <main className={styles.layout}>
       <div className={styles.rightRectangle} />
@@ -23,9 +26,11 @@ export default function Layout({ children }) {
           <NavLink className={styles.link} to="/questions">
             <Typography variant="h6">Questions</Typography>
           </NavLink>
-          <NavLink className={styles.link} to="/results">
-            <Typography variant="h6">Results</Typography>
-          </NavLink>
+          {!_.isEmpty(results) &&
+            <NavLink className={styles.link} to="/results">
+              <Typography variant="h6">Results</Typography>
+            </NavLink>
+          }
         </div>
 
       </nav>
