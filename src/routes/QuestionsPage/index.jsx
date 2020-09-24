@@ -1,4 +1,5 @@
 import React from 'react'
+import join from 'classnames'
 import _ from 'lodash'
 import { Card, Typography, Button, Paper, IconButton } from '@material-ui/core'
 import { t } from 'core/intl'
@@ -84,10 +85,10 @@ export default function Home() {
           const selected = _.get(results, id)
           return (
             <Button
-              className={styles.option}
+              className={join(styles.option, selected && styles.selected)}
               component={Paper}
               elevation={3}
-              color={selected ? 'secondary' : undefined}
+              color={selected ? 'secondary' : 'primary'}
               size="large"
               key={id}
               onClick={() => {
